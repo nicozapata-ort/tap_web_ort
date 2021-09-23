@@ -1,38 +1,259 @@
+html {
+  overflow:hidden;
+}
+
 .App {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
   text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  /*Al momento del video grabado en el celu estaba en 130px*/
+  height: 16vh;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-left: 20px;
 }
 
 .App-header {
-  background-color: #282c34;
+  /* min-height: 100px; */
+  display: flex;
+  height: 13vh;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  /* font-size: calc(10px + 2vmin); */
+  background-color: #FFFFFF;
+}
+
+.App-body {
+  background-color: #002350;
+  display: flex;
+  flex-wrap: wrap;
   min-height: 100vh;
+}
+
+.App-section-description {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  width: 100%;
+  height: 60vh;
+  /* height: 30vh; */
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+}
+
+
+.App-section-form {
+  background-color: #14D2B9;
+  width: 100%;
+  height: 60vh;
+  /* top: 250px; */
+  position: relative;
+  /* bottom: 0; */
+  border-top-left-radius: 35px;
+  border-top-right-radius: 35px;
+  transition: transform 1s ease-in-out;
+  padding-left: 4vw;
+  padding-right: 4vw;
+}
+
+.App-section-form:hover {
+  transform: translatey(-12rem);
+}
+
+
+/**********TEXTOS**********/
+
+.App-text-header-title {
   color: white;
+  font-family: 'Comfortaa Semibold';
+  font-size: 5vh;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+}
+
+.App-text-header-description {
+  color: white;
+  font-weight: 450;
+  font-family: 'Comfortaa Light';
+  font-size: 3vh;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+}
+
+.App-text-form-title {
+  color: white;
+  font-weight: 600;
+  font-family: 'Comfortaa Semibold';
+  font-size: 3vh;
+  text-align: start;
+}
+
+.App-text-form-description {
+  color: white;
+  font-weight: 450;
+  font-family: 'Comfortaa Light';
+  font-size: 2vh;
+  text-align: start;
+}
+
+p{
+  font-family: 'Comfortaa Medium';
+  color: #FFFFFF;
+}
+
+/* h2 {
+  color: white;
+  font-weight: 600;
+  font-family: 'Comfortaa Semibold';
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: start;
+}
+
+h3 {
+  color: white;
+  font-weight: 450;
+  font-family: 'Comfortaa Light';
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+} */
+
+/* .App-header-title{
+  font-size: 20px;
+  position: absolute;
+  left: 75px;
+} */
+
+/********************/
+
+
+.App-header-nav{
+  background-color: blueviolet;
+  justify-content: center;
+  align-items: center;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+.App-container-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 6%;
+}
+
+.App-button-slide {
+  height: 8px;
+  width: 45px;
+  border-radius: 30px;
+  border-style: none;
+}
+
+.App-container-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+  height: 95%;
+}
+
+.App-button-slide:hover {
+  background-color: rgb(207, 204, 204);
+}
+
+.page-selected-form {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  font-family: 'Comfortaa Thin';
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  color: #FFFFFF;
+  background-color: #6B71FF;
+  
+}
+
+#apellido, #nombre {
+  background-color: #b3b5ff;
+  color: #FFFFFF;
+  height: 5vh;
+  width: 55vw;
+  border-style: solid;
+  border-radius: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-color: #8287ff;
+}
+
+#apellido::placeholder {
+  color:#f2f2f2;
+}
+
+#nombre::placeholder {
+  color:#f2f2f2;
+}
+ 
+#button-continue-form {
+  background-color: #6B71FF;
+  color: #FFFFFF;
+  border-style: none;
+  width: 80px;
+  height: 30px;
+  font-family: 'Comfortaa';
+  border-radius: 8px;
+}
+
+/* .App-button-slide:active {
+  transform: translateY(2px)
+} */
+
+
+/* .App-section-form:hover {
+  animation-name: transicionForm;
+  animation-duration: 4s;
+} */
+
+
+/* @keyframes transicionForm {
+  0%{
+    transform: translateY(1000px);
+    transition: ;
+  }
+  10%{
+    background-color: red;
+  }
+} */
+/* @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
+} */
+
+@media (min-width: 1000px) and (max-width: 100vw) {
+  .App-section-form {
+    position: relative;
+    /*Corregir esto que no sean numeros al azar como aca*/
+    width: 60%;
+    left: 16vw;
+    /****************************************************/
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  
+  
 }
