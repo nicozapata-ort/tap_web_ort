@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
-import { Card, CardContent, Typography, Button } from '@material-ui/core'
+import { Card, CardContent, Typography, Button, Box, Stepper, Step, StepLabel, Grid } from '@material-ui/core'
+
 import { Field, Form, Formik } from 'formik'
 import { CheckboxWithLabel, TextField } from 'formik-material-ui'
 import FormContext from '../../context/Form/FormContext'
@@ -16,14 +17,26 @@ export default function UserFormFormik() {
                     initialValues={{ ...dataForm }}
                     onSubmit={() => { }}
                 >
-                    <div>
-                        <Field name="nombre" component={TextField} label="Ingrese su nombre" />
-                        <Field name="apellido" component={TextField} label="Ingrese su apellido" />
-                        <Field type="number" name="dni" component={TextField} label="Ingrese su dni" />
+                    <div title='Personal Data'>
+                        <Box paddingBottom={2}>
+                            <Field fullWidth name="nombre" component={TextField} label="Ingrese su nombre" />
+                        </Box>
+                        <Box paddingBottom={2}>
+                            <Field fullWidth name="apellido" component={TextField} label="Ingrese su apellido" />
+                        </Box>
+                        <Box paddingBottom={2}>
+                            <Field fullWidth type="number" name="dni" component={TextField} label="Ingrese su dni" />
+                        </Box>
+
                     </div>
-                    <div>
-                        <Field name="mail" component={TextField} label="Ingrese su mail" />
-                        <Field name="telefono" component={TextField} label="Ingrese su telefono" />
+                    <div title='Contact'>
+                        <Box paddingBottom={2}>
+                            <Field fullWidth name="mail" component={TextField} label="Ingrese su mail" />
+                        </Box>
+                        <Box paddingBottom={2}>
+                            <Field fullWidth name="telefono" component={TextField} label="Ingrese su telefono" />
+                        </Box>
+
                     </div>
                 </FormikStepper>
             </CardContent>
@@ -36,23 +49,44 @@ export default function UserFormFormik() {
 
 export function FormikStepper({ children, ...props }) {
     const childrenArray = React.Children.toArray(children)
-    const { step, setStep } = useContext(FormContext);
+    const { step, setStep, dataForm, setForm } = useContext(FormContext);
     const currentChild = childrenArray[step]
+
+    const isLastStep = () => {
+        return step === childrenArray.length - 1;
+    }
+
+    const handleChange = props => {
+        setForm({ [props.name]: props.value })
+    }
 
     return (
         <Formik {...props} onSubmit={async (values, helpers) => {
-            if(step === childrenArray.length - 1){
+            if (isLastStep()) {
                 await props.onSubmit(values, helpers)
-            }else{
+            } else {
                 setStep(step + 1)
             }
         }}>
             <Form autoComplete="off">
+                <Stepper activeStep={step} alternativeLabel>
+                    {childrenArray.map((child) => (
+                        <Step key={child.props.title}>
+                            <StepLabel>{child.props.title}</StepLabel>
+                        </Step>
+                    ))}
+                </Stepper>
+
                 {currentChild}
 
-                {step > 0 ? <Button onClick={() => setStep(step - 1)}>Back</Button> : null}
-                <Button type='submit'>Next</Button>
-
+                <Grid container spacing={2} alignItems="center" justify="center">
+                    <Grid item>
+                        {step > 0 ? <Button style={{ backgroundColor: '#8C91FF', color: '#FFFFFF' }} onClick={() => setStep(step - 1)}>Back</Button> : null}
+                    </Grid>
+                    <Grid item>
+                        <Button variant='contained' style={{ backgroundColor: '#8C91FF', color: '#FFFFFF' }} type='submit'>{isLastStep() ? 'Submit' : 'Next'}</Button>
+                    </Grid>
+                </Grid>
             </Form>
         </Formik>
     )

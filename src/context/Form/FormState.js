@@ -12,7 +12,7 @@ const FormState = (props) => {
             telefono:'',
             dni:0
         },
-        step: 1
+        step: 0
     }
 
     const [state, dispatch] = useReducer(FormReducer, initialState);

@@ -2,68 +2,6 @@ html {
   overflow:hidden;
 }
 
-.App {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  text-align: center;
-}
-
-.App-logo {
-  /*Al momento del video grabado en el celu estaba en 130px*/
-  height: 16vh;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding-left: 20px;
-}
-
-.App-header {
-  /* min-height: 100px; */
-  display: flex;
-  height: 13vh;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  /* font-size: calc(10px + 2vmin); */
-  background-color: #FFFFFF;
-}
-
-.App-body {
-  background-color: #002350;
-  display: flex;
-  flex-wrap: wrap;
-  min-height: 100vh;
-}
-
-.App-section-description {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 60vh;
-  /* height: 30vh; */
-  justify-content: center;
-  align-items: center;
-}
-
-
-.App-section-form {
-  background-color: #14D2B9;
-  width: 100%;
-  height: 60vh;
-  /* top: 250px; */
-  position: relative;
-  /* bottom: 0; */
-  border-top-left-radius: 35px;
-  border-top-right-radius: 35px;
-  transition: transform 1s ease-in-out;
-  padding-left: 4vw;
-  padding-right: 4vw;
-}
-
-.App-section-form:hover {
-  transform: translatey(-12rem);
-}
-
 
 /**********TEXTOS**********/
 
@@ -107,41 +45,174 @@ p{
   color: #FFFFFF;
 }
 
-/* h2 {
-  color: white;
-  font-weight: 600;
-  font-family: 'Comfortaa Semibold';
-  padding-left: 10px;
-  padding-right: 10px;
-  text-align: start;
-}
-
-h3 {
-  color: white;
-  font-weight: 450;
-  font-family: 'Comfortaa Light';
-  padding-left: 10px;
-  padding-right: 10px;
-  text-align: center;
-} */
-
-/* .App-header-title{
-  font-size: 20px;
-  position: absolute;
-  left: 75px;
-} */
-
 /********************/
 
-
-.App-header-nav{
-  background-color: blueviolet;
-  justify-content: center;
-  align-items: center;
+.App {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  text-align: center;
 }
 
-.App-link {
-  color: #61dafb;
+
+/******************** LOGO *************************/
+
+.App-section-logo-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 40%;
+  height: 80vh;
+  /* bottom: 60px;
+  right: 130px; */
+}
+
+.App-section-logo{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 60%;
+  height: 80vh;
+  /* bottom: 60px;
+  right: 130px; */
+  padding-top: 100px;
+}
+
+.profile-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 0px 0px white;
+  border-radius: 50%;
+  height: 360px;
+  width: 360px;
+  /* margin: 0 0px 0 100px; */
+}
+
+.App-logo {
+  /*Al momento del video grabado en el celu estaba en 130px*/
+  background-color: #EDF3FB;
+  height: 92%;
+  width: 92%;
+  background-size: cover;
+  border-radius: 50%;
+  background-image: url('./Tap.png');
+  background-repeat: no-repeat;
+  background-position: center ;
+}
+
+/****************************************************/
+
+
+.App-section-description-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 60%;
+  height: 80vh;
+  /* height: 30vh; */
+}
+
+.App-section-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 80%;
+  height: 80vh;
+  /* height: 30vh; */
+  padding-top: 150px;
+}
+
+.App-header {
+  /* min-height: 100px; */
+  display: flex;
+  height: 13vh;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  /* font-size: calc(10px + 2vmin); */
+  background-color: #FFFFFF;
+}
+
+.App-body {
+  background-color: #002350;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 100vh;
+}
+
+.App-section-form2 {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  min-height: 20vh;
+  width: 100%;
+  z-index: 21;
+}
+
+.swipeable-form-container {
+  /* background-color: salmon;
+  opacity: 0.5; */
+  width: 100%;
+  height: 60vh;
+  position: absolute;
+  bottom: 0;
+  z-index: 30;
+}
+
+.swipeable-form {
+  background-color: #14D2B9;
+  width: 80%;
+  height: 65vh;
+  position: absolute;
+  left: 11vh;
+  bottom: 0;
+  right: 0;
+  top: 43vh;
+  border-top-left-radius: 35px;
+  border-top-right-radius: 35px;
+  padding-left: 4vw;
+  padding-right: 4vw;
+}
+
+.custom-shape-divider-top-1632780241 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-top-1632780241 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 150px;
+}
+
+.custom-shape-divider-top-1632780241 .shape-fill {
+  fill: #EDF3FB;
+}
+
+.App-section-form {
+  background-color: #14D2B9;
+  height: 65vh;
+  /* top: 250px; */
+  position: relative;
+  /* bottom: 0; */
+  border-top-left-radius: 35px;
+  border-top-right-radius: 35px;
+  transition: transform 1s ease-in-out;
+  padding-left: 4vw;
+  padding-right: 4vw;
+  bottom: 0px;
+  /* transform: rotate(-180deg); */
 }
 
 .App-container-button {
@@ -213,47 +284,205 @@ h3 {
   border-radius: 8px;
 }
 
-/* .App-button-slide:active {
-  transform: translateY(2px)
-} */
+.App-section-blob-container {
+  position: absolute;
+  left:4vw;
+  bottom: 50vh;
+  /* background-color: red; */
+}
+
+.App-section-blob {
+  position: relative;
+  right: 8vw;
+  bottom: 10vh;
+  opacity: 0.2;
+}
+
+.App-section-blob2 {
+  position: absolute;
+  right: 6vw;
+  bottom: 12vh;
+  opacity: 0.2;
+}
+
+.App-section-blob3 {
+  position: absolute;
+  left: 34vw;
+  bottom: 19vh;
+  opacity: 0.2;
+}
+
+.App-section-blob4 {
+  position: absolute;
+  left: 33vw;
+  bottom: 21vh;
+  opacity: 0.2;
+}
+
+.App-section-blob5 {
+  position: absolute;
+  left: 62vw;
+  bottom: 21vh;
+  opacity: 0.2;
+}
+
+.App-section-blob6 {
+  position: absolute;
+  left: 65vw;
+  top: 40vh;
+  opacity: 0.2;
+}
+
+.App-section-blob-container2 {
+  position: absolute;
+  background-color: red;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
 
 
-/* .App-section-form:hover {
-  animation-name: transicionForm;
-  animation-duration: 4s;
-} */
-
-
-/* @keyframes transicionForm {
-  0%{
-    transform: translateY(1000px);
-    transition: ;
-  }
-  10%{
+@media (min-width: 1000px) and (max-width: 1500px) {
+  .swipeable-form {
     background-color: red;
   }
-} */
-/* @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
 
-@media (min-width: 1000px) and (max-width: 100vw) {
+  .App-section-logo-container{
+    background-color: green;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 40%;
+    height: 80vh;
+    /* bottom: 60px;
+    right: 130px; */
+  }
+
+  .App-section-logo{
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 60%;
+    height: 80vh;
+    /* bottom: 60px;
+    right: 130px; */
+    padding-top: 150px;
+  }
+
+  .profile-logo {
+    background-color: hotpink;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 0px 0px white;
+    border-radius: 50%;
+    height: 320px;
+    width: 320px;
+    /* margin: 0 0px 0 100px; */
+  }
+
+  .App-logo {
+    /*Al momento del video grabado en el celu estaba en 130px*/
+    background-color: blueviolet;
+    height: 92%;
+    width: 92%;
+    background-size: cover;
+    border-radius: 50%;
+    background-image: url('./Tap.png');
+    background-repeat: no-repeat;
+    background-position: center ;
+  }
+  
+}
+
+@media screen and (min-width: 1500px) {
+  .swipeable-form-container {
+    /* background-color: salmon;
+    opacity: 0.5; */
+    width: 100%;
+    height: 60vh;
+    position: absolute;
+    bottom: 0;
+    z-index: 30;
+  }
+}
+
+
+
+
+/* @media (min-width: 1000px) and (max-width: 100vw) {
   .App-section-form {
     position: relative;
-    /*Corregir esto que no sean numeros al azar como aca*/
     width: 60%;
     left: 16vw;
-    /****************************************************/
     justify-content: center;
     align-items: center;
   }
-
-
-  
-  
 }
+
+
+@media (min-width: 300px) and (max-width: 1000px) {
+  .App-section-logo-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 40%;
+    height: 80vh;
+  }
+  
+  .App-section-logo{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 40%;
+    height: 80vh;
+    padding-top: 100px;
+  }
+  
+  .App-section-description-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 60%;
+    height: 80vh;
+  }
+  
+  .App-section-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 80%;
+    height: 80vh;
+    padding-top: 150px;
+  }
+}
+
+
+@media screen and (min-width: 300px) {
+  .visual-curve {
+    aspect-ratio: 3 / 5;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .visual-curve {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+} */
