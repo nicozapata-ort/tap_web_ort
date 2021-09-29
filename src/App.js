@@ -17,47 +17,18 @@ const SCREEN_HEIGHT = window.innerHeight;
 
 function App() {
 
-  // const formPos = useSpring({ y: 0 })
-
-  // const bindFormPos = useDrag((params) => {
-  //   const y = params.xy[1];
-
-  //   if (y >= 0 && y <= SCREEN_HEIGHT) {
-  //     formPos.y.set(y)
-  //   }
-  // })
-
   function PullRelease({ children }) {
     const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }))
 
-    const bindFormPos = useDrag(({ down, movement: [mx, my], dragging }) => {
+    const bindFormPos = useDrag(({ down, offset: [ox, oy], dragging }) => {
 
-      api.start({ x: down ? mx : 0, y: down ? my : 0, immediate: down })
-      // if(dragging){
-      //   console.log("AHRE")
-      // }else{
-      //   y.start(-403)
-      // if(my > SCREEN_HEIGHT/2){
-      //   console.log('SOBREPASE LA MITAD AL SOLTAR', SCREEN_HEIGHT, my)
-      // }else{
-      //   console.log('NO SOBREPASE LA MITAD AL SOLTAR', SCREEN_HEIGHT, my)
-      //   y.start(0)
-      // }
-      // }
+      api.start({ x: ox, y: oy, immediate: down })
 
-    })
+    }, {bounds:{top: -420, bottom: 0}})
 
     // Bind it to a component
     return <animated.div {...bindFormPos()} style={{ y }}>{children}</animated.div>
   }
-
-  /*
-    const buttonPos = useSpring({ y: 0 })
-  
-    const bindButtonPos = useDrag((params) => {
-      buttonPos.y.set(params.offset[1])
-    })
-  */
 
   return (
     <div className="App">
