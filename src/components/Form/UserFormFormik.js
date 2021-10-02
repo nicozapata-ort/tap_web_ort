@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Card, CardContent, Typography, Button, Box, Stepper, Step, StepLabel, Grid } from '@material-ui/core'
+import { Card, CardContent, Button, Box, Stepper, Step, StepLabel, Grid } from '@material-ui/core'
 
 import { Field, Form, Formik } from 'formik'
 import { CheckboxWithLabel, TextField } from 'formik-material-ui'
@@ -15,9 +15,9 @@ export default function UserFormFormik() {
             <CardContent>
                 <FormikStepper
                     initialValues={{ ...dataForm }}
-                    onSubmit={() => { }}
+                    onSubmit={() => alert(...dataForm)}
                 >
-                    <div title='Personal Data'>
+                    <div title='Datos personales'>
                         <Box paddingBottom={2}>
                             <Field fullWidth name="nombre" component={TextField} label="Ingrese su nombre" />
                         </Box>
@@ -25,11 +25,11 @@ export default function UserFormFormik() {
                             <Field fullWidth name="apellido" component={TextField} label="Ingrese su apellido" />
                         </Box>
                         <Box paddingBottom={2}>
-                            <Field fullWidth type="number" name="dni" component={TextField} label="Ingrese su dni" />
+                            <Field fullWidth name="dni" component={TextField} label="Ingrese su dni" />
                         </Box>
 
                     </div>
-                    <div title='Contact'>
+                    <div title='Contacto'>
                         <Box paddingBottom={2}>
                             <Field fullWidth name="mail" component={TextField} label="Ingrese su mail" />
                         </Box>
@@ -79,12 +79,12 @@ export function FormikStepper({ children, ...props }) {
 
                 {currentChild}
 
-                <Grid container spacing={2} alignItems="center" justify="center">
+                <Grid container spacing={2} alignItems="center" justifyContent="center">
                     <Grid item>
-                        {step > 0 ? <Button style={{ backgroundColor: '#8C91FF', color: '#FFFFFF' }} onClick={() => setStep(step - 1)}>Back</Button> : null}
+                        {step > 0 ? <Button style={{ backgroundColor: '#8C91FF', color: '#FFFFFF' }} onClick={() => setStep(step - 1)}>Atras</Button> : null}
                     </Grid>
                     <Grid item>
-                        <Button variant='contained' style={{ backgroundColor: '#8C91FF', color: '#FFFFFF' }} type='submit'>{isLastStep() ? 'Submit' : 'Next'}</Button>
+                        <Button variant='contained' style={{ backgroundColor: '#8C91FF', color: '#FFFFFF' }} type='submit'>{isLastStep() ? 'Enviar' : 'Siguiente'}</Button>
                     </Grid>
                 </Grid>
             </Form>

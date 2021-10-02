@@ -10,7 +10,7 @@ const FormState = (props) => {
             apellido:'',
             mail:'',
             telefono:'',
-            dni:0
+            dni:''
         },
         step: 0
     }
