@@ -8,9 +8,9 @@ const FormState = (props) => {
         dataForm: {
             nombre:'',
             apellido:'',
-            mail:'',
-            telefono:'',
-            dni:''
+            email:'',
+            telefono: '',
+            dni: ''
         },
         step: 0
     }

@@ -21,10 +21,10 @@ function App() {
 
       api.start({ x: ox, y: oy, immediate: down })
 
-    }, { bounds: { top: -420, bottom: 0 } })
+    }, { bounds: { top: -460, bottom: 0 } })
 
     // Bind it to a component
-    return <animated.div {...bindFormPos()} style={{ y }}>{children}</animated.div>
+    return <animated.div {...bindFormPos()} style={{ y, touchAction: 'none' }}>{children}</animated.div>
   }
 
   return (
@@ -86,7 +86,6 @@ function App() {
               </div>
               <h2 className="App-text-form-title">¡Hola! ¿Cómo estás?</h2>
               <h3 className="App-text-form-description">¡Completa el formulario para participar de nuestra campaña!</h3>
-              <br />
               <UserFormFormik />
             </div>
           </div>
