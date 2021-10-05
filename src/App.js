@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 // import logo from './logo.svg';
 // import logo2 from './Tap.png';
 // import Formulario from './components/Formulario.js';
@@ -9,7 +9,7 @@ import FormState from './context/Form/FormState.js';
 import UserFormFormik from './components/Form/UserFormFormik';
 import { useSpring, animated } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
-
+import { getAllDescription } from './strapi/data.js'
 const SCREEN_HEIGHT = window.innerHeight;
 
 function App() {
@@ -20,12 +20,28 @@ function App() {
     const bindFormPos = useDrag(({ down, offset: [ox, oy], dragging }) => {
 
       api.start({ x: ox, y: oy, immediate: down })
+      // console.log('Posición del offset:', oy)
+      // console.log('Posición de la variable y:', y)
+
 
     }, { bounds: { top: -460, bottom: 0 } })
 
     // Bind it to a component
     return <animated.div {...bindFormPos()} style={{ y, touchAction: 'none' }}>{children}</animated.div>
   }
+
+
+  
+  const [description, setDescription] = useState('');
+  const [descriptionDate, setDescriptionDate] = useState('');
+
+
+  useEffect(async () => {
+    const data = await getAllDescription()
+    setDescription(data[0].description)
+    setDescriptionDate(data[0].description_date)
+  }, []);
+
 
   return (
     <div className="App-body">
@@ -59,8 +75,8 @@ function App() {
 
         <div className="App-section-description-container">
           <div className="App-section-description">
-            <h2 className="App-text-header-title">¡Tap está de cumpleaños y te regala $1000 para tu próxima recarga!</h2>
-            <h3 className="App-text-header-description">Desde el 30/09 al 21/10 inclusive</h3>
+            <h2 className="App-text-header-title">{description}</h2>
+            <h3 className="App-text-header-description">{descriptionDate}</h3>
           </div>
         </div>
 
@@ -77,7 +93,7 @@ function App() {
       </section>
 
 
-      <section className='swipeable-form-container'>
+      <section className='swipeable-form-container unselectable'>
         <PullRelease>
           <div className='swipeable-form'>
             <div className='div-form'>

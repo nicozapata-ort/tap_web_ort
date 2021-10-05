@@ -223,6 +223,13 @@ p{
   border-top-right-radius: 35px;
 }
 
+.unselectable {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .App-container-button {
   display: flex;
   justify-content: center;
