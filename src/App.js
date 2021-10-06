@@ -1,16 +1,10 @@
 import React, {useEffect, useState} from 'react'
-// import logo from './logo.svg';
-// import logo2 from './Tap.png';
-// import Formulario from './components/Formulario.js';
-// import UserForm from './components/UserForm.js'
-// import { Paper, SwipeableDrawer } from '@material-ui/core'
 import './App.css';
 import FormState from './context/Form/FormState.js';
 import UserFormFormik from './components/Form/UserFormFormik';
 import { useSpring, animated } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { getAllDescription } from './strapi/data.js'
-const SCREEN_HEIGHT = window.innerHeight;
 
 function App() {
 
@@ -26,12 +20,9 @@ function App() {
 
     }, { bounds: { top: -460, bottom: 0 } })
 
-    // Bind it to a component
     return <animated.div {...bindFormPos()} style={{ y, touchAction: 'none' }}>{children}</animated.div>
   }
 
-
-  
   const [description, setDescription] = useState('');
   const [descriptionDate, setDescriptionDate] = useState('');
 
@@ -68,11 +59,7 @@ function App() {
         <svg className='App-section-blob6' viewBox="0 0 900 600" width="900" height="500" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1"><g transform="translate(491.040369876575 314.33015250579285)"><path d="M135 -144.4C166.2 -103.7 176.9 -51.9 175.3 -1.5C173.8 48.8 160.1 97.6 128.8 129.2C97.6 160.9 48.8 175.5 -6.8 182.3C-62.5 189.1 -124.9 188.3 -174.9 156.6C-224.9 124.9 -262.5 62.5 -257 5.4C-251.6 -51.6 -203.2 -103.2 -153.2 -143.9C-103.2 -184.6 -51.6 -214.3 0.1 -214.4C51.9 -214.5 103.7 -185 135 -144.4" fill="#FFFFFF"></path></g></svg>
       </div>
 
-
-
-
       <section className='App-section-container'>
-
         <div className="App-section-description-container">
           <div className="App-section-description">
             <h2 className="App-text-header-title">{description}</h2>
@@ -84,12 +71,10 @@ function App() {
           <div className='App-section-logo'>
             <div className='profile-logo'>
               <div className="App-logo">
-                {/* <img src={logo2} className="logo-image" alt="logo" /> */}
               </div>
             </div>
           </div>
         </div>
-
       </section>
 
 
@@ -113,7 +98,6 @@ function App() {
 }
 
 export default function AppWrapper() {
-
   return (
     <FormState>
       <App />

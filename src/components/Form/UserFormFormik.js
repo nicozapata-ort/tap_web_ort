@@ -1,13 +1,39 @@
 import React, { useContext, useState } from 'react'
 import { Card, CardContent, CircularProgress, Button, Box, Stepper, Step, StepLabel, Grid } from '@material-ui/core'
+import { Field, Form, Formik } from 'formik'
+import { TextField } from 'formik-material-ui'
+import FormContext from '../../context/Form/FormContext'
+import axios from 'axios'
 import * as Yup from 'yup';
 
+// const sleep = (time) => new Promise((acc) => setTimeout(acc, time))
 
-import { Field, Form, Formik } from 'formik'
-import { CheckboxWithLabel, TextField } from 'formik-material-ui'
-import FormContext from '../../context/Form/FormContext'
+const request = async (values) => {
+    const tk = new Date();
+    const data = {
+        Nombre: values.nombre,
+        Apellido: values.apellido,
+        Dni: values.dni,
+        Email: values.email,
+        Telefono: values.telefono,
+        Token: `ABC${tk.getHours()}${tk.getMinutes()}${tk.getSeconds()}XYZ`,
+        Referidos: 0
+    }
 
-const sleep = (time) => new Promise((acc) => setTimeout(acc, time))
+    const auth = {
+        headers: {
+            Authorization:
+                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjMzNDkyNzU4LCJleHAiOjE2MzYwODQ3NTh9.tTONIIv436EnoUz2Aa3Z55ToOp20dJz5u5lenPm5o8M',
+        },
+    }
+
+    try {
+        const res = await axios.post(`http://localhost:1337/usuarios?referr=ABC19385XYZ`, data, auth)
+        alert(res.data.cupon)
+    } catch (error) {
+        alert('Error fatal!!!!')
+    }
+}
 
 export default function UserFormFormik() {
 
@@ -19,7 +45,7 @@ export default function UserFormFormik() {
                 <FormikStepper
                     initialValues={{ ...dataForm }}
                     onSubmit={async (values) => {
-                        await sleep(3000);
+                        await request(values);
                         console.log('values', values)
                     }}
                 >
@@ -62,14 +88,6 @@ export function FormikStepper({ children, ...props }) {
     const isLastStep = () => {
         return step === childrenArray.length - 1;
     }
-
-    const handleChange = props => {
-        setForm({ [props.name]: props.value })
-    }
-
-    const validationSchema = Yup.object({
-        email: Yup.string().email('El email ingresado es incorrecto').required('Requerido')
-    })
 
     return (
         <Formik 
