@@ -22,7 +22,7 @@ html {
 
 .App-body {
   background-color: #002350;
-  position: relative;
+  /* display: inline-flex; */
   display: flex;
   flex-wrap: wrap;
   min-height: 100vh;
@@ -115,9 +115,9 @@ p{
 
 .App-logo {
   /*Al momento del video grabado en el celu estaba en 130px*/
-  height: 92%;
+  height: 50%;
   width: 92%;
-  background-size: contain;
+  background-size: cover;
   background-image: url('./TAP_marca-02-color-RGB-gradiente-invertido.png');
   background-repeat: no-repeat;
   background-position: center ;
@@ -155,12 +155,10 @@ p{
 /***************************** WAVE *************************************/
 
 .App-section-form2 {
-  position: relative;
-  bottom: 0;
-  left: 0;
+  display: flex;
   /* min-height: 20vh; */
   width: 100%;
-  z-index: 21;
+  z-index: 20;
 }
 
 
@@ -232,9 +230,15 @@ p{
 
 .App-container-button {
   display: flex;
+  position: absolute;
   justify-content: center;
   align-items: center;
-  height: 6%;
+  height: 5%;
+  width: 100%;
+  left: 0;
+  top: 0.5px;
+  border-top-left-radius: 35px;
+  border-top-right-radius: 35px;
 }
 
 .App-button-slide {
@@ -242,13 +246,14 @@ p{
   width: 45px;
   border-radius: 30px;
   border-style: none;
+  background-color: #FFFFFF;
 }
 
-.App-button-slide:hover {
+/* .App-button-slide:hover {
   background-color: rgb(207, 204, 204);
-}
+} */
 
-.page-selected-form {
+/* .page-selected-form {
   display: inline-flex;
   width: 30px;
   height: 30px;
@@ -289,7 +294,7 @@ p{
   height: 30px;
   font-family: 'Comfortaa';
   border-radius: 8px;
-}
+} */
 /************************************************************************/
 
 

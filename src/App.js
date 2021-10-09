@@ -1,38 +1,47 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css';
 import FormState from './context/Form/FormState.js';
 import UserFormFormik from './components/Form/UserFormFormik';
-import { useSpring, animated } from '@react-spring/web'
+import { useSpring, a, config } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { getAllDescription } from './strapi/data.js'
 
 function App() {
-
-  function PullRelease({ children }) {
-    const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }))
-
-    const bindFormPos = useDrag(({ down, offset: [ox, oy], dragging }) => {
-
-      api.start({ x: ox, y: oy, immediate: down })
-      // console.log('Posición del offset:', oy)
-      // console.log('Posición de la variable y:', y)
-
-
-    }, { bounds: { top: -460, bottom: 0 } })
-
-    return <animated.div {...bindFormPos()} style={{ y, touchAction: 'none' }}>{children}</animated.div>
-  }
-
   const [description, setDescription] = useState('');
   const [descriptionDate, setDescriptionDate] = useState('');
+  const [isClosed, setIsClosed] = useState(true);
+  const [{ y }, api] = useSpring(() => ({ y: 0 }))
 
+  const open = ({ canceled }) => {
+    api.start({ y: -460, immediate: false, config: canceled ? config.wobbly : config.stiff })
+    setIsClosed(false)
+  }
+
+  const close = (velocity = 0) => {
+    api.start({ y: 0, immediate: false, config: { ...config.stiff, velocity } })
+    setIsClosed(true)
+  }
+
+  const bind = useDrag(
+    ({ last, velocity: [, vy], direction: [, dy], offset: [, oy], cancel, canceled }) => {
+      if (oy < -550 || oy > 100) {
+        cancel()
+      }
+
+      if (last) {
+        oy > -200 || (vy > 0.5 && dy > 0) ? close(vy) : open({ canceled })
+      } else {
+        api.start({ y: oy, immediate: true })
+      }
+    },
+    { from: () => [0, y.get()], filterTaps: true, bounds: { top: -460 }, rubberband: true }
+  )
 
   useEffect(async () => {
     const data = await getAllDescription()
     setDescription(data[0].description)
     setDescriptionDate(data[0].description_date)
   }, []);
-
 
   return (
     <div className="App-body">
@@ -70,8 +79,7 @@ function App() {
         <div className='App-section-logo-container'>
           <div className='App-section-logo'>
             <div className='profile-logo'>
-              <div className="App-logo">
-              </div>
+              <div className="App-logo"></div>
             </div>
           </div>
         </div>
@@ -79,18 +87,18 @@ function App() {
 
 
       <section className='swipeable-form-container unselectable'>
-        <PullRelease>
+        <a.div {...bind()} style={{ y, touchAction: 'none' }}>
           <div className='swipeable-form'>
             <div className='div-form'>
-              <div className="App-container-button">
-                <button className="App-button-slide" onClick={() => { }}></button>
+              <div className="App-container-button" onClick={isClosed ? open : close}>
+                <div className="App-button-slide"></div>
               </div>
               <h2 className="App-text-form-title">¡Hola! ¿Cómo estás?</h2>
               <h3 className="App-text-form-description">¡Completa el formulario para participar de nuestra campaña!</h3>
               <UserFormFormik />
             </div>
           </div>
-        </PullRelease>
+        </a.div>
       </section>
 
     </div>

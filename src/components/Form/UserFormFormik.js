@@ -16,7 +16,7 @@ const request = async (values) => {
         Dni: values.dni,
         Email: values.email,
         Telefono: values.telefono,
-        Token: `ABC${tk.getHours()}${tk.getMinutes()}${tk.getSeconds()}XYZ`,
+        // Token: `ABC${tk.getHours()}${tk.getMinutes()}${tk.getSeconds()}XYZ`,
         Referidos: 0
     }
 
@@ -40,7 +40,7 @@ export default function UserFormFormik() {
     const { dataForm, setForm } = useContext(FormContext);
 
     return (
-        <Card>
+        <Card style={{height:'460px'}}>
             <CardContent>
                 <FormikStepper
                     initialValues={{ ...dataForm }}
@@ -50,23 +50,23 @@ export default function UserFormFormik() {
                     }}
                 >
                     <div title='Datos personales'>
-                        <Box paddingBottom={2}>
-                            <Field fullWidth name="nombre" component={TextField} label="Ingrese su nombre" />
+                        <Box paddingBottom={1}>
+                            <Field fullWidth name="nombre" component={TextField} label="Ingrese su nombre" variant="outlined"/>
                         </Box>
                         <Box paddingBottom={2}>
-                            <Field fullWidth name="apellido" component={TextField} label="Ingrese su apellido" />
+                            <Field fullWidth name="apellido" component={TextField} label="Ingrese su apellido" variant="outlined"/>
                         </Box>
                         <Box paddingBottom={2}>
-                            <Field fullWidth type="number" name="dni" component={TextField} label="Ingrese su dni" />
+                            <Field fullWidth type="number" name="dni" component={TextField} label="Ingrese su dni" variant="outlined"/>
                         </Box>
 
                     </div>
                     <div title='Contacto'>
                         <Box paddingBottom={2}>
-                            <Field type='email' fullWidth name="email" component={TextField} label="Ingrese su mail" />
+                            <Field type='email' fullWidth name="email" component={TextField} label="Ingrese su mail"  variant="outlined"/>
                         </Box>
                         <Box paddingBottom={2}>
-                            <Field fullWidth type="number" name="telefono" component={TextField} label="Ingrese su telefono" />
+                            <Field fullWidth type="number" name="telefono" component={TextField} label="Ingrese su telefono"  variant="outlined"/>
                         </Box>
 
                     </div>
@@ -102,20 +102,20 @@ export function FormikStepper({ children, ...props }) {
             }}
             validationSchema = {!isLastStep() 
                 ? Yup.object({
-                nombre: Yup.string().max(20, 'No se permiten más de 20 caracteres.').required('Por favor, ingrese su nombre'),
-                apellido: Yup.string().max(20, 'No se permiten más de 20 caracteres.').required('Por favor, ingrese su apellido'),
-                dni: Yup.number().lessThan(100000000, 'Su DNI debe ser menor a 100.000.000').moreThan(10000000, 'Su DNI debe ser mayor a 10.000.000').required('Por favor, ingrese su DNI')
+                nombre: Yup.string().max(20, 'No se permiten más de 20 caracteres.').required('No es posible dejar el campo vacío.'),
+                apellido: Yup.string().max(20, 'No se permiten más de 20 caracteres.').required('No es posible dejar el campo vacío.'),
+                dni: Yup.number().lessThan(100000000, 'Su DNI debe ser menor a 100.000.000').moreThan(10000000, 'Su DNI debe ser mayor a 10.000.000').required('No es posible dejar el campo vacío.')
                 }) 
                 : Yup.object({
                 email: Yup.string().email('El email es incorrecto').required('Por favor, ingrese su email'),
-                telefono: Yup.number().max(9999999999, 'El número ingresado no es válido.').min(1111111111, 'El número ingresado no es válido.').required('Por favor, ingrese su telefono')
+                telefono: Yup.number().max(9999999999, 'El número ingresado no es válido.').min(1111111111, 'El número ingresado no es válido.').required('No es posible dejar el campo vacío.')
                 })
             }
             autoComplete='off'
         >
             { ({isSubmitting})  => (
                 <Form autoComplete="off">
-                    <Stepper activeStep={step} alternativeLabel>
+                    <Stepper style={{maxHeight:'80px'}} activeStep={step} alternativeLabel>
                         {childrenArray.map((child, index) => (
                             <Step key={child.props.title} completed={step > index || completed}>
                                 <StepLabel>{child.props.title}</StepLabel>
@@ -127,13 +127,13 @@ export function FormikStepper({ children, ...props }) {
                             
                     <Grid container spacing={2} alignItems="center" justifyContent="center">
                         <Grid item>
-                            {step > 0 ? <Button disabled={isSubmitting} style={{ backgroundColor: isSubmitting ? '#CDCDCD' : '#8C91FF', color: isSubmitting ? '#757575' : '#FFFFFF' }} onClick={() => setStep(step - 1)}>Atras</Button> : null}
+                            {step > 0 ? <Button disabled={isSubmitting} style={{ backgroundColor: isSubmitting ? '#CDCDCD' : '#4E53DB', color: isSubmitting ? '#757575' : '#FFFFFF', borderRadius:'25px', textTransform:'none', fontFamily:'Comfortaa'}} onClick={() => setStep(step - 1)}>Atras</Button> : null}
                         </Grid>
                         <Grid item>
                             <Button 
                                 disabled={isSubmitting} variant='contained'
                                 startIcon={isSubmitting ? <CircularProgress size='1rem'/> : null} 
-                                style={{ backgroundColor: isSubmitting ? '#CDCDCD' : '#8C91FF', color: isSubmitting ? '#757575' : '#FFFFFF' }} type='submit'>
+                                style={{ backgroundColor: isSubmitting ? '#CDCDCD' : '#4E53DB', color: isSubmitting ? '#757575' : '#FFFFFF', borderRadius:'25px', textTransform:'none', fontFamily:'Comfortaa' }} type='submit'>
                                     {isSubmitting ? 'Enviando' : isLastStep() ? 'Enviar' : 'Siguiente'}
                             </Button>
                         </Grid>
