@@ -116,10 +116,9 @@ export function FormikStepper({ children, ...props }) {
                 }) 
                 : Yup.object({
                 email: Yup.string().email('El email ingresado es incorrecto.').required('No es posible dejar el campo vacío.'),
-                telefono: Yup.number().lessThan(9999999999, 'El número ingresado no es válido.').moreThan(1111111111, 'El número ingresado no es válido.').required('No es posible dejar el campo vacío.')
+                telefono: Yup.number().lessThan(9999999999, 'El número ingresado no es válido.').moreThan(1100000000, 'El número ingresado no es válido.').required('No es posible dejar el campo vacío.')
                 })
             }
-            autoComplete='off'
         >
             { ({isSubmitting})  => (
                 <Form autoComplete="off">
