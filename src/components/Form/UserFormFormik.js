@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Card, CardContent, CircularProgress, Button, Box, Stepper, Step, StepLabel, Grid } from '@material-ui/core'
+import { Card, CardContent, CircularProgress, Button, Box, Stepper, Step, StepLabel, Grid, makeStyles } from '@material-ui/core'
 import { Field, Form, Formik } from 'formik'
 import { TextField } from 'formik-material-ui'
 import FormContext from '../../context/Form/FormContext'
@@ -7,6 +7,12 @@ import axios from 'axios'
 import * as Yup from 'yup';
 
 // const sleep = (time) => new Promise((acc) => setTimeout(acc, time))
+
+const useStyles = makeStyles({
+    customLabelStyle: {
+      fontFamily: "Comfortaa"
+    }
+});
 
 const request = async (values) => {
     const tk = new Date();
@@ -50,23 +56,23 @@ export default function UserFormFormik() {
                     }}
                 >
                     <div title='Datos personales'>
-                        <Box paddingBottom={1}>
-                            <Field fullWidth name="nombre" component={TextField} label="Ingrese su nombre" variant="outlined"/>
+                        <Box paddingBottom={1.5}>
+                            <Field fullWidth name="nombre" component={TextField} label="Ingrese su nombre" variant="outlined" InputLabelProps={{style: {fontFamily:'Comfortaa', fontSize:14}}}/>
                         </Box>
-                        <Box paddingBottom={2}>
-                            <Field fullWidth name="apellido" component={TextField} label="Ingrese su apellido" variant="outlined"/>
+                        <Box paddingBottom={1.5}>
+                            <Field fullWidth name="apellido" component={TextField} label="Ingrese su apellido" variant="outlined" InputLabelProps={{style: {fontFamily:'Comfortaa', fontSize:14}}}/>
                         </Box>
-                        <Box paddingBottom={2}>
-                            <Field fullWidth type="number" name="dni" component={TextField} label="Ingrese su dni" variant="outlined"/>
+                        <Box paddingBottom={1.5}>
+                            <Field fullWidth type="number" name="dni" component={TextField} label="Ingrese su dni" variant="outlined" InputLabelProps={{style: {fontFamily:'Comfortaa', fontSize:14}}}/>
                         </Box>
 
                     </div>
                     <div title='Contacto'>
                         <Box paddingBottom={2}>
-                            <Field type='email' fullWidth name="email" component={TextField} label="Ingrese su mail"  variant="outlined"/>
+                            <Field type='email' fullWidth name="email" component={TextField} label="Ingrese su mail"  variant="outlined" InputLabelProps={{style: {fontFamily:'Comfortaa', fontSize:14}}}/>
                         </Box>
                         <Box paddingBottom={2}>
-                            <Field fullWidth type="number" name="telefono" component={TextField} label="Ingrese su telefono"  variant="outlined"/>
+                            <Field fullWidth type="number" name="telefono" component={TextField} label="Ingrese su telefono"  variant="outlined" InputLabelProps={{style: {fontFamily:'Comfortaa', fontSize:14}}}/>
                         </Box>
 
                     </div>
@@ -89,6 +95,8 @@ export function FormikStepper({ children, ...props }) {
         return step === childrenArray.length - 1;
     }
 
+    const classes = useStyles();
+
     return (
         <Formik 
             {...props} 
@@ -107,8 +115,8 @@ export function FormikStepper({ children, ...props }) {
                 dni: Yup.number().lessThan(100000000, 'Su DNI debe ser menor a 100.000.000').moreThan(10000000, 'Su DNI debe ser mayor a 10.000.000').required('No es posible dejar el campo vacío.')
                 }) 
                 : Yup.object({
-                email: Yup.string().email('El email es incorrecto').required('Por favor, ingrese su email'),
-                telefono: Yup.number().max(9999999999, 'El número ingresado no es válido.').min(1111111111, 'El número ingresado no es válido.').required('No es posible dejar el campo vacío.')
+                email: Yup.string().email('El email ingresado es incorrecto.').required('No es posible dejar el campo vacío.'),
+                telefono: Yup.number().lessThan(9999999999, 'El número ingresado no es válido.').moreThan(1111111111, 'El número ingresado no es válido.').required('No es posible dejar el campo vacío.')
                 })
             }
             autoComplete='off'
@@ -118,7 +126,7 @@ export function FormikStepper({ children, ...props }) {
                     <Stepper style={{maxHeight:'80px'}} activeStep={step} alternativeLabel>
                         {childrenArray.map((child, index) => (
                             <Step key={child.props.title} completed={step > index || completed}>
-                                <StepLabel>{child.props.title}</StepLabel>
+                                <StepLabel classes={{label: classes.customLabelStyle}}>{child.props.title}</StepLabel>
                             </Step>
                         ))}
                     </Stepper>
