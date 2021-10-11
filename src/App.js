@@ -5,14 +5,22 @@ import UserFormFormik from './components/Form/UserFormFormik';
 import { useSpring, a, config } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { getAllDescription } from './strapi/data.js'
-import { Button } from '@material-ui/core'
+import { Button, Modal, Box, Card, CardContent, Grid } from '@material-ui/core'
 import logo from './TAP_marca-02-color-RGB-gradiente-invertido.png'
+import { getAllParticipants } from './strapi/data.js'
+import Ranking from './components/Ranking.js'
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
   const [description, setDescription] = useState('');
   const [descriptionDate, setDescriptionDate] = useState('');
   const [isClosed, setIsClosed] = useState(true);
   const [{ y }, api] = useSpring(() => ({ y: 0 }))
+  const [openModal, setOpenModal] = useState();
+  const handleOpen = () => setOpenModal(true)
+  const handleClose = () => setOpenModal(false)
+
+  const participantes = getAllParticipants()
 
   const open = ({ canceled }) => {
     api.start({ y: -460, immediate: false, config: canceled ? config.wobbly : config.stiff })
@@ -48,20 +56,9 @@ function App() {
   return (
     <div className="App-body">
 
-
       <header className='App-header'>
-          <img className='App-logo' src={logo} alt='logo_tap' width={200} />
+        <img className='App-logo' src={logo} alt='logo_tap' width={200} />
       </header>
-
-      {/* <section className='App-section-form2'>
-        <div className="custom-shape-divider-top-1632780241">
-          <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="shape-fill"></path>
-          </svg>
-        </div>
-      </section> */}
-
-
 
       <section className='App-section-container'>
         <div className='App-section-blob-container'>
@@ -86,23 +83,9 @@ function App() {
             </div>
           </div>
 
-          <div className='App-description-button'>
-            <Button
-              variant='contained'
-              style={{ backgroundColor: '#002350', color: '#FFFFFF', borderRadius: '25px', textTransform: 'none', fontFamily: 'Comfortaa', width: '80%', height: '70%' }}
-            >Ranking</Button>
-          </div>
-
-          {/* <div className='App-section-logo-container'>
-            <div className='App-section-logo'>
-              <div className='profile-logo'>
-                <div className="App-logo"></div>
-              </div>
-            </div>
-          </div> */}
+          <Ranking />
         </div>
       </section>
-
 
       <section className='swipeable-form-container unselectable'>
         <a.div {...bind()} style={{ y, touchAction: 'none' }}>
@@ -113,7 +96,11 @@ function App() {
               </div>
               <h2 className="App-text-form-title">¡Hola! ¿Cómo estás?</h2>
               <h3 className="App-text-form-description">¡Completa el formulario para participar de nuestra campaña!</h3>
-              <UserFormFormik />
+              <Router>
+                <Route path="/" exact>
+                  <UserFormFormik />
+                </Route>
+              </Router>
             </div>
           </div>
         </a.div>
