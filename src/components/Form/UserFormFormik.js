@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Card, CardContent, CircularProgress, Button, Box, Stepper, Step, StepLabel, Grid, makeStyles } from '@material-ui/core'
+import { Card, CardContent, CircularProgress, Button, Box, Stepper, Step, StepLabel, Grid, makeStyles, Modal, Typography } from '@material-ui/core'
 import { Field, Form, Formik } from 'formik'
 import { TextField } from 'formik-material-ui'
 import FormContext from '../../context/Form/FormContext'
@@ -18,6 +18,10 @@ const useStyles = makeStyles({
 
 
 export default function UserFormFormik() {
+    const [openModal, setOpenModal] = useState(false);
+    const handleOpen = () => setOpenModal(true)
+    const handleClose = () => setOpenModal(false)
+    const [cupon, setCupon] = useState({});
 
     const { dataForm, setForm } = useContext(FormContext);
 
@@ -25,10 +29,27 @@ export default function UserFormFormik() {
         return new URLSearchParams(useLocation().search)
     }
 
+    function MessageCupon() {
+        return (
+            <Modal open={openModal} onClose={handleClose}>
+                <Card id='card-message-cupon'>
+                    <CardContent>
+                        <Grid container direction="row" justifyContent='center' alignItems='center' style={{height:'55vh', justifyContent:'center', alignItems:'center'}}>
+                                <Grid item style={{ textAlign: 'center', marginBottom: '8px' }}>
+                                    <Typography style={{ fontFamily: 'Comfortaa Semibold', color: '#FFFFFF', fontSize:'25px' }}>{`¡Felicidades, obtuviste tu cupón de descuento: ${cupon.cupon}!`}</Typography>
+                                    <br/>
+                                    <Typography style={{ fontFamily: 'Comfortaa Semibold', color: '#FFFFFF', fontSize:'18px' }}>{`Compartí el siguiente link para sumar puntos por un premio mayor: ${cupon.url_referidos}!`}</Typography>
+                                </Grid>
+                        </Grid>
+                    </CardContent>
+                </Card>
+            </Modal>
+        )
+    }
+
     const query = useQuery();
 
     const request = async (values) => {
-        const tk = new Date();
         const user = {
             Nombre: values.nombre,
             Apellido: values.apellido,
@@ -52,9 +73,14 @@ export default function UserFormFormik() {
                 console.log('Entre al if del error !201', data)
                 throw new Error(data.type)
             }
-            
-            alert('Felicidades, obtuviste tu cupón de descuento: ' + data.cupon + '\n'
-                + 'comparte tu link para sumar puntos por un premio mayor: ' + data.url_referidos)
+
+            // alert('Felicidades, obtuviste tu cupón de descuento: ' + data.cupon + '\n'
+            //     + 'comparte tu link para sumar puntos por un premio mayor: ' + data.url_referidos)
+
+            if (data != null) {
+                setCupon({...data})
+                handleOpen()
+            }
         } catch (error) {
             alert('Error fatal!!!!', error.message)
         }
@@ -62,39 +88,46 @@ export default function UserFormFormik() {
 
 
     return (
-        <Card style={{ height: '460px' }}>
-            <CardContent>
-                <FormikStepper
-                    initialValues={{ ...dataForm }}
-                    onSubmit={async (values) => {
-                        await request(values);
-                        console.log('values', values)
-                    }}
-                >
-                    <div title='Datos personales'>
-                        <Box paddingBottom={1.5}>
-                            <Field fullWidth name="nombre" component={TextField} label="Ingrese su nombre" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
-                        </Box>
-                        <Box paddingBottom={1.5}>
-                            <Field fullWidth name="apellido" component={TextField} label="Ingrese su apellido" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
-                        </Box>
-                        <Box paddingBottom={1.5}>
-                            <Field fullWidth type="number" name="dni" component={TextField} label="Ingrese su dni" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
-                        </Box>
+        <>
+            <Card style={{ height: '460px' }}>
+                <CardContent>
+                    <FormikStepper
+                        initialValues={{ ...dataForm }}
+                        onSubmit={async (values, helpers) => {
+                            await request(values);
+                            console.log('values', values)
+                            // helpers.resetForm()
+                        }}
+                    >
+                        <div title='Datos personales'>
+                            <Box paddingBottom={1.5}>
+                                <Field fullWidth name="nombre" component={TextField} label="Ingrese su nombre" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
+                            </Box>
+                            <Box paddingBottom={1.5}>
+                                <Field fullWidth name="apellido" component={TextField} label="Ingrese su apellido" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
+                            </Box>
+                            <Box paddingBottom={1.5}>
+                                <Field fullWidth type="number" name="dni" component={TextField} label="Ingrese su dni" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
+                            </Box>
 
-                    </div>
-                    <div title='Contacto'>
-                        <Box paddingBottom={2}>
-                            <Field type='email' fullWidth name="email" component={TextField} label="Ingrese su mail" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
-                        </Box>
-                        <Box paddingBottom={2}>
-                            <Field fullWidth type="number" name="telefono" component={TextField} label="Ingrese su telefono" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
-                        </Box>
+                        </div>
+                        <div title='Contacto'>
+                            <Box paddingBottom={2}>
+                                <Field type='email' fullWidth name="email" component={TextField} label="Ingrese su mail" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
+                            </Box>
+                            <Box paddingBottom={2}>
+                                <Field fullWidth type="number" name="telefono" component={TextField} label="Ingrese su telefono" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
+                            </Box>
 
-                    </div>
-                </FormikStepper>
-            </CardContent>
-        </Card>
+                        </div>
+                    </FormikStepper>
+                </CardContent>
+            </Card>
+
+            {openModal
+                ? MessageCupon()
+                : null}
+        </>
     )
 }
 

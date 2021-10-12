@@ -361,10 +361,10 @@ input{
   align-items: center
 }
 
-#card-ranking {
+#card-ranking, #card-message-cupon {
   position: absolute; 
   width: 90vw; 
-  height: 59vh; 
+  height: 60vh; 
   background-color: #002350; 
   top: 25%;
   bottom: 0; 
@@ -423,6 +423,42 @@ input{
 
 
 /***************************** MEDIA QUERIES ****************************/
+
+@media screen and (max-width: 500px) {
+  #primera-posicion-ranking {
+    width: 90px; 
+    height: 90px;
+    border-radius: 90px;
+  }  
+
+  #container-description-prim-pos {
+    display: flex; 
+    width: 82px; 
+    height: 82px; 
+    border-radius: 90px; 
+  }
+
+  #segunda-posicion-ranking, #tercera-posicion-ranking{
+    width: 75px; 
+    height: 75px; 
+    border-radius: 75px; 
+  }
+
+  #container-description-seg-pos, #container-description-ter-pos{
+    display: flex; 
+    width: 67px; 
+    height: 67px; 
+    border-radius: 67px; 
+  }
+
+  #card-ranking, #card-message-cupon {
+    width: 97vw; 
+    height: 75vh; 
+    top: 15%;
+
+  }
+}
+
 
 @media screen and (max-width: 700px) {
 

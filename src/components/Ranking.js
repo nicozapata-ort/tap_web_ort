@@ -16,7 +16,6 @@ const Ranking = () => {
     useEffect(async () => {
         const data = await getAllParticipants2()
         setParticipantes(data)
-        console.log(data)
     }, []);
 
     function renderPodiumParticipants() {
@@ -116,14 +115,16 @@ const Ranking = () => {
                 <Card id='card-ranking' className='unselectable'>
                     <CardContent>
                         <Grid container justifyContent='center' alignItems='center'>
-                            {renderPodiumParticipants()}
-                        </Grid>
-
-                        <Grid container direction="column">
-                            <Grid item style={{ textAlign: 'center', marginBottom: '8px' }}>
-                                <Typography style={{ fontFamily: 'Comfortaa Semibold', color: '#49E3C1' }}>Precio: $5000 (1-10 pos.) | $1000 (>10 pos.)</Typography>
+                            <Grid item container justifyContent='center' alignItems='center'>
+                                {renderPodiumParticipants()}
                             </Grid>
-                            {renderPartipantDetail()}
+
+                            <Grid item container direction="column">
+                                <Grid item style={{ textAlign: 'center', marginBottom: '8px' }}>
+                                    <Typography style={{ fontFamily: 'Comfortaa Semibold', color: '#49E3C1' }}>Precio: $5000 (1-10 pos.) | $1000 (mayor a 10 pos.)</Typography>
+                                </Grid>
+                                {renderPartipantDetail()}
+                            </Grid>
                         </Grid>
                     </CardContent>
                 </Card>
