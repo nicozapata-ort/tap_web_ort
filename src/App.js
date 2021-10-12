@@ -5,9 +5,7 @@ import UserFormFormik from './components/Form/UserFormFormik';
 import { useSpring, a, config } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { getAllDescription } from './strapi/data.js'
-import { Button, Modal, Box, Card, CardContent, Grid } from '@material-ui/core'
 import logo from './TAP_marca-02-color-RGB-gradiente-invertido.png'
-import { getAllParticipants } from './strapi/data.js'
 import Ranking from './components/Ranking.js'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -16,11 +14,6 @@ function App() {
   const [descriptionDate, setDescriptionDate] = useState('');
   const [isClosed, setIsClosed] = useState(true);
   const [{ y }, api] = useSpring(() => ({ y: 0 }))
-  const [openModal, setOpenModal] = useState();
-  const handleOpen = () => setOpenModal(true)
-  const handleClose = () => setOpenModal(false)
-
-  const participantes = getAllParticipants()
 
   const open = ({ canceled }) => {
     api.start({ y: -460, immediate: false, config: canceled ? config.wobbly : config.stiff })
