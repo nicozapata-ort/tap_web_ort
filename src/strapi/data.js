@@ -18,4 +18,14 @@ function getAllParticipants() {
     return participantes
 }
 
-export { getAllDescription, getAllParticipants }
+async function getAllParticipants2(){
+    try {
+        const { data } = await axios.get('http://localhost:1337/usuarios')
+        data.sort((a,b) => b.Referidos - a.Referidos)
+        return data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export { getAllDescription, getAllParticipants, getAllParticipants2 }

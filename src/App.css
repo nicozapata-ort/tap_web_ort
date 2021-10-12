@@ -331,29 +331,93 @@ input{
 
 /******************************** RANKING *******************************/
 
-.button-ranking{
-  background-color: '#002350'; 
-  color: '#FFFFFF';
-  border-radius: '25px'; 
-  text-transform: 'none';
+#button-ranking{
+  background-color: #002350; 
+  color: #FFFFFF;
+  border-radius: 25px; 
+  text-transform: none; 
   font-family: 'Comfortaa'; 
-  width: '80%';
-  height: '70%'
+  width: 80%;
+  height: 45px
 }
 
-body::-webkit-scrollbar {
-  width: 12px;               /* width of the entire scrollbar */
+.list-item-ranking {
+  flex-direction: row; 
+  justify-content: center; 
+  align-items: center; 
+  background-color: #405A7C; 
+  margin-bottom: 10px; 
+  border-radius: 100px; 
+  padding: 15px
 }
 
-body::-webkit-scrollbar-track {
-  background: orange;        /* color of the tracking area */
+.circle-pos-item{
+  display: flex; 
+  width: 30px; 
+  height: 30px; 
+  border-radius: 30px; 
+  background-color: white; 
+  justify-content: center; 
+  align-items: center
 }
 
-body::-webkit-scrollbar-thumb {
-  background-color: blue;    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 3px solid orange;  /* creates padding around scroll thumb */
+#card-ranking {
+  position: absolute; 
+  width: 90vw; 
+  height: 59vh; 
+  background-color: #002350; 
+  top: 25%;
+  bottom: 0; 
+  left: 0; 
+  right: 0; 
+  margin: 0 auto; 
+  border-radius: 50px
 }
+
+#primera-posicion-ranking {
+  width: 150px; 
+  height: 150px;
+  border-radius: 150px;
+  border-color: #14D2B9;
+  border-width: 4px;
+  border-style: solid;
+  background-color: #405A7C;
+  text-align: center;
+  margin-bottom: 10px
+}
+
+#segunda-posicion-ranking, #tercera-posicion-ranking{
+  width: 100px; 
+  height: 100px; 
+  border-radius: 100px; 
+  border-color: #14D2B9; 
+  border-width: 4px; 
+  border-style: solid; 
+  background-color: #405A7C; 
+  text-align: center; 
+  margin-bottom: 10px
+}
+
+#container-description-prim-pos {
+  display: flex; 
+  width: 142px; 
+  height: 142px; 
+  border-radius: 150px; 
+  justify-content: center; 
+  align-items: center; 
+  flex-direction: column
+}
+
+#container-description-seg-pos, #container-description-ter-pos{
+  display: flex; 
+  width: 92px; 
+  height: 92px; 
+  border-radius: 92px; 
+  justify-content: center; 
+  align-items: center; 
+  flex-direction: column
+}
+
 /************************************************************************/
 
 
