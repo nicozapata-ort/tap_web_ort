@@ -89,7 +89,7 @@ export default function UserFormFormik() {
 
     return (
         <>
-            <Card style={{ height: '460px' }}>
+            <Card style={{ height: '460px', width:'100%' }}>
                 <CardContent>
                     <FormikStepper
                         initialValues={{ ...dataForm }}
