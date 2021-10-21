@@ -265,9 +265,14 @@ input{
 } */
 
 .formulary{
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
   align-content: center;
   justify-content: center;
+  justify-items: center;
+  align-items: center;
+  height: 80vh;
 }
 
 
@@ -322,13 +327,14 @@ input{
   height: 45px
 }
 
-#button-ranking2, #button-ranking3{
+#button-ranking-2, #button-ranking-3{
   background-color: #14D2B9; 
   color: #FFFFFF;
   border-radius: 25px; 
   text-transform: none; 
   font-family: 'Comfortaa'; 
-  height: 45px
+  height: 45px;
+  margin: 20px auto;
 }
 
 
@@ -360,16 +366,23 @@ input{
   align-content: center;
   justify-content: center;
   align-items: start;
-  justify-items: center; */
-  width: 95vw; 
-  height: 80vh; 
-  background-color: #002350; 
+  justify-items: center;
   position: absolute; 
   top: 10%;
   bottom: 0; 
   left: 0; 
   right: 0; 
-  margin: 0 auto; 
+  margin: 0 auto;  */
+  width: 95vw; 
+  height: 55vh; 
+  background-color: #002350; 
+  border-radius: 50px
+}
+
+#card-ranking2{
+  width: 95vw; 
+  height: 70vh; 
+  background-color: #002350; 
   border-radius: 50px
 }
 
@@ -461,9 +474,6 @@ input{
   width: 80%;
 }
 
-.container-form{
-
-}
 /**********************************************/
 
 /******************* BLOB ********************/
@@ -518,9 +528,19 @@ input{
 }
 /**********************************************/
 
+#card-ranking{
+  width: 60vw; 
+  height: 60vh; 
+  border-radius: 50px;
+  background-color: #002350;
+}
 
-
-
+#card-message-cupon{
+  width: 60vw; 
+  height: 60vh; 
+  border-radius: 50px;
+  background-color: #002350;
+}
 
 
 

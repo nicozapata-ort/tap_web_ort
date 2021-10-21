@@ -1,9 +1,11 @@
 import axios from 'axios'
 
-async function getAllDescription() {
+async function getPromotion() {
     try {
         const { data } = await axios.get('http://localhost:1337/promotions')
-
+        if(data.length > 0){
+            return data[data.length - 1]
+        }
         return data
     } catch (error) {
         console.log(error)
@@ -20,26 +22,35 @@ function getAllParticipants() {
 
 async function getAllParticipants2() {
     try {
-        const { data } = await axios.get('http://localhost:1337/usuarios')
-        data.sort((a, b) => b.Referidos - a.Referidos)
-        return data
-    } catch (error) {
-        console.log(error)
-    }
-    /*
-         try {
-        const { data } = await axios.get('http://localhost:1337/ranking', {
+        let { data } = await axios.get('http://localhost:1337/ranking', {
             headers: {
                 Authorization:
-                    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM0NTAwNDc4LCJleHAiOjE2MzcwOTI0Nzh9.G1RKSbO3Ppz1dCxvT8hBrMYbbHX55gg1HR-s5ColroA'
+                    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjMzNDkyNzU4LCJleHAiOjE2MzYwODQ3NTh9.tTONIIv436EnoUz2Aa3Z55ToOp20dJz5u5lenPm5o8M'
             },
-            params: { email: "suarez@suarez.com" }
+            params: { email: "nicolashzap@gmail.com" }
         });
+
+        const promotion = await getPromotion()
+        console.log('Estoy en DATA', promotion)
+        console.log('Estoy en DATA', data)
+
+
+        if(data.data.length >= promotion.maxParticipants){
+            data = data.data.splice(0,promotion.maxParticipants)
+            return data
+        }
+
         return data.data
     } catch (error) {
         console.log(error)
     }
-    */
+    // try {
+    //     const { data } = await axios.get('http://localhost:1337/usuarios')
+    //     data.sort((a, b) => b.Referidos - a.Referidos)
+    //     return data
+    // } catch (error) {
+    //     console.log(error)
+    // }
 }
 
-export { getAllDescription, getAllParticipants, getAllParticipants2 }
+export { getPromotion, getAllParticipants, getAllParticipants2 }

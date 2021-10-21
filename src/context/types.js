@@ -1,2 +1,5 @@
 export const SET_FORM = 'SET_FORM'
 export const SET_STEP = 'SET_STEP'
+export const SET_PROMOTION = 'SET_PROMOTION'
+export const SET_REGISTERED_USER = 'SET_REGISTERED_USER'
+export const SET_FORM_COMPLETED = 'SET_FORM_COMPLETED'

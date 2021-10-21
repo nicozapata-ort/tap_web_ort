@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import './App.css';
 import FormState from './context/Form/FormState.js';
 import UserFormFormik from './components/Form/UserFormFormik';
 import { useSpring, a, config } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
-import { getAllDescription } from './strapi/data.js'
+import { getPromotion } from './strapi/data.js'
 import logo from './TAP_marca-02-color-RGB-gradiente-invertido.png'
 import Ranking from './components/Ranking.js'
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Button } from '@material-ui/core'
 import imagePromotion from './visa-tap-online.png'
+import PromotionState from './context/Promotion/PromotionState.js';
+import PromotionContext from './context/Promotion/PromotionContext';
 
 function App() {
-  const [description, setDescription] = useState('');
-  const [descriptionDate, setDescriptionDate] = useState('');
+  const { promotion, setPromotion } = useContext(PromotionContext);
+  // const [descriptionDate, setDescriptionDate] = useState('');
   const [isClosed, setIsClosed] = useState(true);
   const [{ y }, api] = useSpring(() => ({ y: 0 }))
 
@@ -43,9 +44,9 @@ function App() {
   )
 
   useEffect(async () => {
-    const data = await getAllDescription()
-    setDescription(data[0].description)
-    setDescriptionDate(data[0].description_date)
+    const data = await getPromotion()
+    setPromotion(data)
+    console.log('Estoy en App, se deberia hacer una vez')
   }, []);
 
   return (
@@ -74,8 +75,8 @@ function App() {
 
         <div className="App-section-description-container unselectable">
           <div className="App-section-description">
-            <h2 className="App-text-header-title">{description}</h2>
-            <h3 className="App-text-header-description">{descriptionDate}</h3>
+            <h2 className="App-text-header-title">{`${promotion.description} $${promotion.prizeMinPrice} a $${promotion.prizeMaxPrice}`}</h2>
+            <h3 className="App-text-header-description">{`Podes participar desde el ${promotion.dateMin} al ${promotion.dateMax}`}</h3>
           </div>
         </div>
 
@@ -116,8 +117,10 @@ function App() {
 
 export default function AppWrapper() {
   return (
-    <FormState>
-      <App />
-    </FormState>
+    <PromotionState>
+      <FormState>
+        <App />
+      </FormState>
+    </PromotionState>
   )
 };

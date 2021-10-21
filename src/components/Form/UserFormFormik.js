@@ -6,6 +6,8 @@ import FormContext from '../../context/Form/FormContext'
 import axios from 'axios'
 import * as Yup from 'yup';
 import { useLocation } from "react-router-dom";
+import { Scrollbar } from 'react-scrollbars-custom'
+
 
 
 // const sleep = (time) => new Promise((acc) => setTimeout(acc, time))
@@ -18,12 +20,12 @@ const useStyles = makeStyles({
 
 
 export default function UserFormFormik() {
-    const [openModal, setOpenModal] = useState(false);
+    const [openModal, setOpenModal] = useState(true);
     const handleOpen = () => setOpenModal(true)
     const handleClose = () => setOpenModal(false)
     const [cupon, setCupon] = useState({});
 
-    const { dataForm, setForm } = useContext(FormContext);
+    const { dataForm, setForm, setRegisteredUser, setStep, setFormCompleted } = useContext(FormContext);
 
     function useQuery() {
         return new URLSearchParams(useLocation().search)
@@ -31,15 +33,20 @@ export default function UserFormFormik() {
 
     function MessageCupon() {
         return (
-            <Modal open={openModal} onClose={handleClose}>
+            <Modal 
+                open={openModal}
+                onClose={handleClose}
+                style={{display:'flex',alignItems:'center',justifyContent:'center'}}
+            >
                 <Card id='card-message-cupon'>
                     <CardContent>
-                        <Grid container direction="row" justifyContent='center' alignItems='center' style={{height:'55vh', justifyContent:'center', alignItems:'center'}}>
-                                <Grid item style={{ textAlign: 'center', marginBottom: '8px' }}>
-                                    <Typography style={{ fontFamily: 'Comfortaa Semibold', color: '#FFFFFF', fontSize:'25px' }}>{`¡Felicidades, obtuviste tu cupón de descuento: ${cupon.cupon}!`}</Typography>
-                                    <br/>
-                                    <Typography style={{ fontFamily: 'Comfortaa Semibold', color: '#FFFFFF', fontSize:'18px' }}>{`Compartí el siguiente link para sumar puntos por un premio mayor: ${cupon.url_referidos}!`}</Typography>
-                                </Grid>
+                        <Grid container direction="column" justifyContent='center' alignContent='center' style={{ textAlign:'center', height:'56vh'}}>
+                            <Grid item style={{ justifyContent: 'center', alignContent: 'center', textAlign:'center' }}>
+                                <Typography style={{ fontFamily: 'Comfortaa Semibold', color: '#FFFFFF', fontSize: '25px', marginBottom:'20px' }}>¡Felicidades, obtuviste tu cupón de descuento!</Typography>
+                                <Typography style={{ fontFamily: 'Comfortaa Semibold', color: '#FFFFFF', fontSize: '25px', marginBottom:'30px', borderRadius:'50px', borderColor:'#14D2B9', borderWidth:'3px', borderStyle:'solid',width:'50%', margin:'20px auto' }}>{`${cupon.cupon}`}</Typography>
+                                <Typography style={{ fontFamily: 'Comfortaa Semibold', color: '#FFFFFF', fontSize: '18px', marginBottom:'20px' }}>Compartí el siguiente link para sumar puntos por un premio mayor</Typography>
+                                <Typography style={{ fontFamily: 'Comfortaa Semibold', color: '#FFFFFF', fontSize: '18px' }}>{`${cupon.url_referidos}`}</Typography>
+                            </Grid>
                         </Grid>
                     </CardContent>
                 </Card>
@@ -78,8 +85,9 @@ export default function UserFormFormik() {
             //     + 'comparte tu link para sumar puntos por un premio mayor: ' + data.url_referidos)
 
             if (data != null) {
-                setCupon({...data})
+                setCupon({ ...data })
                 handleOpen()
+                setRegisteredUser(true)
             }
         } catch (error) {
             alert('Error fatal!!!!', error.message)
@@ -88,46 +96,51 @@ export default function UserFormFormik() {
 
 
     return (
-        <>
-            <Card style={{ height: '460px', width:'100%' }}>
-                <CardContent>
-                    <FormikStepper
-                        initialValues={{ ...dataForm }}
-                        onSubmit={async (values, helpers) => {
-                            await request(values);
-                            console.log('values', values)
-                            // helpers.resetForm()
-                        }}
-                    >
-                        <div title='Datos personales'>
-                            <Box paddingBottom={1.5}>
-                                <Field fullWidth name="nombre" component={TextField} label="Ingrese su nombre" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
-                            </Box>
-                            <Box paddingBottom={1.5}>
-                                <Field fullWidth name="apellido" component={TextField} label="Ingrese su apellido" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
-                            </Box>
-                            <Box paddingBottom={1.5}>
-                                <Field fullWidth type="number" name="dni" component={TextField} label="Ingrese su dni" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
-                            </Box>
+        <Grid item style={{ height: '80vh', width: '100%', justifyContent:'center', alignContent:'center' }}>
+            <Card style={{ height: '100%', width: '100%' }}>
+                <Scrollbar style={{ width: '100%', height: '100%' }}>
+                    <CardContent>
+                        <FormikStepper
+                            initialValues={{ ...dataForm }}
+                            onSubmit={async (values, helpers) => {
+                                await request(values);
+                                console.log('values', values)
+                                helpers.resetForm()
+                                setStep(0)
+                                setFormCompleted(false)
+                                setRegisteredUser(false)
+                            }}
+                        >
+                            <div title='Datos personales'>
+                                <Box paddingBottom={1.5}>
+                                    <Field fullWidth name="nombre" component={TextField} label="Ingrese su nombre" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
+                                </Box>
+                                <Box paddingBottom={1.5}>
+                                    <Field fullWidth name="apellido" component={TextField} label="Ingrese su apellido" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
+                                </Box>
+                                <Box paddingBottom={1.5}>
+                                    <Field fullWidth type="number" name="dni" component={TextField} label="Ingrese su dni" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
+                                </Box>
 
-                        </div>
-                        <div title='Contacto'>
-                            <Box paddingBottom={2}>
-                                <Field type='email' fullWidth name="email" component={TextField} label="Ingrese su mail" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
-                            </Box>
-                            <Box paddingBottom={2}>
-                                <Field fullWidth type="number" name="telefono" component={TextField} label="Ingrese su telefono" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
-                            </Box>
+                            </div>
+                            <div title='Contacto'>
+                                <Box paddingBottom={2}>
+                                    <Field type='email' fullWidth name="email" component={TextField} label="Ingrese su mail" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
+                                </Box>
+                                <Box paddingBottom={2}>
+                                    <Field fullWidth type="number" name="telefono" component={TextField} label="Ingrese su telefono" variant="outlined" InputLabelProps={{ style: { fontFamily: 'Comfortaa', fontSize: 14 } }} />
+                                </Box>
 
-                        </div>
-                    </FormikStepper>
-                </CardContent>
+                            </div>
+                        </FormikStepper>
+                    </CardContent>
+                </Scrollbar>
             </Card>
 
             {openModal
                 ? MessageCupon()
                 : null}
-        </>
+        </Grid>
     )
 }
 
@@ -136,9 +149,9 @@ export default function UserFormFormik() {
 
 export function FormikStepper({ children, ...props }) {
     const childrenArray = React.Children.toArray(children)
-    const { step, setStep, dataForm, setForm } = useContext(FormContext);
+    const { step, setStep, dataForm, setForm, formCompleted, setFormCompleted } = useContext(FormContext);
     const currentChild = childrenArray[step]
-    const [completed, setCompleted] = useState(false);
+    // const [completed, setCompleted] = useState(false);
 
     const isLastStep = () => {
         return step === childrenArray.length - 1;
@@ -152,7 +165,6 @@ export function FormikStepper({ children, ...props }) {
             onSubmit={async (values, helpers) => {
                 if (isLastStep()) {
                     await props.onSubmit(values, helpers)
-                    setCompleted(!completed)
                 } else {
                     setStep(step + 1)
                 }
@@ -171,28 +183,35 @@ export function FormikStepper({ children, ...props }) {
         >
             {({ isSubmitting }) => (
                 <Form autoComplete="off">
-                    <Stepper style={{ maxHeight: '80px' }} activeStep={step} alternativeLabel>
-                        {childrenArray.map((child, index) => (
-                            <Step key={child.props.title} completed={step > index || completed}>
-                                <StepLabel classes={{ label: classes.customLabelStyle }}>{child.props.title}</StepLabel>
-                            </Step>
-                        ))}
-                    </Stepper>
-
-                    {currentChild}
-
-                    <Grid container spacing={2} alignItems="center" justifyContent="center">
+                    <Grid container direction='column' justifyContent='center' alignContent='center'>
                         <Grid item>
-                            {step > 0 ? <Button disabled={isSubmitting} style={{ backgroundColor: isSubmitting ? '#CDCDCD' : '#4E53DB', color: isSubmitting ? '#757575' : '#FFFFFF', borderRadius: '25px', textTransform: 'none', fontFamily: 'Comfortaa' }} onClick={() => setStep(step - 1)}>Atras</Button> : null}
+                            <Stepper style={{ maxHeight: '80px' }} activeStep={step} alternativeLabel>
+                                {childrenArray.map((child, index) => (
+                                    <Step key={child.props.title} completed={step > index || formCompleted}>
+                                        <StepLabel classes={{ label: classes.customLabelStyle }}>{child.props.title}</StepLabel>
+                                    </Step>
+                                ))}
+                            </Stepper>
                         </Grid>
+
                         <Grid item>
-                            <Button
-                                disabled={isSubmitting} variant='contained'
-                                startIcon={isSubmitting ? <CircularProgress size='1rem' /> : null}
-                                style={{ backgroundColor: isSubmitting ? '#CDCDCD' : '#4E53DB', color: isSubmitting ? '#757575' : '#FFFFFF', borderRadius: '25px', textTransform: 'none', fontFamily: 'Comfortaa' }} type='submit'>
-                                {isSubmitting ? 'Enviando' : isLastStep() ? 'Enviar' : 'Siguiente'}
-                            </Button>
+                            {currentChild}
                         </Grid>
+
+                        <Grid container spacing={2} alignContent="center" justifyContent="center" >
+                            <Grid item>
+                                {step > 0 ? <Button disabled={isSubmitting} style={{ backgroundColor: isSubmitting ? '#CDCDCD' : '#4E53DB', color: isSubmitting ? '#757575' : '#FFFFFF', borderRadius: '25px', textTransform: 'none', fontFamily: 'Comfortaa' }} onClick={() => setStep(step - 1)}>Atras</Button> : null}
+                            </Grid>
+                            <Grid item>
+                                <Button
+                                    disabled={isSubmitting} variant='contained'
+                                    startIcon={isSubmitting ? <CircularProgress size='1rem' /> : null}
+                                    style={{ backgroundColor: isSubmitting ? '#CDCDCD' : '#4E53DB', color: isSubmitting ? '#757575' : '#FFFFFF', borderRadius: '25px', textTransform: 'none', fontFamily: 'Comfortaa' }} type='submit'>
+                                    {isSubmitting ? 'Enviando' : isLastStep() ? 'Enviar' : 'Siguiente'}
+                                </Button>
+                            </Grid>
+                        </Grid>
+
                     </Grid>
                 </Form>
             )}
