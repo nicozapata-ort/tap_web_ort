@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+
+
 html {
   overflow:hidden;
 }
@@ -38,7 +41,8 @@ html {
 
 .App-text-header-title {
   color: #002350;
-  font-family: 'Comfortaa Semibold';
+  font-weight: 700;
+  font-family: 'Comfortaa', cursive;
   font-size: 4vh;
   padding-left: 10px;
   padding-right: 10px;
@@ -47,8 +51,8 @@ html {
 
 .App-text-header-description {
   color: #002350;
-  font-weight: 450;
-  font-family: 'Comfortaa Light';
+  font-weight: 400;
+  font-family: 'Comfortaa', cursive;
   font-size: 3vh;
   padding-left: 10px;
   padding-right: 10px;
@@ -56,23 +60,23 @@ html {
 }
 
 .App-text-form-title {
-  color: white;
+  color: #FFFFFF;
   font-weight: 600;
-  font-family: 'Comfortaa Semibold';
+  font-family: 'Comfortaa', cursive;
   font-size: 3vh;
   text-align: start;
 }
 
 .App-text-form-description {
-  color: white;
-  font-weight: 450;
-  font-family: 'Comfortaa Light';
+  color: #FFFFFF;
+  font-weight: 400;
+  font-family: 'Comfortaa', cursive;
   font-size: 2vh;
   text-align: start;
 }
 
 p{
-  font-family: 'Comfortaa Medium';
+  font-family: 'Comfortaa', cursive;
   color: #FFFFFF;
 }
 
@@ -80,6 +84,16 @@ input{
   padding:5px;
   font-size:16px;
   font-family:'Comfortaa';    
+}
+
+#participantRankingPrize, #titleRanking, #descriptionCupon, #descriptionLinkReferr{
+  font-weight: 600;
+  font-family: 'Comfortaa', cursive;
+}
+
+#participantsRankingPosition, #participantsRankingName, #participantsRankingPoints, #participantRankingPrizePrice1, #participantRankingPrizePrice2, #subtitleRanking, #descriptionParticipantRankingPosition, #participantsRankingPosition, #descriptionParticipantRankingPrize, #participantRankingPrizePrice3, #labelNameForm, #labelLastNameForm, #labelDniForm, #labelEmailForm, #labelPhoneForm, #labelStep, #cupon, #linkReferr, #copyLink{
+  font-weight: 400;
+  font-family: 'Comfortaa', cursive;
 }
 /************************************************************************/
 
@@ -322,9 +336,8 @@ input{
   color: #FFFFFF;
   border-radius: 25px; 
   text-transform: none; 
-  font-family: 'Comfortaa'; 
+  font-family: 'Comfortaa', cursive;
   width: 80%;
-  height: 45px
 }
 
 #button-ranking-2, #button-ranking-3{
@@ -332,9 +345,14 @@ input{
   color: #FFFFFF;
   border-radius: 25px; 
   text-transform: none; 
-  font-family: 'Comfortaa'; 
-  height: 45px;
+  font-family: 'Comfortaa', cursive;
   margin: 20px auto;
+}
+
+#button-ranking-form, #button-form-1, #button-form-2, #button-cupon{
+  border-radius: 25px; 
+  text-transform: none; 
+  font-family: 'Comfortaa', cursive;
 }
 
 

@@ -40,16 +40,16 @@ const Ranking = () => {
 
                                         <Grid item xs={2} sm={2} md={2}>
                                             <div className='circle-pos-item'>
-                                                <Typography style={{ fontFamily: 'Comfortaa', color: '#405A7C' }}>{pos + 1}</Typography>
+                                                <Typography id='participantsRankingPosition' style={{ color: '#405A7C' }}>{pos + 1}</Typography>
                                             </div>
                                         </Grid>
 
                                         <Grid item xs={7} sm={8} md={8} style={{ textAlign: 'center' }}>
-                                            <Typography style={{ fontFamily: 'Comfortaa' }}>{`${participante.Nombre} ${participante.Apellido[0]}.`}</Typography>
+                                            <Typography id='participantsRankingName'>{`${participante.Nombre} ${participante.Apellido[0]}.`}</Typography>
                                         </Grid>
 
                                         <Grid item xs={3} sm={2} md={2} style={{ textAlign: 'center' }}>
-                                            <Typography style={{ fontFamily: 'Comfortaa', color: '#6EF1C7' }}>{`${participante.Referidos} puntos`}</Typography>
+                                            <Typography id='participantsRankingPoints' style={{ color: '#6EF1C7' }}>{`${participante.Referidos} puntos`}</Typography>
                                         </Grid>
                                     </ListItem>
                                 )
@@ -88,10 +88,10 @@ const Ranking = () => {
                                     <Grid item container style={styles.gridContainer}>
                                         <Card style={{ backgroundColor: '#002350', marginTop:'10px', borderColor:'#14D2B9', borderStyle:'solid', borderWidth:'5px' }}>
                                             <CardContent>
-                                                <Grid item style={{ textAlign: 'center' }}>
-                                                    <Typography style={styles.textSubTitle}>Premio</Typography>
-                                                    <Typography style={styles.textDescription}>Entre posicion 1-10: $5000</Typography>
-                                                    <Typography style={styles.textDescription}>{}Mayor a posicion  10: $1000</Typography>
+                                                <Grid item style={{ textAlign: 'center', padding:'10px' }}>
+                                                    <Typography id='participantRankingPrize' style={styles.textSubTitle}>Premio</Typography>
+                                                    <Typography id='participantRankingPrizePrice1' style={styles.textDescription}>Entre posicion 1-10: $5000</Typography>
+                                                    <Typography id='participantRankingPrizePrice2' style={styles.textDescription}>{}Mayor a posicion  10: $1000</Typography>
                                                 </Grid>
                                             </CardContent>
                                         </Card>
@@ -162,11 +162,11 @@ const Ranking = () => {
                                 <Grid container spacing={4} direction='column' style={styles.gridContainer}>
 
                                     <Grid item style={{...styles.gridContainer, marginTop:'30px'}}>
-                                        <Typography style={styles.textTitle}>Ranking</Typography>
+                                        <Typography id='titleRanking' style={styles.textTitle}>Ranking</Typography>
                                     </Grid>
 
                                     <Grid item style={{ ...styles.gridContainer, textAlign: 'center' }}>
-                                        <Typography style={styles.textSubTitle}>¡Ingresa tu correo electrónico para saber tu posición!</Typography>
+                                        <Typography id='subtitleRanking' style={styles.textSubTitle}>¡Ingresa tu correo electrónico para saber tu posición!</Typography>
                                     </Grid>
 
                                     <Grid item container style={{ ...styles.gridContainer }}>
@@ -196,8 +196,9 @@ const Ranking = () => {
                                                                 <Grid item>
                                                                     <Button
                                                                         disabled={isSubmitting} variant='contained'
+                                                                        id='button-ranking-form'
                                                                         startIcon={isSubmitting ? <CircularProgress size='1rem' /> : null}
-                                                                        style={{ backgroundColor: isSubmitting ? '#CDCDCD' : '#14D2B9', color: isSubmitting ? '#757575' : '#FFFFFF', borderRadius: '25px', textTransform: 'none', fontFamily: 'Comfortaa' }} type='submit'>
+                                                                        style={{ backgroundColor: isSubmitting ? '#CDCDCD' : '#14D2B9', color: isSubmitting ? '#757575' : '#FFFFFF'}} type='submit'>
                                                                         {isSubmitting ? 'Enviando' : 'Enviar'}
                                                                     </Button>
                                                                 </Grid>
@@ -210,10 +211,10 @@ const Ranking = () => {
 
                                         {isCompleted
                                             ? <Grid item direction='column' style={{ ...styles.gridContainer, marginTop: '50px', textAlign: 'center' }}>
-                                                <Typography style={{ ...styles.textSubTitle}}>Estás en la posición</Typography>
-                                                <Typography style={{ ...styles.textSubTitle, borderRadius:'50px', borderColor:'#14D2B9', borderWidth:'3px', borderStyle:'solid',width:'50%', margin:'10px auto'}}>{userPositionRanking}</Typography>
-                                                <Typography style={styles.textSubTitle}>Tu premio es de</Typography>
-                                                <Typography style={{...styles.textSubTitle, borderRadius:'50px', borderColor:'#14D2B9', borderWidth:'3px', borderStyle:'solid',width:'50%', margin:'10px auto'}}>${userPositionRanking <= 10 ? promotion.prizeMaxPrice : promotion.prizeMinPrice} </Typography>
+                                                <Typography id='descriptionParticipantRankingPosition' style={{ ...styles.textSubTitle}}>Estás en la posición</Typography>
+                                                <Typography id='participantsRankingPosition' style={{ ...styles.textSubTitle, borderRadius:'50px', borderColor:'#14D2B9', borderWidth:'3px', borderStyle:'solid',width:'50%', margin:'10px auto'}}>{userPositionRanking}</Typography>
+                                                <Typography id='descriptionParticipantRankingPrize' style={styles.textSubTitle}>Tu premio es de</Typography>
+                                                <Typography id='participantRankingPrizePrice3' style={{...styles.textSubTitle, borderRadius:'50px', borderColor:'#14D2B9', borderWidth:'3px', borderStyle:'solid',width:'50%', margin:'10px auto'}}>${userPositionRanking <= 10 ? promotion.prizeMaxPrice : promotion.prizeMinPrice} </Typography>
                                             </Grid>
                                             : null
                                         }
@@ -242,22 +243,18 @@ const styles = {
         alignContent: 'center'
     },
     textTitle: {
-        fontFamily: 'Comfortaa Semibold', //Debe ser BOLD
         color: '#FFFFFF',
         fontSize: '25px'
     },
     textSubTitle: {
-        fontFamily: 'Comfortaa Semibold',
         color: '#FFFFFF',
         fontSize: '20px',
         marginBottom: '10px'
     },
     textDescription: {
-        fontFamily: 'Comfortaa Medium',
         color: '#FFFFFF'
     },
     textField: {
-        fontFamily: 'Comfortaa',
         fontSize: 14
     },
 }
