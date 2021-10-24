@@ -8,6 +8,8 @@ import * as Yup from 'yup';
 import { useLocation } from "react-router-dom";
 import { Scrollbar } from 'react-scrollbars-custom'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import IconButton from '@mui/material/IconButton';
 
 
 
@@ -41,7 +43,7 @@ export default function UserFormFormik() {
                 onClose={handleClose}
                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
-                <Card id='card-message-cupon'>
+                <Card id='card-message-cupon' style={{width:'200px'}}>
                     <Scrollbar>
                         <CardContent>
                             <Grid container
@@ -49,20 +51,36 @@ export default function UserFormFormik() {
                                 direction="column"
                                 alignContent="center"
                                 justifyContent="center"
-                                style={{ minHeight: '55vh', justifyItems:'center', alignItems:'center' }}>
+                                style={{ minHeight: '55vh', justifyItems: 'center', alignItems: 'center' }}>
+
+                                <Grid item container direction='row' style={{
+                                    justifyItems: 'center',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    alignContent: 'center', marginTop: '30px'
+                                }}>
+                                    <Grid item container style={{ justifyContent: 'space-between' }}>
+                                        <Grid item >
+                                            <IconButton aria-label="Atras" sx={{ color: '#FFFFFF' }} onClick={handleClose}>
+                                                <ArrowBackIcon />
+                                            </IconButton>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+
 
                                 <Grid item container direction='column' style={{ justifyContent: 'center', alignContent: 'center', textAlign: 'center', margin: '0 auto' }}>
-                                    <Typography id='descriptionCupon' style={{ color: '#FFFFFF', fontSize: '22px', margin: '20px auto' }}>¡Felicidades, obtuviste tu cupón de descuento!</Typography>
-                                    <Grid item style={{borderRadius: '50px', borderColor: '#14D2B9', borderWidth: '3px', borderStyle: 'solid', margin: '10px auto', padding:'10px'}}>
+                                    <Typography id='descriptionCupon' style={{ color: '#FFFFFF', fontSize: '22px', margin: '5px auto' }}>¡Felicidades, obtuviste tu cupón de descuento!</Typography>
+                                    <Grid item style={{ borderRadius: '50px', borderColor: '#14D2B9', borderWidth: '3px', borderStyle: 'solid', margin: '10px auto', padding: '10px' }}>
                                         <Typography id='cupon' style={{ color: '#FFFFFF', fontSize: '20px' }}>{`${cupon.cupon}`}</Typography>
                                     </Grid>
-                                    <Typography id='descriptionLinkReferr' style={{ color: '#FFFFFF', fontSize: '18px', marginBottom: '20px',marginTop: '20px' }}>Compartí el siguiente link para sumar puntos por un premio mayor</Typography>
-                                    <Grid item style={{borderRadius: '50px', borderColor: '#14D2B9', borderWidth: '3px', borderStyle: 'solid', margin: '10px auto', padding:'10px'}}>
+                                    <Typography id='descriptionLinkReferr' style={{ color: '#FFFFFF', fontSize: '18px', marginBottom: '20px', marginTop: '20px' }}>Compartí el siguiente link para sumar puntos por un premio mayor</Typography>
+                                    <Grid item style={{ borderRadius: '50px', borderColor: '#14D2B9', borderWidth: '3px', borderStyle: 'solid', margin: '10px auto', padding: '10px' }}>
                                         <Typography id='linkReferr' style={{ color: '#FFFFFF', fontSize: '18px' }}>{`${cupon.url_referidos}`}</Typography>
                                     </Grid>
                                 </Grid>
 
-                                <Grid item container direction='row' style={{ justifyContent: 'center', alignContent: 'center', textAlign: 'center', width: '50%', marginTop:'30px' }}>
+                                <Grid item container direction='row' style={{ justifyContent: 'center', alignContent: 'center', textAlign: 'center', width: '50%', marginTop: '30px' }}>
 
                                     <Grid item style={{ justifyContent: 'center', alignContent: 'center', textAlign: 'center', margin: '15px auto' }}>
                                         <CopyToClipboard

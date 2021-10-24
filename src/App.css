@@ -10,11 +10,11 @@ html {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-template-columns: 1fr;
-  grid-template-rows: 100px 1fr;
+  grid-template-rows: 80px 1fr;
   grid-template-areas: 
   "header"
   "textContext";
-  background-color: #002350;
+  background-color: #F3F3F3;
   min-height: 100vh;
 }
 
@@ -30,11 +30,18 @@ html {
 }
 
 .container-logo2{
-  display: grid;
-  align-items: center;
-  justify-items: center;
+  display: flex;
+  align-content: center;
+  justify-content: center;
   width: 100%;
 }
+
+.App-logo3{
+  /* background-position: center;
+  object-fit:cover;
+  object-position:50% 50%;*/
+}
+
 
 
 /*****************************TEXTOS*************************************/
@@ -59,7 +66,7 @@ html {
   color: #FFFFFF;
   font-weight: 600;
   font-family: 'Comfortaa', cursive;
-  font-size: 3vh;
+  font-size: 2.5vh;
   text-align: start;
 }
 
@@ -148,7 +155,7 @@ input{
   grid-area: 'textContext';
   grid-column: span 3;
   grid-template-columns: 1fr;
-  grid-template-rows: 65% 35%;
+  grid-template-rows: 80% 20%;
   background-color: #F3F3F3;
   /* width: 90%; */
   /* margin: 0 auto; */
@@ -267,12 +274,13 @@ input{
 /***************************** FORM *************************************/
 
 .swipeable-form-container {
-  /* background-color: mediumspringgreen; */
   /* opacity: 0.5; */
   /* grid-area: 'formulary'; */
   width: 100%;
-  height: 20vh;
-  position: absolute;
+  height: 15vh;
+  position: relative;
+  border-top-left-radius: 35px;
+  border-top-right-radius: 35px;
   bottom: 0;
 }
 
@@ -284,7 +292,7 @@ input{
   left: 0;
   right: 0;
   bottom: 0;
-  top: 2vh;
+  top: 0;
   margin: 0 auto;
   border-top-left-radius: 35px;
   border-top-right-radius: 35px;
@@ -292,12 +300,19 @@ input{
 }
 
 .div-form {
-  padding: 20px 10px 10px 10px;
+  padding: 30px 10px 10px 10px;
 }
 
-/* .container-form{
-  background-color: red;
-} */
+.container-form{
+  /* background-color: blue; */
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+}
+
+.container-title-form{
+  /* background-color: red; */
+}
 
 .formulary{
   display: grid;
@@ -476,10 +491,14 @@ input{
 
 @media screen and (min-width: 1000px){
 
+  .App-body {
+    background-color: #002350;
+  }
+
 /******************* DESCRIPTION ********************/
 .App-section-container {
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 65% 35%;
+  grid-template-rows: 80% 20%;
   border-radius: 80px;
   width: 90%;
   margin: 0 auto;
