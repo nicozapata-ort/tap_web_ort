@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 
 
 export default function UserFormFormik() {
-    const [openModal, setOpenModal] = useState(false);
+    const [openModal, setOpenModal] = useState(true);
     const handleOpen = () => setOpenModal(true)
     const handleClose = () => setOpenModal(false)
     const [cupon, setCupon] = useState({});
@@ -43,7 +43,7 @@ export default function UserFormFormik() {
                 onClose={handleClose}
                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
-                <Card id='card-message-cupon' style={{width:'200px'}}>
+                <Card id='card-message-cupon'>
                     <Scrollbar>
                         <CardContent>
                             <Grid container
