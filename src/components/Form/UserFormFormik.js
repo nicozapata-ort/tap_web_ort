@@ -49,20 +49,22 @@ export default function UserFormFormik() {
                                 direction="column"
                                 alignContent="center"
                                 justifyContent="center"
-                                style={{ minHeight: '55vh', justifyItems:'center', alignItems:'center' }}>
+                                style={{ minHeight: '55vh', justifyItems: 'center', alignItems: 'center' }}>
 
                                 <Grid item container direction='column' style={{ justifyContent: 'center', alignContent: 'center', textAlign: 'center', margin: '0 auto' }}>
                                     <Typography id='descriptionCupon' style={{ color: '#FFFFFF', fontSize: '22px', margin: '20px auto' }}>¡Felicidades, obtuviste tu cupón de descuento!</Typography>
-                                    <Grid item style={{borderRadius: '50px', borderColor: '#14D2B9', borderWidth: '3px', borderStyle: 'solid', margin: '10px auto', padding:'10px'}}>
+                                    <Grid item style={{ borderRadius: '50px', borderColor: '#14D2B9', borderWidth: '3px', borderStyle: 'solid', margin: '10px auto', padding: '10px' }}>
                                         <Typography id='cupon' style={{ color: '#FFFFFF', fontSize: '20px' }}>{`${cupon.cupon}`}</Typography>
                                     </Grid>
-                                    <Typography id='descriptionLinkReferr' style={{ color: '#FFFFFF', fontSize: '18px', marginBottom: '20px',marginTop: '20px' }}>Compartí el siguiente link para sumar puntos por un premio mayor</Typography>
-                                    <Grid item style={{borderRadius: '50px', borderColor: '#14D2B9', borderWidth: '3px', borderStyle: 'solid', margin: '10px auto', padding:'10px'}}>
-                                        <Typography id='linkReferr' style={{ color: '#FFFFFF', fontSize: '18px' }}>{`${cupon.url_referidos}`}</Typography>
+                                    <Typography id='descriptionLinkReferr' style={{ color: '#FFFFFF', fontSize: '18px', marginBottom: '20px', marginTop: '20px' }}>Compartí el siguiente link para sumar puntos por un premio mayor</Typography>
+                                    <Grid item style={{ borderRadius: '50px', borderColor: '#14D2B9', borderWidth: '3px', borderStyle: 'solid', margin: '10px auto', padding: '10px' }}>
+                                        <Typography id='linkReferr' style={{ color: '#FFFFFF', fontSize: '18px' }}>
+                                            <a href={cupon.url_referidos} style={{ color: '#FFFFFF' }}>{`${cupon.url_referidos}`}</a>
+                                        </Typography>
                                     </Grid>
                                 </Grid>
 
-                                <Grid item container direction='row' style={{ justifyContent: 'center', alignContent: 'center', textAlign: 'center', width: '50%', marginTop:'30px' }}>
+                                <Grid item container direction='row' style={{ justifyContent: 'center', alignContent: 'center', textAlign: 'center', width: '50%', marginTop: '30px' }}>
 
                                     <Grid item style={{ justifyContent: 'center', alignContent: 'center', textAlign: 'center', margin: '15px auto' }}>
                                         <CopyToClipboard
@@ -119,7 +121,7 @@ export default function UserFormFormik() {
         const auth = {
             headers: {
                 Authorization:
-                    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjMzNDkyNzU4LCJleHAiOjE2MzYwODQ3NTh9.tTONIIv436EnoUz2Aa3Z55ToOp20dJz5u5lenPm5o8M',
+                    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzQ0ZDA5MzExNDhkMGY0Y2VlYTNlMyIsImlhdCI6MTYzNTAyMTQ5NiwiZXhwIjoxNjM3NjEzNDk2fQ.4ACqISC0LpFUhQNMSDWKx54A0l34AWkLkSCvF_eDYWk',
             },
         }
 

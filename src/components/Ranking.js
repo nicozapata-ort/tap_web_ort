@@ -133,7 +133,7 @@ const Ranking = () => {
             const { data } = await axios.get('http://localhost:1337/ranking', {
                 headers: {
                     Authorization:
-                        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjMzNDkyNzU4LCJleHAiOjE2MzYwODQ3NTh9.tTONIIv436EnoUz2Aa3Z55ToOp20dJz5u5lenPm5o8M'
+                        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzQ0ZDA5MzExNDhkMGY0Y2VlYTNlMyIsImlhdCI6MTYzNTAyMTQ5NiwiZXhwIjoxNjM3NjEzNDk2fQ.4ACqISC0LpFUhQNMSDWKx54A0l34AWkLkSCvF_eDYWk'
                 },
                 params: { email: email }
             });
