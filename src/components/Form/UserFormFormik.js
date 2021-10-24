@@ -43,7 +43,11 @@ export default function UserFormFormik() {
                 onClose={handleClose}
                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
+<<<<<<< HEAD
                 <Card id='card-message-cupon'>
+=======
+                <Card id='card-message-cupon' >
+>>>>>>> 2d4ce184678d6ffc12ea9b798a10cf19e3917008
                     <Scrollbar>
                         <CardContent>
                             <Grid container
@@ -76,7 +80,9 @@ export default function UserFormFormik() {
                                     </Grid>
                                     <Typography id='descriptionLinkReferr' style={{ color: '#FFFFFF', fontSize: '18px', marginBottom: '20px', marginTop: '20px' }}>Compartí el siguiente link para sumar puntos por un premio mayor</Typography>
                                     <Grid item style={{ borderRadius: '50px', borderColor: '#14D2B9', borderWidth: '3px', borderStyle: 'solid', margin: '10px auto', padding: '10px' }}>
-                                        <Typography id='linkReferr' style={{ color: '#FFFFFF', fontSize: '18px' }}>{`${cupon.url_referidos}`}</Typography>
+                                        <Typography id='linkReferr' style={{ color: '#FFFFFF', fontSize: '18px' }}>
+                                            <a href={cupon.url_referidos} style={{ color: '#FFFFFF' }}>{`${cupon.url_referidos}`}</a>
+                                        </Typography>
                                     </Grid>
                                 </Grid>
 
@@ -137,12 +143,12 @@ export default function UserFormFormik() {
         const auth = {
             headers: {
                 Authorization:
-                    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjMzNDkyNzU4LCJleHAiOjE2MzYwODQ3NTh9.tTONIIv436EnoUz2Aa3Z55ToOp20dJz5u5lenPm5o8M',
+                    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzQ0ZDA5MzExNDhkMGY0Y2VlYTNlMyIsImlhdCI6MTYzNTAyMTQ5NiwiZXhwIjoxNjM3NjEzNDk2fQ.4ACqISC0LpFUhQNMSDWKx54A0l34AWkLkSCvF_eDYWk',
             },
         }
 
         try {
-            const { data } = await axios.post(`http://localhost:1337/usuarios?referr=${query.get("referr")}`, user, auth)
+            const { data } = await axios.post(`http://localhost:1337/participants?referr=${query.get("referr")}`, user, auth)
             console.log(data)
 
             if (data.status !== 201) {
