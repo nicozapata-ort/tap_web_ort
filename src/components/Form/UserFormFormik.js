@@ -43,11 +43,7 @@ export default function UserFormFormik() {
                 onClose={handleClose}
                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
-<<<<<<< HEAD
                 <Card id='card-message-cupon'>
-=======
-                <Card id='card-message-cupon' >
->>>>>>> 2d4ce184678d6ffc12ea9b798a10cf19e3917008
                     <Scrollbar>
                         <CardContent>
                             <Grid container
