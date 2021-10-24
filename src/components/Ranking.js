@@ -177,7 +177,7 @@ const Ranking = () => {
                             <div className='modal-ranking'>
                                 <Grid container spacing={4} direction='column' style={styles.gridContainer}>
 
-                                    <Grid item container direction='row' style={{ ...styles.gridContainer, marginTop: '30px', justifyContent: 'center' }}>
+                                    <Grid item container direction='row' style={{ ...styles.gridContainer, marginTop: '30px' }}>
                                         <Grid item container style={{ justifyContent: 'space-between' }}>
                                             <Grid item >
                                                 <IconButton aria-label="Atras" sx={{ color: '#FFFFFF' }} onClick={handleClose}>
