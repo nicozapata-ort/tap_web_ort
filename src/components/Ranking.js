@@ -8,6 +8,9 @@ import * as Yup from 'yup';
 import axios from 'axios'
 import PromotionContext from '../context/Promotion/PromotionContext.js'
 import FormContext from '../context/Form/FormContext.js'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import IconButton from '@mui/material/IconButton';
+
 
 
 const Ranking = () => {
@@ -71,11 +74,11 @@ const Ranking = () => {
 
         return (
             <>
-                <Button id='button-ranking-2' variant='contained' onClick={handleOpen}>Ver Ranking Completo</Button>
-                <Modal 
-                    open={openModal} 
+                <Button id='button-ranking-2' variant='contained' onClick={handleOpen}>Ver premios</Button>
+                <Modal
+                    open={openModal}
                     onClose={handleClose}
-                    style={{display:'flex',alignItems:'center',justifyContent:'center'}}
+                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                 >
                     <Card id='card-ranking' className='unselectable'>
                         <Scrollbar>
@@ -85,23 +88,36 @@ const Ranking = () => {
                                         <Typography style={styles.textTitle}>Ranking</Typography>
                                     </Grid> */}
 
+                                    <Grid item container direction='row' style={{ ...styles.gridContainer, marginTop: '30px', justifyContent: 'center' }}>
+                                        <Grid item container style={{ justifyContent: 'space-between' }}>
+                                            <Grid item >
+                                                <IconButton aria-label="Atras" sx={{ color: '#FFFFFF' }} onClick={handleClose}>
+                                                    <ArrowBackIcon />
+                                                </IconButton>
+                                            </Grid>
+                                        </Grid>
+                                        <div style={{ position: 'absolute', margin: '0 auto' }}>
+                                            <Typography id='titleRanking' style={styles.textTitle}>Premios</Typography>
+                                        </div>
+                                    </Grid>
+
                                     <Grid item container style={styles.gridContainer}>
-                                        <Card style={{ backgroundColor: '#002350', marginTop:'10px', borderColor:'#14D2B9', borderStyle:'solid', borderWidth:'5px' }}>
+                                        <Card style={{ backgroundColor: '#002350', borderColor: '#14D2B9', borderStyle: 'solid', borderWidth: '5px' }}>
                                             <CardContent>
-                                                <Grid item style={{ textAlign: 'center', padding:'10px' }}>
-                                                    <Typography id='participantRankingPrize' style={styles.textSubTitle}>Premio</Typography>
+                                                <Grid item style={{ textAlign: 'center', padding: '10px' }}>
                                                     <Typography id='participantRankingPrizePrice1' style={styles.textDescription}>Entre posicion 1-10: $5000</Typography>
-                                                    <Typography id='participantRankingPrizePrice2' style={styles.textDescription}>{}Mayor a posicion  10: $1000</Typography>
+                                                    <Typography id='participantRankingPrizePrice2' style={styles.textDescription}>{ }Mayor a posicion  10: $1000</Typography>
                                                 </Grid>
                                             </CardContent>
                                         </Card>
                                     </Grid>
 
-                                    <Grid item container direction="column" style={{ justifyContent: 'center', alignContent:'center' }}>
+                                    <Grid item container direction="column" style={{ justifyContent: 'center', alignContent: 'center' }}>
                                         {renderPartipantDetail()}
                                     </Grid>
 
-                                    <Button id='button-ranking-3' variant='contained' onClick={handleClose}>Atrás</Button>
+
+                                    {/* <Button id='button-ranking-3' variant='contained' onClick={handleClose}>Atrás</Button> */}
                                 </Grid>
                             </CardContent>
                         </Scrollbar>
@@ -153,7 +169,7 @@ const Ranking = () => {
                 onClose={handleClose}
                 aria-labelledby="parent-modal-title"
                 aria-describedby="parent-modal-description"
-                style={{display:'flex',alignItems:'center',justifyContent:'center'}}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
                 <Card id='card-ranking' className='unselectable'>
                     <Scrollbar>
@@ -161,8 +177,17 @@ const Ranking = () => {
                             <div className='modal-ranking'>
                                 <Grid container spacing={4} direction='column' style={styles.gridContainer}>
 
-                                    <Grid item style={{...styles.gridContainer, marginTop:'30px'}}>
-                                        <Typography id='titleRanking' style={styles.textTitle}>Ranking</Typography>
+                                    <Grid item container direction='row' style={{ ...styles.gridContainer, marginTop: '30px', justifyContent: 'center' }}>
+                                        <Grid item container style={{ justifyContent: 'space-between' }}>
+                                            <Grid item >
+                                                <IconButton aria-label="Atras" sx={{ color: '#FFFFFF' }} onClick={handleClose}>
+                                                    <ArrowBackIcon />
+                                                </IconButton>
+                                            </Grid>
+                                        </Grid>
+                                        <div style={{ position: 'absolute', margin: '0 auto' }}>
+                                            <Typography id='titleRanking' style={styles.textTitle}>Ranking</Typography>
+                                        </div>
                                     </Grid>
 
                                     <Grid item style={{ ...styles.gridContainer, textAlign: 'center' }}>
@@ -170,7 +195,7 @@ const Ranking = () => {
                                     </Grid>
 
                                     <Grid item container style={{ ...styles.gridContainer }}>
-                                        <Card style={{ width: '100%', height: '150px', paddingTop: '20px', backgroundColor: '#FFFFFF', marginTop:'10px', borderColor:'#14D2B9', borderStyle:'solid', borderWidth:'3px' }}>
+                                        <Card style={{ width: '100%', height: '150px', paddingTop: '20px', backgroundColor: '#FFFFFF', marginTop: '10px', borderColor: '#14D2B9', borderStyle: 'solid', borderWidth: '3px' }}>
                                             <CardContent>
                                                 <Formik
                                                     initialValues={{ email: '' }}
@@ -190,7 +215,7 @@ const Ranking = () => {
                                                     {({ isSubmitting }) => (
                                                         <Form autoComplete="off">
                                                             <Box paddingBottom={2}>
-                                                                <Field type='email' fullWidth name="email" component={TextField} label="Ingrese su mail" variant="outlined" InputLabelProps={{ style: styles.textField }} />
+                                                                <Field type='email' fullWidth name="email" component={TextField} label="Ingresa tu email" variant="outlined" InputLabelProps={{ id: 'labelEmailFormRanking', style: styles.textField }} />
                                                             </Box>
                                                             <Grid container spacing={2} style={styles.gridContainer}>
                                                                 <Grid item>
@@ -198,7 +223,7 @@ const Ranking = () => {
                                                                         disabled={isSubmitting} variant='contained'
                                                                         id='button-ranking-form'
                                                                         startIcon={isSubmitting ? <CircularProgress size='1rem' /> : null}
-                                                                        style={{ backgroundColor: isSubmitting ? '#CDCDCD' : '#14D2B9', color: isSubmitting ? '#757575' : '#FFFFFF'}} type='submit'>
+                                                                        style={{ backgroundColor: isSubmitting ? '#CDCDCD' : '#14D2B9', color: isSubmitting ? '#757575' : '#FFFFFF' }} type='submit'>
                                                                         {isSubmitting ? 'Enviando' : 'Enviar'}
                                                                     </Button>
                                                                 </Grid>
@@ -210,12 +235,19 @@ const Ranking = () => {
                                         </Card>
 
                                         {isCompleted
-                                            ? <Grid item direction='column' style={{ ...styles.gridContainer, marginTop: '50px', textAlign: 'center' }}>
-                                                <Typography id='descriptionParticipantRankingPosition' style={{ ...styles.textSubTitle}}>Estás en la posición</Typography>
-                                                <Typography id='participantsRankingPosition' style={{ ...styles.textSubTitle, borderRadius:'50px', borderColor:'#14D2B9', borderWidth:'3px', borderStyle:'solid',width:'50%', margin:'10px auto'}}>{userPositionRanking}</Typography>
-                                                <Typography id='descriptionParticipantRankingPrize' style={styles.textSubTitle}>Tu premio es de</Typography>
-                                                <Typography id='participantRankingPrizePrice3' style={{...styles.textSubTitle, borderRadius:'50px', borderColor:'#14D2B9', borderWidth:'3px', borderStyle:'solid',width:'50%', margin:'10px auto'}}>${userPositionRanking <= 10 ? promotion.prizeMaxPrice : promotion.prizeMinPrice} </Typography>
-                                            </Grid>
+
+                                            ? userPositionRanking > 0
+
+                                                ? <Grid item style={{ ...styles.gridContainer, marginTop: '50px', textAlign: 'center' }}>
+                                                    <Typography id='descriptionParticipantRankingPosition' style={{ ...styles.textSubTitle }}>Estás en la posición</Typography>
+                                                    <Typography id='participantsRankingPosition' style={{ ...styles.textSubTitle, borderRadius: '50px', borderColor: '#14D2B9', borderWidth: '3px', borderStyle: 'solid', width: '50%', margin: '10px auto' }}>{userPositionRanking}</Typography>
+                                                    <Typography id='descriptionParticipantRankingPrize' style={styles.textSubTitle}>Tu premio es de</Typography>
+                                                    <Typography id='participantRankingPrizePrice3' style={{ ...styles.textSubTitle, borderRadius: '50px', borderColor: '#14D2B9', borderWidth: '3px', borderStyle: 'solid', width: '50%', margin: '10px auto' }}>${userPositionRanking <= 10 ? promotion.prizeMaxPrice : promotion.prizeMinPrice} </Typography>
+                                                </Grid>
+                                                : <Grid item style={{ ...styles.gridContainer, marginTop: '30px', textAlign: 'center' }}>
+                                                    <Typography id='emailNotFound' style={{ ...styles.textSubTitle, marginBottom: '10px', fontSize: '18px' }}>Email no encontrado</Typography>
+                                                    <Typography id='descriptionNoParticipantRankingPosition' style={styles.textSubTitle}>¡Te invitamos a completar el formulario para participar!</Typography>
+                                                </Grid>
                                             : null
                                         }
                                     </Grid>
@@ -249,7 +281,6 @@ const styles = {
     textSubTitle: {
         color: '#FFFFFF',
         fontSize: '20px',
-        marginBottom: '10px'
     },
     textDescription: {
         color: '#FFFFFF'

@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 
 
 export default function UserFormFormik() {
-    const [openModal, setOpenModal] = useState(true);
+    const [openModal, setOpenModal] = useState(false);
     const handleOpen = () => setOpenModal(true)
     const handleClose = () => setOpenModal(false)
     const [cupon, setCupon] = useState({});
@@ -161,22 +161,22 @@ export default function UserFormFormik() {
                         >
                             <div title='Datos personales'>
                                 <Box paddingBottom={1.5}>
-                                    <Field fullWidth name="nombre" component={TextField} label="Ingrese su nombre" variant="outlined" InputLabelProps={{ id: 'labelNameForm', style: { fontSize: 14 } }} />
+                                    <Field fullWidth name="nombre" component={TextField} label="Ingresa tu nombre" variant="outlined" InputLabelProps={{ id: 'labelNameForm', style: { fontSize: 14 } }} />
                                 </Box>
                                 <Box paddingBottom={1.5}>
-                                    <Field fullWidth name="apellido" component={TextField} label="Ingrese su apellido" variant="outlined" InputLabelProps={{ id: 'labelLastNameForm', style: { fontSize: 14 } }} />
+                                    <Field fullWidth name="apellido" component={TextField} label="Ingresa tu apellido" variant="outlined" InputLabelProps={{ id: 'labelLastNameForm', style: { fontSize: 14 } }} />
                                 </Box>
                                 <Box paddingBottom={1.5}>
-                                    <Field fullWidth type="number" name="dni" component={TextField} label="Ingrese su dni" variant="outlined" InputLabelProps={{ id: 'labelDniForm', style: { fontSize: 14 } }} />
+                                    <Field fullWidth type="number" name="dni" component={TextField} label="Ingresa tu dni" variant="outlined" InputLabelProps={{ id: 'labelDniForm', style: { fontSize: 14 } }} />
                                 </Box>
 
                             </div>
                             <div title='Contacto'>
                                 <Box paddingBottom={2}>
-                                    <Field type='email' fullWidth name="email" component={TextField} label="Ingrese su mail" variant="outlined" InputLabelProps={{ id: 'labelEmailForm', style: { fontSize: 14 } }} />
+                                    <Field type='email' fullWidth name="email" component={TextField} label="Ingresa tu email" variant="outlined" InputLabelProps={{ id: 'labelEmailForm', style: { fontSize: 14 } }} />
                                 </Box>
                                 <Box paddingBottom={2}>
-                                    <Field fullWidth type="number" name="telefono" component={TextField} label="Ingrese su telefono" variant="outlined" InputLabelProps={{ id: 'labelPhoneForm', style: { fontSize: 14 } }} />
+                                    <Field fullWidth type="number" name="telefono" component={TextField} label="Ingresa tu telefono" variant="outlined" InputLabelProps={{ id: 'labelPhoneForm', style: { fontSize: 14 } }} />
                                 </Box>
 
                             </div>
@@ -219,8 +219,8 @@ export function FormikStepper({ children, ...props }) {
             }}
             validationSchema={!isLastStep()
                 ? Yup.object({
-                    nombre: Yup.string().max(20, 'No se permiten más de 20 caracteres.').required('No es posible dejar el campo vacío.'),
-                    apellido: Yup.string().max(20, 'No se permiten más de 20 caracteres.').required('No es posible dejar el campo vacío.'),
+                    nombre: Yup.string().max(20, 'No se permiten más de 20 caracteres.').matches(/^[aA-zZ\s]+$/, "No se permiten valores alfanuméricos ni símbolos.").required('No es posible dejar el campo vacío.'),
+                    apellido: Yup.string().max(20, 'No se permiten más de 20 caracteres.').matches(/^[aA-zZ\s]+$/, "No se permiten valores alfanuméricos y tampoco símbolos.").required('No es posible dejar el campo vacío.'),
                     dni: Yup.number().lessThan(100000000, 'Su DNI debe ser menor a 100.000.000').moreThan(10000000, 'Su DNI debe ser mayor a 10.000.000').required('No es posible dejar el campo vacío.')
                 })
                 : Yup.object({
@@ -246,7 +246,7 @@ export function FormikStepper({ children, ...props }) {
                             {currentChild}
                         </Grid>
 
-                        <Grid container spacing={2} alignContent="center" justifyContent="center" >
+                        <Grid item container spacing={2} alignContent="center" justifyContent="center" >
                             <Grid item>
                                 {step > 0
                                     ? <Button

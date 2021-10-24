@@ -43,6 +43,15 @@ function App() {
     { from: () => [0, y.get()], filterTaps: true, bounds: { top: -460 }, rubberband: true }
   )
 
+  const formatDate = dateString => {
+    const date = new Date(dateString)
+    const day = date.getDate() + 1
+    const month = date.getMonth() + 1
+    const year = date.getFullYear()
+
+    return `${day}/${month}/${year}`
+  }
+
   useEffect(async () => {
     const data = await getPromotion()
     setPromotion(data)
@@ -75,13 +84,21 @@ function App() {
 
         <div className="App-section-description-container unselectable">
           <div className="App-section-description">
-            <h2 className="App-text-header-title">{`${promotion.description} $${promotion.prizeMinPrice} a $${promotion.prizeMaxPrice}`}</h2>
-            <h3 className="App-text-header-description">{`Podes participar desde el ${promotion.dateMin} al ${promotion.dateMax}`}</h3>
+            <div className='container-text-description'>
+              <div className='container-title'>
+                <h2 className="App-text-header-title">{`${promotion.description} $${promotion.prizeMinPrice} a $${promotion.prizeMaxPrice}`}</h2>
+              </div>
+              <div className='container-description'>
+                <h3 className="App-text-header-description">{`Podes participar desde el ${formatDate(promotion.dateMin)} al ${formatDate(promotion.dateMax)}`}</h3>
+              </div>
+            </div>
           </div>
         </div>
 
         <div className='ranking-container'>
-          <Ranking />
+          <div className='ranking'>
+            <Ranking />
+          </div>
         </div>
 
         <div className='promotional-image'>
