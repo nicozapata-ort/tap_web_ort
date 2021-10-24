@@ -43,7 +43,7 @@ export default function UserFormFormik() {
                 onClose={handleClose}
                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
-                <Card id='card-message-cupon' style={{ width: '200px' }}>
+                <Card id='card-message-cupon' >
                     <Scrollbar>
                         <CardContent>
                             <Grid container
@@ -144,7 +144,7 @@ export default function UserFormFormik() {
         }
 
         try {
-            const { data } = await axios.post(`http://localhost:1337/usuarios?referr=${query.get("referr")}`, user, auth)
+            const { data } = await axios.post(`http://localhost:1337/participants?referr=${query.get("referr")}`, user, auth)
             console.log(data)
 
             if (data.status !== 201) {
