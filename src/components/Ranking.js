@@ -65,8 +65,6 @@ const Ranking = () => {
         )
     }
 
-    // const sleep = (time) => new Promise((acc) => setTimeout(acc, time))
-
     const ChildModal = () => {
         const [openModal, setOpenModal] = useState(false);
         const handleOpen = () => setOpenModal(true)
@@ -84,9 +82,6 @@ const Ranking = () => {
                         <Scrollbar>
                             <CardContent>
                                 <Grid container spacing={3} style={styles.gridContainer}>
-                                    {/* <Grid item container style={styles.gridContainer}>
-                                        <Typography style={styles.textTitle}>Ranking</Typography>
-                                    </Grid> */}
 
                                     <Grid item container direction='row' style={{ ...styles.gridContainer, marginTop: '30px', justifyContent: 'center' }}>
                                         <Grid item container style={{ justifyContent: 'space-between' }}>
@@ -116,8 +111,6 @@ const Ranking = () => {
                                         {renderPartipantDetail()}
                                     </Grid>
 
-
-                                    {/* <Button id='button-ranking-3' variant='contained' onClick={handleClose}>Atrás</Button> */}
                                 </Grid>
                             </CardContent>
                         </Scrollbar>
@@ -133,7 +126,7 @@ const Ranking = () => {
             const { data } = await axios.get('http://localhost:1337/ranking', {
                 headers: {
                     Authorization:
-                        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzQ0ZDA5MzExNDhkMGY0Y2VlYTNlMyIsImlhdCI6MTYzNTAyMTQ5NiwiZXhwIjoxNjM3NjEzNDk2fQ.4ACqISC0LpFUhQNMSDWKx54A0l34AWkLkSCvF_eDYWk'
+                        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM1MzEzNjU3LCJleHAiOjE2Mzc5MDU2NTd9.CCz0ujJGDciWsAs3uBZ8Qr8lOM_hSXUd4jOI50YNJi8'
                 },
                 params: { email: email }
             });

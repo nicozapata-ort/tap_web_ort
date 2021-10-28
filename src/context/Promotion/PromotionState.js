@@ -5,7 +5,7 @@ import PromotionReducer from './PromotionReducer.js'
 const PromotionState = (props) => {
 
     const initialState = {
-        promotion: {}
+        promotion: null
     }
 
     const [state, dispatch] = useReducer(PromotionReducer, initialState);

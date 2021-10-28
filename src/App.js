@@ -14,10 +14,9 @@ import PromotionContext from './context/Promotion/PromotionContext';
 
 function App() {
   const { promotion, setPromotion } = useContext(PromotionContext);
-  // const [descriptionDate, setDescriptionDate] = useState('');
   const [isClosed, setIsClosed] = useState(true);
   const [{ y }, api] = useSpring(() => ({ y: 0 }))
-  const maxHeight = -(window.innerHeight/2 + 60) ;
+  const maxHeight = -(window.innerHeight / 2 + 60);
   console.log('maxHeight', maxHeight)
 
   const open = ({ canceled }) => {
@@ -42,22 +41,23 @@ function App() {
         api.start({ y: oy, immediate: true })
       }
     },
-    { from: () => [0, y.get()], filterTaps: true, bounds: { top: -460 }, rubberband: true }
+    { from: () => [0, y.get()], filterTaps: true, bounds: { top: maxHeight }, rubberband: true }
   )
 
   const formatDate = dateString => {
     const date = new Date(dateString)
-    const day = date.getDate() + 1
-    const month = date.getMonth() + 1
-    const year = date.getFullYear()
-
-    return `${day}/${month}/${year}`
+    return `${date.getDate() + 1}/${date.getMonth() + 1}/${date.getFullYear()}`
   }
 
-  useEffect(async () => {
-    const data = await getPromotion()
-    setPromotion(data)
-    console.log('Estoy en App, se deberia hacer una vez')
+  useEffect(() => {
+
+    async function fetchMyAPI() {
+      const data = await getPromotion()
+      setPromotion(data)
+    }
+
+    fetchMyAPI()
+
   }, []);
 
   return (
@@ -66,23 +66,26 @@ function App() {
         <div className='container-logo2'>
           <img className='App-logo3' src={logo} alt='logo_tap' width={150} />
         </div>
-        {/* <p>icono nav</p> */}
       </header>
 
       <section className='App-section-container'>
 
-        <div className="App-section-description-container unselectable">
-          <div className="App-section-description">
-            <div className='container-text-description'>
-              <div className='container-title'>
-                <h2 className="App-text-header-title">{`${promotion.description} $${promotion.prizeMinPrice} a $${promotion.prizeMaxPrice}`}</h2>
-              </div>
-              <div className='container-description'>
-                <h3 className="App-text-header-description">{`Podes participar desde el ${formatDate(promotion.dateMin)} al ${formatDate(promotion.dateMax)}`}</h3>
+        {promotion !== null
+          ? <div className="App-section-description-container unselectable">
+            <div className="App-section-description">
+              <div className='container-text-description'>
+                <div className='container-title'>
+                  <h2 className="App-text-header-title">{`${promotion.description} $${promotion.prizeMinPrice} a $${promotion.prizeMaxPrice}`}</h2>
+                </div>
+                <div className='container-description'>
+                  <h3 className="App-text-header-description">{`Podes participar desde el ${formatDate(promotion.dateMin)} al ${formatDate(promotion.dateMax)}`}</h3>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+
+          : null
+        }
 
         <div className='ranking-container'>
           <div className='ranking'>
@@ -104,8 +107,7 @@ function App() {
               </div>
               <div className='container-form'>
                 <div className='container-title-form'>
-                  <h2 className="App-text-form-title">¡Completa el formulario para participar de nuestra campaña!</h2>
-                  {/* <h3 className="App-text-form-description">¡Completa el formulario para participar de nuestra campaña!</h3> */}
+                  <h2 className="App-text-form-title">¡Completa el formulario para participar!</h2>
                 </div>
                 <div className='formulary'>
                   <Router>

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Card, CardContent, CircularProgress, Button, Box, Stepper, Step, StepLabel, Grid, makeStyles, Modal, Typography } from '@material-ui/core'
+import { Card, CardContent, CircularProgress, Button, Box, Stepper, Step, StepLabel, Grid, Modal, Typography } from '@material-ui/core'
 import { Field, Form, Formik } from 'formik'
 import { TextField } from 'formik-material-ui'
 import FormContext from '../../context/Form/FormContext'
@@ -12,17 +12,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from '@mui/material/IconButton';
 
 
-
-// const sleep = (time) => new Promise((acc) => setTimeout(acc, time))
-
-const useStyles = makeStyles({
-    customLabelStyle: {
-    }
-});
-
-
 export default function UserFormFormik() {
-    const [openModal, setOpenModal] = useState(true);
+    const [openModal, setOpenModal] = useState(false);
     const handleOpen = () => setOpenModal(true)
     const handleClose = () => setOpenModal(false)
     const [cupon, setCupon] = useState({});
@@ -139,7 +130,7 @@ export default function UserFormFormik() {
         const auth = {
             headers: {
                 Authorization:
-                    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzQ0ZDA5MzExNDhkMGY0Y2VlYTNlMyIsImlhdCI6MTYzNTAyMTQ5NiwiZXhwIjoxNjM3NjEzNDk2fQ.4ACqISC0LpFUhQNMSDWKx54A0l34AWkLkSCvF_eDYWk',
+                    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM1MzEzNjU3LCJleHAiOjE2Mzc5MDU2NTd9.CCz0ujJGDciWsAs3uBZ8Qr8lOM_hSXUd4jOI50YNJi8',
             },
         }
 
@@ -165,7 +156,7 @@ export default function UserFormFormik() {
 
     return (
         <Grid item style={{ height: '80vh', width: '100%', justifyContent: 'center', alignContent: 'center' }}>
-            <Card style={{ height: '100%', width: '100%' }}>
+            <Card id='card-container-form'>
                 <Scrollbar style={{ width: '100%', height: '100%' }}>
                     <CardContent>
                         <FormikStepper
@@ -213,19 +204,15 @@ export default function UserFormFormik() {
 }
 
 
-
-
 export function FormikStepper({ children, ...props }) {
     const childrenArray = React.Children.toArray(children)
     const { step, setStep, dataForm, setForm, formCompleted, setFormCompleted } = useContext(FormContext);
     const currentChild = childrenArray[step]
-    // const [completed, setCompleted] = useState(false);
 
     const isLastStep = () => {
+        console.log('Es el ultimo paso', step === childrenArray.length - 1)
         return step === childrenArray.length - 1;
     }
-
-    const classes = useStyles();
 
     return (
         <Formik
@@ -235,6 +222,8 @@ export function FormikStepper({ children, ...props }) {
                     await props.onSubmit(values, helpers)
                 } else {
                     setStep(step + 1)
+                    console.log('Entre al else del paso')
+                    helpers.setTouched({});
                 }
             }}
             validationSchema={!isLastStep()
@@ -253,10 +242,12 @@ export function FormikStepper({ children, ...props }) {
                 <Form autoComplete="off">
                     <Grid container direction='column' justifyContent='center' alignContent='center'>
                         <Grid item>
-                            <Stepper style={{ maxHeight: '80px' }} activeStep={step} alternativeLabel>
+                            <Stepper activeStep={step} alternativeLabel>
                                 {childrenArray.map((child, index) => (
                                     <Step key={child.props.title} completed={step > index || formCompleted}>
-                                        <StepLabel classes={{ label: classes.customLabelStyle }}>{child.props.title}</StepLabel>
+                                        <StepLabel>
+                                            <Typography id='step-label'>{child.props.title}</Typography>
+                                        </StepLabel>
                                     </Step>
                                 ))}
                             </Stepper>

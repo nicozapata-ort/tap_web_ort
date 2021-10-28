@@ -314,6 +314,18 @@ input{
   /* background-color: red; */
 }
 
+#step-label{
+  color: #000000;
+  font-weight: 300;
+  font-family: 'Comfortaa', cursive;
+}
+
+#card-container-form{
+  height: 75%; 
+  width: 100%;
+}
+
+
 .formulary{
   display: grid;
   grid-template-columns: 1fr;
@@ -347,8 +359,8 @@ input{
 }
 
 .App-button-slide {
-  height: 8px;
-  width: 45px;
+  height: 1vh;
+  width: 6vh;
   border-radius: 30px;
   border-style: none;
   background-color: #FFFFFF;
@@ -427,7 +439,7 @@ input{
   right: 0; 
   margin: 0 auto;  */
   width: 95vw; 
-  height: 55vh; 
+  height: 65vh; 
   background-color: #002350; 
   border-radius: 50px
 }
@@ -528,12 +540,20 @@ input{
 .container-text-description{
   width: 100%;
 }
+
+.container-title{
+  padding: 0 20px 0 20px;
+}
 /****************************************************/
 
 
 /******************* FORM ********************/
 .swipeable-form {
   width: 80%;
+}
+
+#card-container-form{
+  height: 75%;
 }
 
 /**********************************************/
