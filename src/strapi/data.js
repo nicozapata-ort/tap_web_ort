@@ -36,9 +36,7 @@ async function getAllParticipants2() {
         });
 
         const promotion = await getPromotion()
-        console.log('Estoy en DATA', promotion)
-        console.log('Estoy en DATA', data)
-
+        console.log('Estoy en DATA, para ver promotion', promotion)
 
         if (data.data.length >= promotion.maxParticipants) {
             data = data.data.splice(0, promotion.maxParticipants)

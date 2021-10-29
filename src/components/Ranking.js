@@ -1,24 +1,22 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Button, Modal, Box, Card, CardContent, Grid, Typography, List, ListItem, CircularProgress } from '@material-ui/core'
-import { getAllParticipants2 } from '../strapi/data.js'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import IconButton from '@mui/material/IconButton';
 import { Scrollbar } from 'react-scrollbars-custom'
+import FormContext from '../context/Form/FormContext.js'
+import PromotionContext from '../context/Promotion/PromotionContext.js'
+import { getAllParticipants2 } from '../strapi/data.js'
 import { Field, Form, Formik } from 'formik'
 import { TextField } from 'formik-material-ui'
 import * as Yup from 'yup';
 import axios from 'axios'
-import PromotionContext from '../context/Promotion/PromotionContext.js'
-import FormContext from '../context/Form/FormContext.js'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import IconButton from '@mui/material/IconButton';
-
-
 
 const Ranking = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [isCompleted, setIsCompleted] = useState(false);
-    const [participantes, setParticipantes] = useState([]);
+    const [participantes, setParticipantes] = useState(null);
     const [userPositionRanking, setUserPositionRanking] = useState(0);
     const { promotion } = useContext(PromotionContext);
     const { registeredUser } = useContext(FormContext);
@@ -27,7 +25,6 @@ const Ranking = () => {
     useEffect(async () => {
         const data = await getAllParticipants2()
         setParticipantes(data)
-        console.log('Estoy en Ranking, hubo un cambio en registeredUser', registeredUser)
     }, [registeredUser]);
 
     function renderPartipantDetail() {
@@ -100,15 +97,17 @@ const Ranking = () => {
                                         <Card style={{ backgroundColor: '#002350', borderColor: '#14D2B9', borderStyle: 'solid', borderWidth: '5px' }}>
                                             <CardContent>
                                                 <Grid item style={{ textAlign: 'center', padding: '10px' }}>
-                                                    <Typography id='participantRankingPrizePrice1' style={styles.textDescription}>Entre posicion 1-10: $5000</Typography>
-                                                    <Typography id='participantRankingPrizePrice2' style={styles.textDescription}>{ }Mayor a posicion  10: $1000</Typography>
+                                                    <Typography id='participantRankingPrizePrice1' style={styles.textDescription}>Entre posición 1-10: $5000</Typography>
+                                                    <Typography id='participantRankingPrizePrice2' style={styles.textDescription}>{ }Mayor a posición  10: $1000</Typography>
                                                 </Grid>
                                             </CardContent>
                                         </Card>
                                     </Grid>
 
                                     <Grid item container direction="column" style={{ justifyContent: 'center', alignContent: 'center' }}>
-                                        {renderPartipantDetail()}
+                                        {participantes 
+                                        ? renderPartipantDetail()
+                                        : null}
                                     </Grid>
 
                                 </Grid>
@@ -184,7 +183,7 @@ const Ranking = () => {
                                     </Grid>
 
                                     <Grid item style={{ ...styles.gridContainer, textAlign: 'center' }}>
-                                        <Typography id='subtitleRanking' style={styles.textSubTitle}>¡Ingresa tu correo electrónico para saber tu posición!</Typography>
+                                        <Typography id='subtitleRanking' style={styles.textSubTitle}>¡Ingresá tu correo electrónico para saber tu posición!</Typography>
                                     </Grid>
 
                                     <Grid item container style={{ ...styles.gridContainer }}>
@@ -194,8 +193,6 @@ const Ranking = () => {
                                                     initialValues={{ email: '' }}
                                                     onSubmit={async (values, helpers) => {
                                                         const userRanking = await request(values.email)
-                                                        console.log('values', values)
-                                                        console.log('posicion userRanking', userRanking.positionUserEmail)
                                                         setIsCompleted(true)
                                                         setUserPositionRanking(userRanking.positionUserEmail)
                                                         // helpers.resetForm()
@@ -208,7 +205,7 @@ const Ranking = () => {
                                                     {({ isSubmitting }) => (
                                                         <Form autoComplete="off">
                                                             <Box paddingBottom={2}>
-                                                                <Field type='email' fullWidth name="email" component={TextField} label="Ingresa tu email" variant="outlined" InputLabelProps={{ id: 'labelEmailFormRanking', style: styles.textField }} />
+                                                                <Field type='email' fullWidth name="email" component={TextField} label="Ingresá tu email" variant="outlined" InputLabelProps={{ id: 'labelEmailFormRanking', style: styles.textField }} />
                                                             </Box>
                                                             <Grid container spacing={2} style={styles.gridContainer}>
                                                                 <Grid item>
@@ -217,7 +214,7 @@ const Ranking = () => {
                                                                         id='button-ranking-form'
                                                                         startIcon={isSubmitting ? <CircularProgress size='1rem' /> : null}
                                                                         style={{ backgroundColor: isSubmitting ? '#CDCDCD' : '#14D2B9', color: isSubmitting ? '#757575' : '#FFFFFF' }} type='submit'>
-                                                                        {isSubmitting ? 'Enviando' : 'Enviar'}
+                                                                        {'Ver mi posición'}
                                                                     </Button>
                                                                 </Grid>
                                                             </Grid>

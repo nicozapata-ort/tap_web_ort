@@ -3,6 +3,7 @@ import { Card, CardContent, CircularProgress, Button, Box, Stepper, Step, StepLa
 import { Field, Form, Formik } from 'formik'
 import { TextField } from 'formik-material-ui'
 import FormContext from '../../context/Form/FormContext'
+import PromotionContext from '../../context/Promotion/PromotionContext.js'
 import axios from 'axios'
 import * as Yup from 'yup';
 import { useLocation } from "react-router-dom";
@@ -19,9 +20,8 @@ export default function UserFormFormik() {
     const [cupon, setCupon] = useState({});
     const [copyTextLink, setTextCopyLink] = useState({ copied: false });
     const [copyTextCupon, setTextCopyCupon] = useState({ copied: false });
-
-
-    const { dataForm, setForm, setRegisteredUser, setStep, setFormCompleted } = useContext(FormContext);
+    const { promotion } = useContext(PromotionContext);
+    const { dataForm, setRegisteredUser, setStep, setFormCompleted } = useContext(FormContext);
 
     function useQuery() {
         return new URLSearchParams(useLocation().search)
@@ -61,14 +61,15 @@ export default function UserFormFormik() {
 
 
                                 <Grid item container direction='column' style={{ justifyContent: 'center', alignContent: 'center', textAlign: 'center', margin: '0 auto' }}>
-                                    <Typography id='descriptionCupon' style={{ color: '#FFFFFF', fontSize: '22px', margin: '5px auto' }}>¡Felicidades, obtuviste tu cupón de descuento!</Typography>
+                                    <Typography id='descriptionCupon' style={{ color: '#FFFFFF', fontSize: '22px', margin: '5px auto' }}>{promotion.longDescriptionCouponPrize}</Typography>
+                                    <Typography id='descriptionCupon2' style={{ color: '#FFFFFF', fontSize: '20px', margin: '5px auto' }}>{promotion.shortDescriptionCouponPrize}</Typography>
                                     <Grid item style={{ borderRadius: '50px', borderColor: '#14D2B9', borderWidth: '3px', borderStyle: 'solid', margin: '10px auto', padding: '10px' }}>
                                         <Typography id='cupon' style={{ color: '#FFFFFF', fontSize: '20px' }}>{`${cupon.cupon}`}</Typography>
                                     </Grid>
-                                    <Typography id='descriptionLinkReferr' style={{ color: '#FFFFFF', fontSize: '18px', marginBottom: '20px', marginTop: '20px' }}>Compartí el siguiente link para sumar puntos por un premio mayor</Typography>
+                                    <Typography id='descriptionLinkReferr' style={{ color: '#FFFFFF', fontSize: '18px', marginBottom: '20px', marginTop: '20px' }}>{promotion.descriptionSharePrizeCoupon}</Typography>
                                     <Grid item style={{ borderRadius: '50px', borderColor: '#14D2B9', borderWidth: '3px', borderStyle: 'solid', margin: '10px auto', padding: '10px' }}>
                                         <Typography id='linkReferr' style={{ color: '#FFFFFF', fontSize: '18px' }}>
-                                            <a href={cupon.url_referidos} style={{ color: '#FFFFFF' }}>{`${cupon.url_referidos}`}</a>
+                                            <a href={cupon.url_referidos} target='_blank' style={{ color: '#FFFFFF' }}>{`${cupon.url_referidos}`}</a>
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -163,7 +164,6 @@ export default function UserFormFormik() {
                             initialValues={{ ...dataForm }}
                             onSubmit={async (values, helpers) => {
                                 await request(values);
-                                console.log('values', values)
                                 helpers.resetForm()
                                 setStep(0)
                                 setFormCompleted(false)
@@ -172,22 +172,22 @@ export default function UserFormFormik() {
                         >
                             <div title='Datos personales'>
                                 <Box paddingBottom={1.5}>
-                                    <Field fullWidth name="nombre" component={TextField} label="Ingresa tu nombre" variant="outlined" InputLabelProps={{ id: 'labelNameForm', style: { fontSize: 14 } }} />
+                                    <Field fullWidth name="nombre" component={TextField} label="Ingresá tu nombre" variant="outlined" InputLabelProps={{ id: 'labelNameForm', style: { fontSize: 14 } }} />
                                 </Box>
                                 <Box paddingBottom={1.5}>
-                                    <Field fullWidth name="apellido" component={TextField} label="Ingresa tu apellido" variant="outlined" InputLabelProps={{ id: 'labelLastNameForm', style: { fontSize: 14 } }} />
+                                    <Field fullWidth name="apellido" component={TextField} label="Ingresá tu apellido" variant="outlined" InputLabelProps={{ id: 'labelLastNameForm', style: { fontSize: 14 } }} />
                                 </Box>
                                 <Box paddingBottom={1.5}>
-                                    <Field fullWidth type="number" name="dni" component={TextField} label="Ingresa tu dni" variant="outlined" InputLabelProps={{ id: 'labelDniForm', style: { fontSize: 14 } }} />
+                                    <Field fullWidth type="number" name="dni" component={TextField} label="Ingresá tu dni" variant="outlined" InputLabelProps={{ id: 'labelDniForm', style: { fontSize: 14 } }} />
                                 </Box>
 
                             </div>
                             <div title='Contacto'>
                                 <Box paddingBottom={2}>
-                                    <Field type='email' fullWidth name="email" component={TextField} label="Ingresa tu email" variant="outlined" InputLabelProps={{ id: 'labelEmailForm', style: { fontSize: 14 } }} />
+                                    <Field type='email' fullWidth name="email" component={TextField} label="Ingresá tu email" variant="outlined" InputLabelProps={{ id: 'labelEmailForm', style: { fontSize: 14 } }} />
                                 </Box>
                                 <Box paddingBottom={2}>
-                                    <Field fullWidth type="number" name="telefono" component={TextField} label="Ingresa tu telefono" variant="outlined" InputLabelProps={{ id: 'labelPhoneForm', style: { fontSize: 14 } }} />
+                                    <Field fullWidth type="number" name="telefono" component={TextField} label="Ingresá tu telefono" variant="outlined" InputLabelProps={{ id: 'labelPhoneForm', style: { fontSize: 14 } }} />
                                 </Box>
 
                             </div>
@@ -206,11 +206,10 @@ export default function UserFormFormik() {
 
 export function FormikStepper({ children, ...props }) {
     const childrenArray = React.Children.toArray(children)
-    const { step, setStep, dataForm, setForm, formCompleted, setFormCompleted } = useContext(FormContext);
+    const { step, setStep, formCompleted } = useContext(FormContext);
     const currentChild = childrenArray[step]
 
     const isLastStep = () => {
-        console.log('Es el ultimo paso', step === childrenArray.length - 1)
         return step === childrenArray.length - 1;
     }
 
@@ -222,7 +221,6 @@ export function FormikStepper({ children, ...props }) {
                     await props.onSubmit(values, helpers)
                 } else {
                     setStep(step + 1)
-                    console.log('Entre al else del paso')
                     helpers.setTouched({});
                 }
             }}
@@ -263,8 +261,9 @@ export function FormikStepper({ children, ...props }) {
                                     ? <Button
                                         id='button-form-1'
                                         disabled={isSubmitting}
+                                        variant='contained'
                                         style={{ backgroundColor: isSubmitting ? '#CDCDCD' : '#4E53DB', color: isSubmitting ? '#757575' : '#FFFFFF' }}
-                                        onClick={() => setStep(step - 1)}>Atras</Button>
+                                        onClick={() => setStep(step - 1)}>Volver</Button>
                                     : null}
                             </Grid>
                             <Grid item>
@@ -273,7 +272,7 @@ export function FormikStepper({ children, ...props }) {
                                     disabled={isSubmitting} variant='contained'
                                     startIcon={isSubmitting ? <CircularProgress size='1rem' /> : null}
                                     style={{ backgroundColor: isSubmitting ? '#CDCDCD' : '#4E53DB', color: isSubmitting ? '#757575' : '#FFFFFF' }} type='submit'>
-                                    {isSubmitting ? 'Enviando' : isLastStep() ? 'Enviar' : 'Siguiente'}
+                                    {'Siguiente'}
                                 </Button>
                             </Grid>
                         </Grid>

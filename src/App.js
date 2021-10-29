@@ -17,7 +17,6 @@ function App() {
   const [isClosed, setIsClosed] = useState(true);
   const [{ y }, api] = useSpring(() => ({ y: 0 }))
   const maxHeight = -(window.innerHeight / 2 + 60);
-  console.log('maxHeight', maxHeight)
 
   const open = ({ canceled }) => {
     api.start({ y: maxHeight, immediate: false, config: canceled ? config.wobbly : config.stiff })
@@ -75,10 +74,10 @@ function App() {
             <div className="App-section-description">
               <div className='container-text-description'>
                 <div className='container-title'>
-                  <h2 className="App-text-header-title">{`${promotion.description} $${promotion.prizeMinPrice} a $${promotion.prizeMaxPrice}`}</h2>
+                  <h2 className="App-text-header-title">{`${promotion.description} $${promotion.prizeMaxPrice}`}</h2>
                 </div>
                 <div className='container-description'>
-                  <h3 className="App-text-header-description">{`Podes participar desde el ${formatDate(promotion.dateMin)} al ${formatDate(promotion.dateMax)}`}</h3>
+                  <h3 className="App-text-header-description">{`Tenés chance desde el ${formatDate(promotion.dateMin)} hasta ${formatDate(promotion.dateMax)}`}</h3>
                 </div>
               </div>
             </div>
@@ -107,7 +106,7 @@ function App() {
               </div>
               <div className='container-form'>
                 <div className='container-title-form'>
-                  <h2 className="App-text-form-title">¡Completa el formulario para participar!</h2>
+                  <h2 className="App-text-form-title">¡Ingresá tus datos para participar!</h2>
                 </div>
                 <div className='formulary'>
                   <Router>
