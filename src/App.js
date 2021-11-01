@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useContext } from 'react'
 import './App.css';
 import FormState from './context/Form/FormState.js';
-import UserFormFormik from './components/Form/UserFormFormik';
+import UserFormFormik from './components/UserFormFormik.js';
 import { useSpring, a, config } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { getPromotion } from './strapi/data.js'
-import logo from './TAP_marca-02-color-RGB-gradiente-invertido.png'
+import logo from './assets/images/TAP_marca-02-color-RGB-gradiente-invertido.png'
 import Ranking from './components/Ranking.js'
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import imagePromotion from './visa-tap-online.png'
+import imagePromotion from './assets/images/visa-tap-online.png'
 import PromotionState from './context/Promotion/PromotionState.js';
 import PromotionContext from './context/Promotion/PromotionContext';
 
@@ -60,24 +60,24 @@ function App() {
   }, []);
 
   return (
-    <div className="App-body">
-      <header className='App-header'>
-        <div className='container-logo2'>
-          <img className='App-logo3' src={logo} alt='logo_tap' width={150} />
+    <div className="body">
+      <header className='container-header'>
+        <div className='container-logo'>
+          <img className='image-logo' src={logo} alt='logo_tap' width={150} />
         </div>
       </header>
 
-      <section className='App-section-container'>
-
+      <section className='container-description-section'>
         {promotion !== null
-          ? <div className="App-section-description-container unselectable">
-            <div className="App-section-description">
-              <div className='container-text-description'>
+          ? 
+          <div className="container-description-1 unselectable">
+            <div className="container-description-2">
+              <div className='container-description-3'>
                 <div className='container-title'>
-                  <h2 className="App-text-header-title">{`${promotion.description} $${promotion.prizeMaxPrice}`}</h2>
+                  <h2 className="title-description-promotion">{`${promotion.description} $${promotion.prizeMaxPrice}`}</h2>
                 </div>
                 <div className='container-description'>
-                  <h3 className="App-text-header-description">{`Tenés chance desde el ${formatDate(promotion.dateMin)} hasta ${formatDate(promotion.dateMax)}`}</h3>
+                  <h3 className="subtitle-description-promotion">{`Tenés chance desde el ${formatDate(promotion.dateMin)} hasta el ${formatDate(promotion.dateMax)}`}</h3>
                 </div>
               </div>
             </div>
@@ -86,27 +86,27 @@ function App() {
           : null
         }
 
-        <div className='ranking-container'>
+        <div className='container-ranking'>
           <div className='ranking'>
             <Ranking />
           </div>
         </div>
 
         <div className='promotional-image'>
-          <img className='imagePromotion' src={imagePromotion} alt='image_promo' />
+          <img className='image-promotion' src={imagePromotion} alt='image_promo' />
         </div>
       </section>
 
-      <section className='swipeable-form-container unselectable'>
+      <section className='container-form-section unselectable'>
         <a.div {...bind()} style={{ y, touchAction: 'none' }}>
-          <div className='swipeable-form'>
+          <div className='container-swipeable-form'>
             <div className='div-form'>
-              <div className="App-container-button" onClick={isClosed ? open : close}>
-                <div className="App-button-slide"></div>
+              <div className="container-button-form" onClick={isClosed ? open : close}>
+                <div className="button-to-slide"></div>
               </div>
               <div className='container-form'>
                 <div className='container-title-form'>
-                  <h2 className="App-text-form-title">¡Ingresá tus datos para participar!</h2>
+                  <h2 className="title-form">¡Ingresá tus datos para participar!</h2>
                 </div>
                 <div className='formulary'>
                   <Router>

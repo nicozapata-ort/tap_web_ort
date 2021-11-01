@@ -12,14 +12,14 @@ import * as Yup from 'yup';
 import axios from 'axios'
 
 const Ranking = () => {
+    const { promotion } = useContext(PromotionContext);
+    const { registeredUser } = useContext(FormContext);
+    const [participantes, setParticipantes] = useState(null);
+    const [userPositionRanking, setUserPositionRanking] = useState(0);
+    const [isCompleted, setIsCompleted] = useState(false);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const [isCompleted, setIsCompleted] = useState(false);
-    const [participantes, setParticipantes] = useState(null);
-    const [userPositionRanking, setUserPositionRanking] = useState(0);
-    const { promotion } = useContext(PromotionContext);
-    const { registeredUser } = useContext(FormContext);
 
 
     useEffect(async () => {
@@ -45,7 +45,7 @@ const Ranking = () => {
                                         </Grid>
 
                                         <Grid item xs={7} sm={8} md={8} style={{ textAlign: 'center' }}>
-                                            <Typography id='participantsRankingName'>{`${participante.Nombre} ${participante.Apellido[0]}.`}</Typography>
+                                            <Typography id='participantsRankingName' style={{ color: '#FFFFFF' }}>{`${participante.Nombre} ${participante.Apellido[0]}.`}</Typography>
                                         </Grid>
 
                                         <Grid item xs={3} sm={2} md={2} style={{ textAlign: 'center' }}>
@@ -83,7 +83,7 @@ const Ranking = () => {
                                     <Grid item container direction='row' style={{ ...styles.gridContainer, marginTop: '30px', justifyContent: 'center' }}>
                                         <Grid item container style={{ justifyContent: 'space-between' }}>
                                             <Grid item >
-                                                <IconButton aria-label="Atras" sx={{ color: '#FFFFFF' }} onClick={handleClose}>
+                                                <IconButton aria-label="Volver" sx={{ color: '#FFFFFF' }} onClick={handleClose}>
                                                     <ArrowBackIcon />
                                                 </IconButton>
                                             </Grid>
@@ -172,7 +172,7 @@ const Ranking = () => {
                                     <Grid item container direction='row' style={{ ...styles.gridContainer, marginTop: '30px' }}>
                                         <Grid item container style={{ justifyContent: 'space-between' }}>
                                             <Grid item >
-                                                <IconButton aria-label="Atras" sx={{ color: '#FFFFFF' }} onClick={handleClose}>
+                                                <IconButton aria-label="Volver" sx={{ color: '#FFFFFF' }} onClick={handleClose}>
                                                     <ArrowBackIcon />
                                                 </IconButton>
                                             </Grid>
@@ -205,7 +205,7 @@ const Ranking = () => {
                                                     {({ isSubmitting }) => (
                                                         <Form autoComplete="off">
                                                             <Box paddingBottom={2}>
-                                                                <Field type='email' fullWidth name="email" component={TextField} label="Ingresá tu email" variant="outlined" InputLabelProps={{ id: 'labelEmailFormRanking', style: styles.textField }} />
+                                                                <Field type='email' fullWidth name="email" component={TextField} label="Ingresá tu email" variant="outlined" InputLabelProps={{ id: 'label-email-form-ranking', style: styles.textField }} />
                                                             </Box>
                                                             <Grid container spacing={2} style={styles.gridContainer}>
                                                                 <Grid item>

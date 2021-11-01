@@ -2,8 +2,8 @@ import React, { useContext, useState } from 'react'
 import { Card, CardContent, CircularProgress, Button, Box, Stepper, Step, StepLabel, Grid, Modal, Typography } from '@material-ui/core'
 import { Field, Form, Formik } from 'formik'
 import { TextField } from 'formik-material-ui'
-import FormContext from '../../context/Form/FormContext'
-import PromotionContext from '../../context/Promotion/PromotionContext.js'
+import FormContext from '../context/Form/FormContext.js'
+import PromotionContext from '../context/Promotion/PromotionContext.js'
 import axios from 'axios'
 import * as Yup from 'yup';
 import { useLocation } from "react-router-dom";
@@ -14,107 +14,93 @@ import IconButton from '@mui/material/IconButton';
 
 
 export default function UserFormFormik() {
+    const { promotion } = useContext(PromotionContext);
+    const { dataForm, setRegisteredUser, setStep, setFormCompleted } = useContext(FormContext);
+    const [coupon, setCoupon] = useState({});
+    const [copyTextLink, setCopyTextLink] = useState({ copied: false });
+    const [copyTextCoupon, setCopyTextCoupon] = useState({ copied: false });
     const [openModal, setOpenModal] = useState(false);
     const handleOpen = () => setOpenModal(true)
     const handleClose = () => setOpenModal(false)
-    const [cupon, setCupon] = useState({});
-    const [copyTextLink, setTextCopyLink] = useState({ copied: false });
-    const [copyTextCupon, setTextCopyCupon] = useState({ copied: false });
-    const { promotion } = useContext(PromotionContext);
-    const { dataForm, setRegisteredUser, setStep, setFormCompleted } = useContext(FormContext);
 
-    function useQuery() {
-        return new URLSearchParams(useLocation().search)
-    }
-
-    const MessageCupon = () => {
+    const MessageCoupon = () => {
         return (
             <Modal
                 open={openModal}
                 onClose={handleClose}
                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
-                <Card id='card-message-cupon'>
+                <Card id='card-message-coupon'>
                     <Scrollbar>
                         <CardContent>
-                            <Grid container
-                                spacing={0}
-                                direction="column"
-                                alignContent="center"
-                                justifyContent="center"
-                                style={{ minHeight: '55vh', justifyItems: 'center', alignItems: 'center' }}>
+                            <Grid container spacing={0} direction="column" style={{ ...styles.gridContainer, minHeight: '55vh' }}>
 
-                                <Grid item container direction='row' style={{
-                                    justifyItems: 'center',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    alignContent: 'center', marginTop: '30px'
-                                }}>
+                                <Grid item container direction='row' style={{ ...styles.gridContainer, marginTop: '30px' }}>
                                     <Grid item container style={{ justifyContent: 'space-between' }}>
                                         <Grid item >
-                                            <IconButton aria-label="Atras" sx={{ color: '#FFFFFF' }} onClick={handleClose}>
+                                            <IconButton aria-label="Volver" sx={{ color: '#FFFFFF' }} onClick={handleClose}>
                                                 <ArrowBackIcon />
                                             </IconButton>
                                         </Grid>
                                     </Grid>
                                 </Grid>
 
-
-                                <Grid item container direction='column' style={{ justifyContent: 'center', alignContent: 'center', textAlign: 'center', margin: '0 auto' }}>
-                                    <Typography id='descriptionCupon' style={{ color: '#FFFFFF', fontSize: '22px', margin: '5px auto' }}>{promotion.longDescriptionCouponPrize}</Typography>
-                                    <Typography id='descriptionCupon2' style={{ color: '#FFFFFF', fontSize: '20px', margin: '5px auto' }}>{promotion.shortDescriptionCouponPrize}</Typography>
-                                    <Grid item style={{ borderRadius: '50px', borderColor: '#14D2B9', borderWidth: '3px', borderStyle: 'solid', margin: '10px auto', padding: '10px' }}>
-                                        <Typography id='cupon' style={{ color: '#FFFFFF', fontSize: '20px' }}>{`${cupon.cupon}`}</Typography>
+                                <Grid item container direction='column' style={{...styles.gridContainer, textAlign: 'center', margin: '0 auto' }}>
+                                    <Typography id='description-coupon' style={{ color: '#FFFFFF', fontSize: '22px', margin: '5px auto' }}>{promotion.longDescriptionCouponPrize}</Typography>
+                                    <Typography id='description-coupon-2' style={{ color: '#FFFFFF', fontSize: '20px', margin: '5px auto' }}>{promotion.shortDescriptionCouponPrize}</Typography>
+                                    
+                                    <Grid item style={styles.borderCoupon}>
+                                        <Typography id='coupon' style={{ color: '#FFFFFF', fontSize: '20px' }}>{`${coupon.cupon}`}</Typography>
                                     </Grid>
-                                    <Typography id='descriptionLinkReferr' style={{ color: '#FFFFFF', fontSize: '18px', marginBottom: '20px', marginTop: '20px' }}>{promotion.descriptionSharePrizeCoupon}</Typography>
-                                    <Grid item style={{ borderRadius: '50px', borderColor: '#14D2B9', borderWidth: '3px', borderStyle: 'solid', margin: '10px auto', padding: '10px' }}>
-                                        <Typography id='linkReferr' style={{ color: '#FFFFFF', fontSize: '18px' }}>
-                                            <a href={cupon.url_referidos} target='_blank' style={{ color: '#FFFFFF' }}>{`${cupon.url_referidos}`}</a>
+                                   
+                                    <Typography id='description-link-referr' style={{ color: '#FFFFFF', fontSize: '18px', margin: '20px 0px' }}>{promotion.descriptionSharePrizeCoupon}</Typography>
+                                   
+                                    <Grid item style={styles.borderCoupon}>
+                                        <Typography id='link-referr' style={{ color: '#FFFFFF', fontSize: '18px' }}>
+                                            <a href={coupon.url_referidos} target='_blank' style={{ color: '#FFFFFF' }}>{`${coupon.url_referidos}`}</a>
                                         </Typography>
                                     </Grid>
                                 </Grid>
 
-                                <Grid item container direction='row' style={{ justifyContent: 'center', alignContent: 'center', textAlign: 'center', width: '50%', marginTop: '30px' }}>
-
-                                    <Grid item style={{ justifyContent: 'center', alignContent: 'center', textAlign: 'center', margin: '15px auto' }}>
+                                <Grid item container direction='row' style={{ ...styles.gridContainer, textAlign: 'center', width: '50%', marginTop: '30px' }}>
+                                    <Grid item style={{ ...styles.gridContainer, textAlign: 'center', margin: '15px auto' }}>
                                         <CopyToClipboard
-                                            text={`${cupon.cupon}`}
-                                            onCopy={() => setTextCopyCupon({ ...copyTextCupon, copied: true })}
+                                            text={`${coupon.cupon}`}
+                                            onCopy={() => setCopyTextCoupon({ ...copyTextCoupon, copied: true })}
                                         >
                                             <Button
-                                                id='button-cupon'
+                                                id='button-coupon-1'
                                                 variant='contained'
-                                                style={{ backgroundColor: '#14D2B9', color: '#FFFFFF' }}
-                                            >Copiar cupon</Button>
-                                            {/* <span style={{ color: 'blue' }}>Copiar</span> */}
+                                                style={styles.buttonCoupon}
+                                            >Copiar coupon</Button>
                                         </CopyToClipboard>
-                                        {copyTextCupon.copied ? <Typography id='copyLink' style={{ color: '#FFFFFF', fontSize: '13px', margin: '5px auto' }}>Copiado.</Typography> : null}
+                                        {copyTextCoupon.copied ? <Typography id='copy-coupon' style={styles.copiedText}>Copiado.</Typography> : null}
                                     </Grid>
 
-                                    <Grid item style={{ justifyContent: 'center', alignContent: 'center', textAlign: 'center', margin: '15px auto' }}>
+                                    <Grid item style={{ ...styles.gridContainer, textAlign: 'center', margin: '15px auto' }}>
                                         <CopyToClipboard
-                                            text={`${cupon.url_referidos}`}
-                                            onCopy={() => setTextCopyLink({ ...copyTextLink, copied: true })}
+                                            text={`${coupon.url_referidos}`}
+                                            onCopy={() => setCopyTextLink({ ...copyTextLink, copied: true })}
                                         >
                                             <Button
-                                                id='button-cupon'
+                                                id='button-coupon-2'
                                                 variant='contained'
-                                                style={{ backgroundColor: '#14D2B9', color: '#FFFFFF' }}
+                                                style={styles.buttonCoupon}
                                             >Copiar link</Button>
-                                            {/* <span style={{ color: 'blue' }}>Copiar</span> */}
                                         </CopyToClipboard>
-                                        {copyTextLink.copied ? <Typography id='copyLink' style={{ color: '#FFFFFF', fontSize: '13px', margin: '5px auto' }}>Copiado.</Typography> : null}
+                                        {copyTextLink.copied ? <Typography id='copy-link' style={styles.copiedText}>Copiado.</Typography> : null}
                                     </Grid>
-
                                 </Grid>
                             </Grid>
-
                         </CardContent>
-
                     </Scrollbar>
                 </Card>
             </Modal>
         )
+    }
+
+    function useQuery() {
+        return new URLSearchParams(useLocation().search)
     }
 
     const query = useQuery();
@@ -145,7 +131,7 @@ export default function UserFormFormik() {
             }
 
             if (data != null) {
-                setCupon({ ...data })
+                setCoupon({ ...data })
                 handleOpen()
                 setRegisteredUser(true)
             }
@@ -154,9 +140,8 @@ export default function UserFormFormik() {
         }
     }
 
-
     return (
-        <Grid item style={{ height: '80vh', width: '100%', justifyContent: 'center', alignContent: 'center' }}>
+        <Grid item style={{ ...styles.gridContainer, height: '80vh', width: '100%' }}>
             <Card id='card-container-form'>
                 <Scrollbar style={{ width: '100%', height: '100%' }}>
                     <CardContent>
@@ -172,22 +157,22 @@ export default function UserFormFormik() {
                         >
                             <div title='Datos personales'>
                                 <Box paddingBottom={1.5}>
-                                    <Field fullWidth name="nombre" component={TextField} label="Ingresá tu nombre" variant="outlined" InputLabelProps={{ id: 'labelNameForm', style: { fontSize: 14 } }} />
+                                    <Field fullWidth name="nombre" component={TextField} label="Ingresá tu nombre" variant="outlined" InputLabelProps={{ id: 'label-name-form', style: styles.textField}}/>
                                 </Box>
                                 <Box paddingBottom={1.5}>
-                                    <Field fullWidth name="apellido" component={TextField} label="Ingresá tu apellido" variant="outlined" InputLabelProps={{ id: 'labelLastNameForm', style: { fontSize: 14 } }} />
+                                    <Field fullWidth name="apellido" component={TextField} label="Ingresá tu apellido" variant="outlined" InputLabelProps={{ id: 'label-last-name-form', style: styles.textField}} />
                                 </Box>
                                 <Box paddingBottom={1.5}>
-                                    <Field fullWidth type="number" name="dni" component={TextField} label="Ingresá tu dni" variant="outlined" InputLabelProps={{ id: 'labelDniForm', style: { fontSize: 14 } }} />
+                                    <Field fullWidth type="number" name="dni" component={TextField} label="Ingresá tu dni" variant="outlined" InputLabelProps={{ id: 'label-dni-form', style: styles.textField}}/>
                                 </Box>
 
                             </div>
                             <div title='Contacto'>
                                 <Box paddingBottom={2}>
-                                    <Field type='email' fullWidth name="email" component={TextField} label="Ingresá tu email" variant="outlined" InputLabelProps={{ id: 'labelEmailForm', style: { fontSize: 14 } }} />
+                                    <Field type='email' fullWidth name="email" component={TextField} label="Ingresá tu email" variant="outlined" InputLabelProps={{ id: 'label-email-form', style: styles.textField}}/>
                                 </Box>
                                 <Box paddingBottom={2}>
-                                    <Field fullWidth type="number" name="telefono" component={TextField} label="Ingresá tu telefono" variant="outlined" InputLabelProps={{ id: 'labelPhoneForm', style: { fontSize: 14 } }} />
+                                    <Field fullWidth type="number" name="telefono" component={TextField} label="Ingresá tu telefono" variant="outlined" InputLabelProps={{ id: 'label-phone-form', style: styles.textField}}/>
                                 </Box>
 
                             </div>
@@ -197,7 +182,7 @@ export default function UserFormFormik() {
             </Card>
 
             {openModal
-                ? <MessageCupon />
+                ? <MessageCoupon />
                 : null}
         </Grid>
     )
@@ -239,6 +224,7 @@ export function FormikStepper({ children, ...props }) {
             {({ isSubmitting }) => (
                 <Form autoComplete="off">
                     <Grid container direction='column' justifyContent='center' alignContent='center'>
+                        
                         <Grid item>
                             <Stepper activeStep={step} alternativeLabel>
                                 {childrenArray.map((child, index) => (
@@ -282,4 +268,34 @@ export function FormikStepper({ children, ...props }) {
             )}
         </Formik>
     )
+}
+
+
+const styles = {
+    gridContainer: {
+        justifyItems: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignContent: 'center'
+    },
+    borderCoupon: {
+        borderRadius: '50px', 
+        borderColor: '#14D2B9', 
+        borderWidth: '3px', 
+        borderStyle: 'solid', 
+        margin: '10px auto', 
+        padding: '10px'
+    },
+    buttonCoupon: {
+        backgroundColor: '#14D2B9', 
+        color: '#FFFFFF'
+    },
+    copiedText: {
+        color: '#FFFFFF', 
+        fontSize: '13px', 
+        margin: '5px auto'
+    },
+    textField: {
+        fontSize: '14px'
+    }
 }

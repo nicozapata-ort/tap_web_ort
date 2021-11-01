@@ -5,7 +5,7 @@ html {
   overflow:hidden;
 }
 
-.App-body {
+.body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -18,35 +18,9 @@ html {
   min-height: 100vh;
 }
 
-.App-header {
-  display: grid;
-  grid-area: 'header';
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  justify-items: center;
-  width: 100vw;
-  background-color: #002350;
-  /* font-size: calc(10px + 2vmin); */
-}
-
-.container-logo2{
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.App-logo3{
-  /* background-position: center;
-  object-fit:cover;
-  object-position:50% 50%;*/
-}
-
-
 
 /*****************************TEXTOS*************************************/
-
-.App-text-header-title {
+.title-description-promotion {
   color: #002350;
   font-weight: 700;
   font-family: 'Comfortaa', cursive;
@@ -54,7 +28,7 @@ html {
   text-align: center;
 }
 
-.App-text-header-description {
+.subtitle-description-promotion {
   color: #002350;
   font-weight: 400;
   font-family: 'Comfortaa', cursive;
@@ -62,7 +36,7 @@ html {
   text-align: center;
 }
 
-.App-text-form-title {
+.title-form {
   color: #FFFFFF;
   font-weight: 600;
   font-family: 'Comfortaa', cursive;
@@ -70,115 +44,68 @@ html {
   text-align: start;
 }
 
-.App-text-form-description {
-  color: #FFFFFF;
-  font-weight: 400;
-  font-family: 'Comfortaa', cursive;
-  font-size: 2vh;
-  text-align: start;
-}
-
-p{
-  font-family: 'Comfortaa', cursive;
-  color: #FFFFFF;
-}
-
-input{
-  padding:5px;
-  font-size:16px;
-  font-family:'Comfortaa';    
-}
-
-#participantRankingPrize, #titleRanking, #descriptionCupon, #descriptionLinkReferr{
+#participantRankingPrize, #titleRanking, #description-coupon, #description-link-referr{
   font-weight: 600;
   font-family: 'Comfortaa', cursive;
 }
 
-#participantsRankingPosition, #participantsRankingName, #participantsRankingPoints, #participantRankingPrizePrice1, #participantRankingPrizePrice2, #subtitleRanking, #descriptionCupon2, #descriptionParticipantRankingPosition, #participantsRankingPosition, #descriptionParticipantRankingPrize, #participantRankingPrizePrice3, #descriptionNoParticipantRankingPosition, #emailNotFound, #labelNameForm, #labelLastNameForm, #labelDniForm, #labelEmailForm, #labelPhoneForm, #labelStep, #labelEmailFormRanking, #cupon, #linkReferr, #copyLink{
+#participantsRankingPosition, #participantsRankingName, #participantsRankingPoints, #participantRankingPrizePrice1, #participantRankingPrizePrice2, #subtitleRanking, #description-coupon-2, #descriptionParticipantRankingPosition, #participantsRankingPosition, #descriptionParticipantRankingPrize, #participantRankingPrizePrice3, #descriptionNoParticipantRankingPosition, #emailNotFound, #label-name-form, #label-last-name-form, #label-dni-form, #label-email-form, #label-phone-form, #label-step, #label-email-form-ranking, #coupon, #link-referr, #copy-coupon, #copy-link{
   font-weight: 400;
   font-family: 'Comfortaa', cursive;
 }
-/************************************************************************/
 
 
 
-/***************************** LOGO *************************************/
-
-.App-section-logo-container{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+/***************************** HEADER *************************************/
+.container-header {
+  display: grid;
+  grid-area: 'header';
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  width: 50%;
-  height: 12vh;
-  /* bottom: 60px;
-  right: 130px; */
-  background-color: red;
+  justify-items: center;
+  width: 100vw;
+  background-color: #002350;
 }
 
-.App-section-logo{
+.container-logo{
   display: flex;
-  flex-direction: column;
+  align-content: center;
   justify-content: center;
-  align-items: flex-start;
   width: 100%;
-  height: 12vh;
-  /* bottom: 60px;
-  right: 130px; */
 }
 
-.profile-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 90%;
-  /* margin: 0 0px 0 100px; */
+.image-logo{
+  /*background-color: red*/
 }
-
-.App-logo {
-  /*Al momento del video grabado en el celu estaba en 130px*/
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* padding-left: 80px; */
-}
-/************************************************************************/
-
 
 
 /***************************** DESCRIPTION ******************************/
-
-
-.App-section-container {
+.container-description-section {
   display: grid;
   grid-area: 'textContext';
   grid-column: span 3;
   grid-template-columns: 1fr;
   grid-template-rows: 80% 20%;
   background-color: #F3F3F3;
-  /* width: 90%; */
-  /* margin: 0 auto; */
-  /* border-radius: 80px; */
 }
 
-.ranking-container{
-  display: grid;
-  /* background-color: greenyellow; */
-  grid-row: 2 / 3;
-  grid-column: span 2;
-}
-
-.ranking{
+.container-description-1 {
   display: flex;
   flex-direction: column;
-  align-content: flex-start;
   justify-content: flex-start;
+  align-items: center;
   width: 100%;
+}
+
+.container-description-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 100%;
 }
 
-.container-text-description{
+.container-description-3{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -197,27 +124,23 @@ input{
   overflow-wrap: break-word;
 }
 
+.container-ranking{
+  display: grid;
+  grid-row: 2 / 3;
+  grid-column: span 2;
+}
+
+.ranking{
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+}
+
 .promotional-image{
   display: none;
-}
-
-.App-section-description-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  /* height: 60vh; */
-}
-
-.App-section-description {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  /* height: 30vh; */
-  /* padding-top: 150px; */
 }
 
 .App-description-button{
@@ -225,57 +148,11 @@ input{
   justify-content: center;
   align-items: flex-start;
   height: 100%;
-  /* background-color: hotpink; */
-  /* position: absolute;
-  top: 58vh;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: 0 auto; */
-  /* background-color: blueviolet; */
 }
-
-/************************************************************************/
-
-
-
-/***************************** WAVE *************************************/
-
-.App-section-form2 {
-  display: flex;
-  /* min-height: 20vh; */
-  width: 100%;
-  z-index: 20;
-}
-
-
-.custom-shape-divider-top-1632780241 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-}
-
-.custom-shape-divider-top-1632780241 svg {
-  position: relative;
-  display: block;
-  width: calc(100% + 1.3px);
-  height: 150px;
-}
-
-.custom-shape-divider-top-1632780241 .shape-fill {
-  fill: #EDF3FB;
-}
-/************************************************************************/
 
 
 /***************************** FORM *************************************/
-
-.swipeable-form-container {
-  /* opacity: 0.5; */
-  /* grid-area: 'formulary'; */
+.container-form-section {
   width: 100%;
   height: 15vh;
   position: relative;
@@ -284,7 +161,7 @@ input{
   bottom: 0;
 }
 
-.swipeable-form {
+.container-swipeable-form {
   background-color: #14D2B9;
   width: 100%;
   height: 100vh;
@@ -303,8 +180,28 @@ input{
   padding: 30px 10px 10px 10px;
 }
 
+.container-button-form {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  height: 5%;
+  width: 100%;
+  left: 0;
+  top: 0.5px;
+  border-top-left-radius: 35px;
+  border-top-right-radius: 35px;
+}
+
+.button-to-slide {
+  height: 1vh;
+  width: 6vh;
+  border-radius: 30px;
+  border-style: none;
+  background-color: #FFFFFF;
+}
+
 .container-form{
-  /* background-color: blue; */
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
@@ -312,6 +209,24 @@ input{
 
 .container-title-form{
   /* background-color: red; */
+}
+
+.formulary{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.unselectable {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 #step-label{
@@ -326,59 +241,7 @@ input{
 }
 
 
-.formulary{
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  align-content: center;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-  height: 80vh;
-}
-
-
-.unselectable {
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.App-container-button {
-  display: flex;
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  height: 5%;
-  width: 100%;
-  left: 0;
-  top: 0.5px;
-  border-top-left-radius: 35px;
-  border-top-right-radius: 35px;
-}
-
-.App-button-slide {
-  height: 1vh;
-  width: 6vh;
-  border-radius: 30px;
-  border-style: none;
-  background-color: #FFFFFF;
-}
-
-/************************************************************************/
-
-
-/********************************* BLOB *********************************/
-
-.App-section-blob-container {
-  display: none;
-}
-/************************************************************************/
-
-
 /******************************** RANKING *******************************/
-
 #button-ranking{
   background-color: #002350; 
   color: #FFFFFF;
@@ -396,7 +259,7 @@ input{
   margin: 20px auto;
 }
 
-#button-ranking-form, #button-form-1, #button-form-2, #button-cupon{
+#button-ranking-form, #button-form-1, #button-form-2, #button-coupon-1, #button-coupon-2{
   border-radius: 25px; 
   text-transform: none; 
   font-family: 'Comfortaa', cursive;
@@ -424,20 +287,7 @@ input{
 }
 
 
-#card-ranking, #card-message-cupon {
-  /* display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  align-content: center;
-  justify-content: center;
-  align-items: start;
-  justify-items: center;
-  position: absolute; 
-  top: 10%;
-  bottom: 0; 
-  left: 0; 
-  right: 0; 
-  margin: 0 auto;  */
+#card-ranking, #card-message-coupon {
   width: 95vw; 
   height: 65vh; 
   background-color: #002350; 
@@ -495,20 +345,17 @@ input{
   flex-direction: column
 }
 
-/************************************************************************/
-
-
 
 /***************************** MEDIA QUERIES ****************************/
 
 @media screen and (min-width: 1000px){
 
-  .App-body {
+  .body {
     background-color: #002350;
   }
 
 /******************* DESCRIPTION ********************/
-.App-section-container {
+.container-description-section {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 80% 20%;
   border-radius: 80px;
@@ -516,12 +363,8 @@ input{
   margin: 0 auto;
 }
 
-.App-section-description {
+.container-description-2 {
   width: 50vw;
-}
-
-.ranking-container{
-  padding-top: 0px;
 }
 
 .promotional-image{
@@ -532,23 +375,21 @@ input{
   width: 100%;
 }
 
-.imagePromotion{
+.image-promotion{
   max-width: 20vw;
   max-height: 40vh
 }
 
-.container-text-description{
+.container-description-3{
   width: 100%;
 }
 
 .container-title{
   padding: 0 20px 0 20px;
 }
-/****************************************************/
-
 
 /******************* FORM ********************/
-.swipeable-form {
+.container-swipeable-form {
   width: 80%;
 }
 
@@ -556,216 +397,12 @@ input{
   height: 75%;
 }
 
-/**********************************************/
-
-/******************* BLOB ********************/
-
-.App-section-blob-container {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  /* background-color: red; */
-}
-
-.App-section-blob {
-  position: absolute;
-  left: -1vw;
-  bottom: 55vh;
-  opacity: 0.1;
-}
-
-.App-section-blob2 {
-  position: absolute;
-  left: -1.5vw;
-  bottom: 56vh;
-  opacity: 0.1;
-}
-
-.App-section-blob3 {
-  position: absolute;
-  left: 38vw;
-  bottom: 57vh;
-  opacity: 0.1;
-}
-
-.App-section-blob4 {
-  position: absolute;
-  left: 37vw;
-  bottom: 58vh;
-  opacity: 0.1;
-}
-
-.App-section-blob5 {
-  position: absolute;
-  right: 5vw;
-  bottom: 37vh;
-  opacity: 0.1;
-}
-
-.App-section-blob6 {
-  position: absolute;
-  right: -6vw;
-  bottom: -20vh;
-  opacity: 0.1;
-}
-/**********************************************/
-
-#card-ranking{
+/******************************** RANKING *******************************/
+#card-ranking, #card-message-coupon{
   width: 60vw; 
   height: 60vh; 
   border-radius: 50px;
   background-color: #002350;
 }
 
-#card-message-cupon{
-  width: 60vw; 
-  height: 60vh; 
-  border-radius: 50px;
-  background-color: #002350;
 }
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* @media screen and (max-width: 500px) {
-  #primera-posicion-ranking {
-    width: 90px; 
-    height: 90px;
-    border-radius: 90px;
-  }  
-
-  #container-description-prim-pos {
-    display: flex; 
-    width: 82px; 
-    height: 82px; 
-    border-radius: 90px; 
-  }
-
-  #segunda-posicion-ranking, #tercera-posicion-ranking{
-    width: 75px; 
-    height: 75px; 
-    border-radius: 75px; 
-  }
-
-  #container-description-seg-pos, #container-description-ter-pos{
-    display: flex; 
-    width: 67px; 
-    height: 67px; 
-    border-radius: 67px; 
-  }
-
-  #card-ranking, #card-message-cupon {
-    width: 97vw; 
-    height: 75vh; 
-    top: 15%;
-
-  }
-}
-
-
-@media screen and (max-width: 700px) {
-
-  .swipeable-form {
-    width: 100%;
-  }
-
-  .App-section-blob-container {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 420px) {
-  
-  .profile-logo {
-    width: 100%;
-    margin: 0 auto;
-  }
-
-  .App-section-description{
-    padding-bottom: 0;
-    height: 60vh;
-  }
-}
-
-@media screen and (max-width: 756px) {
-  .App-text-header-title {
-    font-size: 4vh;
-  }
-
-  .App-logo{
-    margin: 0 auto;
-    padding-left: 0;
-  }
-
-  .App-section-description {
-    padding-top: 3vh;
-  }
-}
-
-@media (min-width: 701px) and (max-width: 986px) {
-  .App-text-header-title {
-    font-size: 4vh;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  .App-section-container{
-    width: 100%;
-    height: 100vh;
-    border-radius: 0;
-  }
-
-  .swipeable-form{
-    width: 100%;
-  }
-
-  .App-section-blob {
-    left: -3vw;
-    bottom: 75vh;
-  }
-  
-  .App-section-blob2 {
-    left: -3.5vw;
-    bottom: 76vh;
-  }
-  
-  .App-section-blob3 {
-    left: 48vw;
-    bottom: 77vh;
-  }
-  
-  .App-section-blob4 {
-    left: 47vw;
-    bottom: 78vh;
-  }
-  
-  .App-section-blob5 {
-    right: 1vw;
-    bottom: 60vh;
-  }
-  
-  .App-section-blob6 {
-    right: -8vw;
-    bottom: 3vh;
-  }
-
-} */
