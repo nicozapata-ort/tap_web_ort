@@ -10,7 +10,7 @@ html {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-template-columns: 1fr;
-  grid-template-rows: 80px 1fr;
+  grid-template-rows: auto 1fr;
   grid-template-areas: 
   "header"
   "textContext";
@@ -20,7 +20,7 @@ html {
 
 
 /*****************************TEXTOS*************************************/
-.title-description-promotion {
+.promotion-desc-title {
   color: #002350;
   font-weight: 700;
   font-family: 'Comfortaa', cursive;
@@ -28,7 +28,7 @@ html {
   text-align: center;
 }
 
-.subtitle-description-promotion {
+.promotion-desc-subtitle {
   color: #002350;
   font-weight: 400;
   font-family: 'Comfortaa', cursive;
@@ -36,7 +36,7 @@ html {
   text-align: center;
 }
 
-.title-form {
+.form-title {
   color: #FFFFFF;
   font-weight: 600;
   font-family: 'Comfortaa', cursive;
@@ -44,12 +44,12 @@ html {
   text-align: start;
 }
 
-#participantRankingPrize, #titleRanking, #description-coupon, #description-link-referr{
+#participantRankingPrize, #prizes-title, #ranking-title, #coupon-desc, #desc-referr-link{
   font-weight: 600;
   font-family: 'Comfortaa', cursive;
 }
 
-#participantsRankingPosition, #participantsRankingName, #participantsRankingPoints, #participantRankingPrizePrice1, #participantRankingPrizePrice2, #subtitleRanking, #description-coupon-2, #descriptionParticipantRankingPosition, #participantsRankingPosition, #descriptionParticipantRankingPrize, #participantRankingPrizePrice3, #descriptionNoParticipantRankingPosition, #emailNotFound, #label-name-form, #label-last-name-form, #label-dni-form, #label-email-form, #label-phone-form, #label-step, #label-email-form-ranking, #coupon, #link-referr, #copy-coupon, #copy-link{
+#pos-part-ranking, #name-part-ranking, #points-part-ranking, #part-prize-price-1, #part-prize-price-2, #ranking-subtitle, #coupon-desc-2, #desc-part-pos, #pos-part, #desc-part-prize, #part-prize-price-3, #email-not-found, #desc-part-without-pos, #form-label-name, #form-label-last-name, #form-label-dni, #form-label-email, #form-label-phone, #label-step, #coupon, #referr-link, #copy-coupon, #copy-link{
   font-weight: 400;
   font-family: 'Comfortaa', cursive;
 }
@@ -57,7 +57,7 @@ html {
 
 
 /***************************** HEADER *************************************/
-.container-header {
+.header-container {
   display: grid;
   grid-area: 'header';
   grid-template-columns: 1fr 1fr;
@@ -67,20 +67,20 @@ html {
   background-color: #002350;
 }
 
-.container-logo{
+.logo-container{
   display: flex;
   align-content: center;
   justify-content: center;
   width: 100%;
 }
 
-.image-logo{
-  /*background-color: red*/
+.logo-image{
+  max-width: 100%;
 }
 
 
 /***************************** DESCRIPTION ******************************/
-.container-description-section {
+.desc-section-container {
   display: grid;
   grid-area: 'textContext';
   grid-column: span 3;
@@ -89,7 +89,7 @@ html {
   background-color: #F3F3F3;
 }
 
-.container-description-1 {
+.desc-container-1 {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -97,7 +97,7 @@ html {
   width: 100%;
 }
 
-.container-description-2 {
+.desc-container-2 {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -105,7 +105,7 @@ html {
   height: 100%;
 }
 
-.container-description-3{
+.desc-container-3 {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -114,17 +114,17 @@ html {
   height: 100%;
 }
 
-.container-title{
+.title-container{
   margin: 0 15px;
   overflow-wrap: break-word;
 }
 
-.container-description{
+.desc-container{
   margin: 0 15px;
   overflow-wrap: break-word;
 }
 
-.container-ranking{
+.ranking-container{
   display: grid;
   grid-row: 2 / 3;
   grid-column: span 2;
@@ -143,16 +143,16 @@ html {
   display: none;
 }
 
-.App-description-button{
+.ranking-button-container{
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 100%;
+  width: 100%;
 }
 
 
 /***************************** FORM *************************************/
-.container-form-section {
+.form-section-container {
   width: 100%;
   height: 15vh;
   position: relative;
@@ -161,7 +161,7 @@ html {
   bottom: 0;
 }
 
-.container-swipeable-form {
+.form-swipeable-container {
   background-color: #14D2B9;
   width: 100%;
   height: 100vh;
@@ -176,11 +176,11 @@ html {
   z-index: 100;
 }
 
-.div-form {
+.form-div {
   padding: 30px 10px 10px 10px;
 }
 
-.container-button-form {
+.form-button-container {
   display: flex;
   position: absolute;
   justify-content: center;
@@ -201,13 +201,13 @@ html {
   background-color: #FFFFFF;
 }
 
-.container-form{
+.form-container{
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
 }
 
-.container-title-form{
+.form-title-container{
   /* background-color: red; */
 }
 
@@ -235,22 +235,30 @@ html {
   font-family: 'Comfortaa', cursive;
 }
 
-#card-container-form{
+#form-card-container{
   height: 75%; 
   width: 100%;
 }
 
+.swal-button {
+  background-color: #002350;
+  border-radius: 25px; 
+  font-weight: 400;
+  font-family: 'Comfortaa', cursive;
+}
+
 
 /******************************** RANKING *******************************/
-#button-ranking{
+#ranking-button{
   background-color: #002350; 
   color: #FFFFFF;
   border-radius: 25px; 
   text-transform: none;
   font-family: 'Comfortaa', cursive;
+  max-width: 100%;
 }
 
-#button-ranking-2, #button-ranking-3{
+#ranking-button-2, #button-ranking-3{
   background-color: #14D2B9; 
   color: #FFFFFF;
   border-radius: 25px; 
@@ -259,14 +267,14 @@ html {
   margin: 20px auto;
 }
 
-#button-ranking-form, #button-form-1, #button-form-2, #button-coupon-1, #button-coupon-2{
+#ranking-button-form, #form-button-1, #form-button-2, #coupon-button-1, #coupon-button-2{
   border-radius: 25px; 
   text-transform: none; 
   font-family: 'Comfortaa', cursive;
 }
 
 
-.circle-pos-item{
+.pos-item-circle{
   display: flex; 
   width: 30px; 
   height: 30px; 
@@ -276,7 +284,7 @@ html {
   align-items: center
 }
 
-.list-item-ranking {
+.ranking-list-item {
   flex-direction: row; 
   justify-content: center; 
   align-items: center; 
@@ -287,62 +295,11 @@ html {
 }
 
 
-#card-ranking, #card-message-coupon {
+#ranking-card, #message-coupon-card, #ranking-card-2{
   width: 95vw; 
   height: 65vh; 
   background-color: #002350; 
   border-radius: 50px
-}
-
-#card-ranking2{
-  width: 95vw; 
-  height: 70vh; 
-  background-color: #002350; 
-  border-radius: 50px
-}
-
-#primera-posicion-ranking {
-  width: 100px; 
-  height: 100px;
-  border-radius: 150px;
-  border-color: #14D2B9;
-  border-width: 4px;
-  border-style: solid;
-  background-color: #405A7C;
-  text-align: center;
-  margin-bottom: 10px
-}
-
-#segunda-posicion-ranking, #tercera-posicion-ranking{
-  width: 80px; 
-  height: 80px; 
-  border-radius: 100px; 
-  border-color: #14D2B9; 
-  border-width: 4px; 
-  border-style: solid; 
-  background-color: #405A7C; 
-  text-align: center; 
-  margin-bottom: 10px
-}
-
-#container-description-prim-pos {
-  display: flex; 
-  width: 92px; 
-  height: 92px; 
-  border-radius: 150px; 
-  justify-content: center; 
-  align-items: center; 
-  flex-direction: column
-}
-
-#container-description-seg-pos, #container-description-ter-pos{
-  display: flex; 
-  width: 72px; 
-  height: 72px; 
-  border-radius: 92px; 
-  justify-content: center; 
-  align-items: center; 
-  flex-direction: column
 }
 
 
@@ -355,7 +312,7 @@ html {
   }
 
 /******************* DESCRIPTION ********************/
-.container-description-section {
+.desc-section-container {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 80% 20%;
   border-radius: 80px;
@@ -363,7 +320,7 @@ html {
   margin: 0 auto;
 }
 
-.container-description-2 {
+.desc-container-2 {
   width: 50vw;
 }
 
@@ -375,30 +332,30 @@ html {
   width: 100%;
 }
 
-.image-promotion{
+.promotion-image{
   max-width: 20vw;
   max-height: 40vh
 }
 
-.container-description-3{
+.desc-container-3{
   width: 100%;
 }
 
-.container-title{
+.title-container{
   padding: 0 20px 0 20px;
 }
 
 /******************* FORM ********************/
-.container-swipeable-form {
+.form-swipeable-container {
   width: 80%;
 }
 
-#card-container-form{
+#form-card-container{
   height: 75%;
 }
 
 /******************************** RANKING *******************************/
-#card-ranking, #card-message-coupon{
+#ranking-card, #message-coupon-card, #ranking-card-2{
   width: 60vw; 
   height: 60vh; 
   border-radius: 50px;

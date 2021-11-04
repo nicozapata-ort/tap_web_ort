@@ -54,30 +54,30 @@ function App() {
       const data = await getPromotion()
       setPromotion(data)
     }
-
+    
     fetchMyAPI()
 
   }, []);
 
   return (
     <div className="body">
-      <header className='container-header'>
-        <div className='container-logo'>
-          <img className='image-logo' src={logo} alt='logo_tap' width={150} />
+      <header className='header-container'>
+        <div className='logo-container'>
+          <img className='logo-image' src={logo} alt='logo_tap' width={150} />
         </div>
       </header>
 
-      <section className='container-description-section'>
+      <section className='desc-section-container'>
         {promotion !== null
           ? 
-          <div className="container-description-1 unselectable">
-            <div className="container-description-2">
-              <div className='container-description-3'>
-                <div className='container-title'>
-                  <h2 className="title-description-promotion">{`${promotion.description} $${promotion.prizeMaxPrice}`}</h2>
+          <div className="desc-container-1 unselectable">
+            <div className="desc-container-2">
+              <div className='desc-container-3'>
+                <div className='title-container'>
+                  <h2 className="promotion-desc-title">{`${promotion.description} $${promotion.prizeMaxPrice}`}</h2>
                 </div>
-                <div className='container-description'>
-                  <h3 className="subtitle-description-promotion">{`Tenés chance desde el ${formatDate(promotion.dateMin)} hasta el ${formatDate(promotion.dateMax)}`}</h3>
+                <div className='desc-container'>
+                  <h3 className="promotion-desc-subtitle">{`Tenés chance desde el ${formatDate(promotion.dateMin)} hasta el ${formatDate(promotion.dateMax)}`}</h3>
                 </div>
               </div>
             </div>
@@ -86,27 +86,27 @@ function App() {
           : null
         }
 
-        <div className='container-ranking'>
+        <div className='ranking-container'>
           <div className='ranking'>
             <Ranking />
           </div>
         </div>
 
         <div className='promotional-image'>
-          <img className='image-promotion' src={imagePromotion} alt='image_promo' />
+          <img className='promotion-image' src={imagePromotion} alt='image_promo' />
         </div>
       </section>
 
-      <section className='container-form-section unselectable'>
+      <section className='form-section-container unselectable'>
         <a.div {...bind()} style={{ y, touchAction: 'none' }}>
-          <div className='container-swipeable-form'>
-            <div className='div-form'>
-              <div className="container-button-form" onClick={isClosed ? open : close}>
+          <div className='form-swipeable-container'>
+            <div className='form-div'>
+              <div className="form-button-container" onClick={isClosed ? open : close}>
                 <div className="button-to-slide"></div>
               </div>
-              <div className='container-form'>
-                <div className='container-title-form'>
-                  <h2 className="title-form">¡Ingresá tus datos para participar!</h2>
+              <div className='form-container'>
+                <div className='form-title-container'>
+                  <h2 className="form-title">¡Ingresá tus datos para participar!</h2>
                 </div>
                 <div className='formulary'>
                   <Router>
