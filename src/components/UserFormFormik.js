@@ -125,16 +125,15 @@ export default function UserFormFormik() {
 
         try {
             const { data } = await axios.post(`http://localhost:1337/participants?referr=${query.get("referr")}`, user, auth)
-            console.log(data)
 
             if (data.status !== 201) {
-                console.log('Entre al if del error !201', data)
-                throw new Error(data.type)
+                throw new Error(data.message)
             }
 
             if (data != null) {
                 setCoupon({ ...data })
                 handleOpen()
+                setFormCompleted(true)
                 setRegisteredUser(true)
             }
         } catch (error) {
@@ -145,7 +144,7 @@ export default function UserFormFormik() {
                 button: {
                     text: "Aceptar",
                 },
-                timer: 5000
+                timer: 10000
             });
         }
     }
@@ -235,16 +234,18 @@ export function FormikStepper({ children, ...props }) {
                 <Form autoComplete="off">
                     <Grid container direction='column' justifyContent='center' alignContent='center'>
 
-                        <Grid item>
-                            <Stepper activeStep={step} alternativeLabel>
-                                {childrenArray.map((child, index) => (
-                                    <Step key={child.props.title} completed={step > index || formCompleted}>
-                                        <StepLabel>
-                                            <Typography id='label-step'>{child.props.title}</Typography>
-                                        </StepLabel>
-                                    </Step>
-                                ))}
-                            </Stepper>
+                        <Grid item container alignContent="center" justifyContent="center" >
+                            <Grid item style={{width:'100vw'}}>
+                                <Stepper activeStep={step} alternativeLabel>
+                                    {childrenArray.map((child, index) => (
+                                        <Step key={child.props.title} completed={step > index || formCompleted}>
+                                            <StepLabel>
+                                                <Typography id='label-step'>{child.props.title}</Typography>
+                                            </StepLabel>
+                                        </Step>
+                                    ))}
+                                </Stepper>
+                            </Grid>
                         </Grid>
 
                         <Grid item>

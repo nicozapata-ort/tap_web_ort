@@ -19,8 +19,6 @@ export const texts = {
     SEE_POSITION_BUTTON: 'Ver mi posición',
     PRIZES_BUTTON: 'Ver premios',
     TITLE_OF_PRIZES: 'Premios',
-    DESCRIPTION_OF_PRIZES_1: 'Entre posición 1-10: $5000',
-    DESCRIPTION_OF_PRIZES_2: 'Mayor a posición  10: $1000',
     RANKING_BUTTON: 'Ver ranking',
     TITLE_OF_RANKING: 'Ranking',
     SUBTITLE_OF_RANKING: '¡Ingresá tu correo electrónico para saber tu posición!',

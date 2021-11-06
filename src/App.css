@@ -236,12 +236,12 @@ html {
 }
 
 #form-card-container{
+  width: 100%; 
   height: 75%; 
-  width: 100%;
 }
 
 .swal-button {
-  background-color: #002350;
+  background-color: #4E53DB;
   border-radius: 25px; 
   font-weight: 400;
   font-family: 'Comfortaa', cursive;
@@ -254,6 +254,7 @@ html {
   color: #FFFFFF;
   border-radius: 25px; 
   text-transform: none;
+  font-weight: 400;
   font-family: 'Comfortaa', cursive;
   max-width: 100%;
 }
@@ -300,6 +301,17 @@ html {
   height: 65vh; 
   background-color: #002350; 
   border-radius: 50px
+}
+
+#ranking-form-card{
+  width: 100%; 
+  height: 150px; 
+  padding-top: 20px; 
+  background-color: #FFFFFF; 
+  margin-top: 10px; 
+  border-color: #14D2B9;
+  border-style: solid; 
+  border-width: 3px
 }
 
 

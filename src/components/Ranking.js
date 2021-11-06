@@ -22,7 +22,10 @@ const Ranking = () => {
     const [isCompleted, setIsCompleted] = useState(false);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setOpen(false)
+        setIsCompleted(false) //Para que cuando salga del modal no siga manteniendo la posición del email ingresado
+    };
 
 
     useEffect(async () => {
@@ -100,17 +103,17 @@ const Ranking = () => {
                                         <Card style={{ backgroundColor: '#002350', borderColor: '#14D2B9', borderStyle: 'solid', borderWidth: '5px' }}>
                                             <CardContent>
                                                 <Grid item style={{ textAlign: 'center', padding: '10px' }}>
-                                                    <Typography id='part-prize-price-1' style={styles.textDescription}>{`${texts.DESCRIPTION_OF_PRIZES_1}`}</Typography>
-                                                    <Typography id='part-prize-price-2' style={styles.textDescription}>{`${texts.DESCRIPTION_OF_PRIZES_2}`}</Typography>
+                                                    <Typography id='part-prize-price-1' style={styles.textDescription}>{`${promotion.descriptionFirstPrize} $${promotion.prizeMaxPrice}`}</Typography>
+                                                    <Typography id='part-prize-price-2' style={styles.textDescription}>{`${promotion.descriptionSecondPrize} $${promotion.prizeMinPrice}`}</Typography>
                                                 </Grid>
                                             </CardContent>
                                         </Card>
                                     </Grid>
 
                                     <Grid item container direction="column" style={{ justifyContent: 'center', alignContent: 'center' }}>
-                                        {participants 
-                                        ? renderPartipantDetail()
-                                        : null}
+                                        {participants
+                                            ? renderPartipantDetail()
+                                            : null}
                                     </Grid>
 
                                 </Grid>
@@ -132,17 +135,11 @@ const Ranking = () => {
                 params: { email: email }
             });
 
-            // if (data.status !== 201) {
-            //     console.log('Entre al if del error !201', data.status )
-            //     throw new Error(data.type)
-            // }
+            if (data.status !== 200) {
+                throw new Error(data.message)
+            }
 
-            console.log('codigo de estado del get:', data)
-
-            // if (data != null) {
-            //     setCupon({...data})
-            //     handleOpen()
-            // }
+            setIsCompleted(true)
 
             return data
         } catch (error) {
@@ -153,7 +150,7 @@ const Ranking = () => {
                 button: {
                     text: "Aceptar",
                 },
-                timer: 5000
+                timer: 10000
             });
         }
     }
@@ -197,13 +194,12 @@ const Ranking = () => {
                                     </Grid>
 
                                     <Grid item container style={{ ...styles.gridContainer }}>
-                                        <Card style={{ width: '100%', height: '150px', paddingTop: '20px', backgroundColor: '#FFFFFF', marginTop: '10px', borderColor: '#14D2B9', borderStyle: 'solid', borderWidth: '3px' }}>
+                                        <Card id='ranking-form-card'>
                                             <CardContent>
                                                 <Formik
                                                     initialValues={{ email: '' }}
                                                     onSubmit={async (values, helpers) => {
                                                         const userRanking = await request(values.email)
-                                                        setIsCompleted(true)
                                                         setUserPositionRanking(userRanking.positionUserEmail)
                                                         // helpers.resetForm()
                                                     }}
@@ -240,9 +236,9 @@ const Ranking = () => {
 
                                                 ? <Grid item style={{ ...styles.gridContainer, marginTop: '50px', textAlign: 'center' }}>
                                                     <Typography id='desc-part-pos' style={{ ...styles.textSubTitle }}>{`${texts.DESCRIPTION_OF_THE_RANKING_POSITION}`}</Typography>
-                                                    <Typography id='pos-part' style={{ ...styles.textSubTitle, borderRadius: '50px', borderColor: '#14D2B9', borderWidth: '3px', borderStyle: 'solid', width: '50%', margin: '10px auto' }}>{userPositionRanking}</Typography>
+                                                    <Typography id='pos-part' style={{ ...styles.textSubTitle, ...styles.textBorder }}>{userPositionRanking}</Typography>
                                                     <Typography id='desc-part-prize' style={styles.textSubTitle}>{`${texts.DESCRIPTION_OF_THE_PRIZE_IN_RANKING}`}</Typography>
-                                                    <Typography id='part-prize-price-3' style={{ ...styles.textSubTitle, borderRadius: '50px', borderColor: '#14D2B9', borderWidth: '3px', borderStyle: 'solid', width: '50%', margin: '10px auto' }}>${userPositionRanking <= promotion.firstPlaces ? promotion.prizeMaxPrice : promotion.prizeMinPrice} </Typography>
+                                                    <Typography id='part-prize-price-3' style={{ ...styles.textSubTitle, ...styles.textBorder }}>${userPositionRanking <= promotion.firstPlaces ? promotion.prizeMaxPrice : promotion.prizeMinPrice} </Typography>
                                                 </Grid>
                                                 : <Grid item style={{ ...styles.gridContainer, marginTop: '30px', textAlign: 'center' }}>
                                                     <Typography id='email-not-found' style={{ ...styles.textSubTitle, marginBottom: '10px', fontSize: '18px' }}>{`${texts.EMAIL_NOT_FOUND}`}</Typography>
@@ -288,4 +284,12 @@ const styles = {
     textField: {
         fontSize: 14
     },
+    textBorder: {
+        borderRadius: '50px', 
+        borderColor: '#14D2B9', 
+        borderWidth: '3px', 
+        borderStyle: 'solid', 
+        width: '50%', 
+        margin: '10px auto'
+    }
 }
