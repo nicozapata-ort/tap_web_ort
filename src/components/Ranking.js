@@ -12,6 +12,7 @@ import { TextField } from 'formik-material-ui'
 import * as Yup from 'yup';
 import axios from 'axios'
 import swal from 'sweetalert';
+import { getApiURL, getAuth, getPromotionId } from "../strapi/config.js";
 
 
 const Ranking = () => {
@@ -29,7 +30,7 @@ const Ranking = () => {
 
 
     useEffect(async () => {
-        const data = await getAllParticipants()
+        const data = await await getAllParticipants({ promotionId: getPromotionId() })
         setParticipants(data)
     }, [registeredUser]);
 
@@ -51,11 +52,11 @@ const Ranking = () => {
                                         </Grid>
 
                                         <Grid item xs={7} sm={8} md={8} style={{ textAlign: 'center' }}>
-                                            <Typography id='name-part-ranking' style={{ color: '#FFFFFF' }}>{`${participante.Nombre} ${participante.Apellido[0]}.`}</Typography>
+                                            <Typography id='name-part-ranking' style={{ color: '#FFFFFF' }}>{`${participante.name} ${participante.lastname[0]}.`}</Typography>
                                         </Grid>
 
                                         <Grid item xs={3} sm={2} md={2} style={{ textAlign: 'center' }}>
-                                            <Typography id='points-part-ranking' style={{ color: '#6EF1C7' }}>{`${participante.Referidos} puntos`}</Typography>
+                                            <Typography id='points-part-ranking' style={{ color: '#6EF1C7' }}>{`${participante.referrals} puntos`}</Typography>
                                         </Grid>
                                     </ListItem>
                                 )
@@ -128,17 +129,12 @@ const Ranking = () => {
     const request = async (email) => {
 
         try {
-            const { data } = await axios.get('http://localhost:1337/ranking', {
-                headers: {
-                    Authorization: process.env.REACT_APP_AUTHORIZATION_STRAPI
-                },
-                params: { email: email }
-            });
+            const { data } = await getAllParticipants({ email, promotionId: getPromotionId() })
 
             if (data.status !== 200) {
                 throw new Error(data.message)
             }
-
+            setParticipants(data)
             setIsCompleted(true)
 
             return data
@@ -285,11 +281,11 @@ const styles = {
         fontSize: 14
     },
     textBorder: {
-        borderRadius: '50px', 
-        borderColor: '#14D2B9', 
-        borderWidth: '3px', 
-        borderStyle: 'solid', 
-        width: '50%', 
+        borderRadius: '50px',
+        borderColor: '#14D2B9',
+        borderWidth: '3px',
+        borderStyle: 'solid',
+        width: '50%',
         margin: '10px auto'
     }
 }

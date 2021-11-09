@@ -13,6 +13,8 @@ import { Scrollbar } from 'react-scrollbars-custom'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from '@mui/material/IconButton';
+import { getApiURL, getAuth, getPromotionId } from "../strapi/config.js";
+
 
 
 
@@ -53,14 +55,14 @@ export default function UserFormFormik() {
                                     <Typography id='coupon-desc-2' style={{ color: '#FFFFFF', fontSize: '20px', margin: '5px auto' }}>{promotion.couponPrizeShortDescription}</Typography>
 
                                     <Grid item style={styles.borderCoupon}>
-                                        <Typography id='coupon' style={{ color: '#FFFFFF', fontSize: '20px' }}>{`${coupon.cupon}`}</Typography>
+                                        <Typography id='coupon' style={{ color: '#FFFFFF', fontSize: '20px' }}>{`${coupon.coupon}`}</Typography>
                                     </Grid>
 
                                     <Typography id='desc-referr-link' style={{ color: '#FFFFFF', fontSize: '18px', margin: '20px 0px' }}>{promotion.descriptionSharePrizeCoupon}</Typography>
 
                                     <Grid item style={styles.borderCoupon}>
                                         <Typography id='referr-link' style={{ color: '#FFFFFF', fontSize: '18px' }}>
-                                            <a href={coupon.url_referidos} target='_blank' style={{ color: '#FFFFFF' }}>{`${coupon.url_referidos}`}</a>
+                                            <a href={coupon.url_referrals} target='_blank' style={{ color: '#FFFFFF' }}>{`${coupon.url_referrals}`}</a>
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -68,7 +70,7 @@ export default function UserFormFormik() {
                                 <Grid item container direction='row' style={{ ...styles.gridContainer, textAlign: 'center', width: '50%', marginTop: '30px' }}>
                                     <Grid item style={{ ...styles.gridContainer, textAlign: 'center', margin: '15px auto' }}>
                                         <CopyToClipboard
-                                            text={`${coupon.cupon}`}
+                                            text={`${coupon.coupon}`}
                                             onCopy={() => setCopyTextCoupon({ ...copyTextCoupon, copied: true })}
                                         >
                                             <Button
@@ -82,7 +84,7 @@ export default function UserFormFormik() {
 
                                     <Grid item style={{ ...styles.gridContainer, textAlign: 'center', margin: '15px auto' }}>
                                         <CopyToClipboard
-                                            text={`${coupon.url_referidos}`}
+                                            text={`${coupon.url_referrals}`}
                                             onCopy={() => setCopyTextLink({ ...copyTextLink, copied: true })}
                                         >
                                             <Button
@@ -110,21 +112,20 @@ export default function UserFormFormik() {
 
     const request = async (values) => {
         const user = {
-            Nombre: values.nombre,
-            Apellido: values.apellido,
-            Dni: values.dni,
-            Email: values.email,
-            Telefono: values.telefono,
+            name: values.nombre,
+            lastname: values.apellido,
+            dni: values.dni,
+            email: values.email,
+            phone: values.telefono,
         }
 
-        const auth = {
-            headers: {
-                Authorization: process.env.REACT_APP_AUTHORIZATION_STRAPI,
-            },
-        }
+        const promotionId = getPromotionId();
+
+        const req = { user, promotionId }
 
         try {
-            const { data } = await axios.post(`http://localhost:1337/participants?referr=${query.get("referr")}`, user, auth)
+
+            const { data } = await axios.post(`${getApiURL()}/participants?referr=${query.get("referr")}`, req, getAuth())
 
             if (data.status !== 201) {
                 throw new Error(data.message)
@@ -235,7 +236,7 @@ export function FormikStepper({ children, ...props }) {
                     <Grid container direction='column' justifyContent='center' alignContent='center'>
 
                         <Grid item container alignContent="center" justifyContent="center" >
-                            <Grid item style={{width:'100vw'}}>
+                            <Grid item style={{ width: '100vw' }}>
                                 <Stepper activeStep={step} alternativeLabel>
                                     {childrenArray.map((child, index) => (
                                         <Step key={child.props.title} completed={step > index || formCompleted}>
