@@ -56,7 +56,7 @@ function App() {
       const data = await getPromotion()
       //console.log(data.description)
       setPromotion(data)
-      console.log(getApiURL())
+      console.log(promotion)
     }
 
     fetchMyAPI()
@@ -117,13 +117,15 @@ function App() {
             <Ranking />
           </div>
         </div>
-
-        <div className='promotional-image'>
-          <img className='promotion-image' src={`${getApiURL()}/uploads/small_visa_tap_online_d85c9fe28c.png`} alt='image_promo' />
-        </div>
+        {promotion !== null ?
+          <div className='promotional-image'>
+            <img className='promotion-image' src={`${getApiURL() + promotion.Picture.formats.medium.url}`} alt='image_promo' />
+          </div>
+          : null
+        }
       </section>
       <section className='form-section-container unselectable'>
-        {promotion && promotion.expired === false ?
+        {promotion && promotion.expired === false && promotion.couponsAvailabes ?
           <a.div {...bind()} style={{ y, touchAction: 'none' }}>
             <div className='form-swipeable-container'>
               <div className='form-div'>

@@ -30,8 +30,8 @@ const Ranking = () => {
 
 
     useEffect(async () => {
-        const data = await await getAllParticipants({ promotionId: getPromotionId() })
-        setParticipants(data)
+        const data = await getAllParticipants({ promotionId: getPromotionId() })
+        setParticipants(data.data)
     }, [registeredUser]);
 
     function renderPartipantDetail() {
@@ -76,7 +76,9 @@ const Ranking = () => {
 
         return (
             <>
+
                 <Button id='ranking-button-2' variant='contained' onClick={handleOpen}>{`${texts.PRIZES_BUTTON}`}</Button>
+
                 <Modal
                     open={openModal}
                     onClose={handleClose}
@@ -129,15 +131,14 @@ const Ranking = () => {
     const request = async (email) => {
 
         try {
-            const { data } = await getAllParticipants({ email, promotionId: getPromotionId() })
+            const { data, positionUserEmail } = await getAllParticipants({ email, promotionId: getPromotionId() })
 
-            if (data.status !== 200) {
-                throw new Error(data.message)
-            }
+            console.log(data)
             setParticipants(data)
             setIsCompleted(true)
+            return positionUserEmail
 
-            return data
+
         } catch (error) {
             swal({
                 title: "¡Error!",
@@ -196,7 +197,9 @@ const Ranking = () => {
                                                     initialValues={{ email: '' }}
                                                     onSubmit={async (values, helpers) => {
                                                         const userRanking = await request(values.email)
-                                                        setUserPositionRanking(userRanking.positionUserEmail)
+                                                        if (userRanking) {
+                                                            setUserPositionRanking(userRanking)
+                                                        }
                                                         // helpers.resetForm()
                                                     }}
                                                     validationSchema={Yup.object({

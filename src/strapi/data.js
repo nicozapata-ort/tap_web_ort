@@ -13,12 +13,14 @@ async function getPromotion() {
 }
 
 async function getAllParticipants({ email, promotionId }) {
-    try {
-        const { data } = await axios.get(`${getApiURL()}/ranking`, getAuth({ email, promotionId }));
-        return data.data
-    } catch (error) {
-        console.log(error)
+
+    const { data } = await axios.get(`${getApiURL()}/ranking`, getAuth({ email, promotionId }));
+
+    if (data.status !== 200) {
+        throw new Error(data.message)
     }
+    return data
+
 
 }
 
