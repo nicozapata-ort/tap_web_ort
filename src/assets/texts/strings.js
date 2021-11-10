@@ -2,6 +2,7 @@ export const texts = {
     COUPON_MC_BUTTON: 'Copiar cupon',
     LINK_MC_BUTTON: 'Copiar link',
     TEXT_COPIED: 'Copiado.',
+    FORM_TITLE: '¡Ingresá tus datos para participar!',
     FORM_LABEL_NAME: 'Ingresá tu nombre',
     FORM_LABEL_LASTNAME: 'Ingresá tu apellido',
     FORM_LABEL_DNI: 'Ingresá tu dni',
@@ -24,7 +25,9 @@ export const texts = {
     SUBTITLE_OF_RANKING: '¡Ingresá tu correo electrónico para saber tu posición!',
     DESCRIPTION_OF_THE_RANKING_POSITION: 'Estás en la posición',
     DESCRIPTION_OF_THE_PRIZE_IN_RANKING: 'Tu premio es de',
+    NO_PARTICIPANTS_WITHOUT: 'Aún no hay participantes ¡Sé el primero en sumarte!',
+    NO_PARTICIPANTS_WITHOUT_COUPONS: 'Aún no hay participantes.',
     EMAIL_NOT_FOUND: 'Email no encontrado',
     DESCRIPTION_OF_THE_RANKING_POSITION: 'Estás en la posición',
-    INVITATION_TO_PARTICIPATE: '¡Te invitamos a completar el formulario para participar!',
+    INVITATION_TO_PARTICIPATE: '¡Te invitamos a completar el formulario para participar!'
 }

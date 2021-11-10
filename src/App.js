@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import './App.css';
+import { texts } from './assets/texts/strings.js'
 import FormState from './context/Form/FormState.js';
 import UserFormFormik from './components/UserFormFormik.js';
 import { useSpring, a, config } from '@react-spring/web'
@@ -8,7 +9,7 @@ import { getPromotion } from './strapi/data.js'
 import logo from './assets/images/TAP_marca-02-color-RGB-gradiente-invertido.png'
 import Ranking from './components/Ranking.js'
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import imagePromotion from './assets/images/visa-tap-online.png'
+// import imagePromotion from './assets/images/visa-tap-online.png'
 import PromotionState from './context/Promotion/PromotionState.js';
 import PromotionContext from './context/Promotion/PromotionContext';
 import { getApiURL } from "./strapi/config.js";
@@ -54,9 +55,7 @@ function App() {
 
     async function fetchMyAPI() {
       const data = await getPromotion()
-      //console.log(data.description)
       setPromotion(data)
-      console.log(getApiURL())
     }
 
     fetchMyAPI()
@@ -75,8 +74,10 @@ function App() {
 
         {promotion != null
           ?
-          promotion.expired === false ?
-            promotion.couponsAvailabes ?
+          promotion.expired === false
+            ?
+            promotion.couponsAvailabes
+              ?
               (<div className="desc-container-1 unselectable">
                 <div className="desc-container-2">
                   <div className='desc-container-3'>
@@ -119,11 +120,12 @@ function App() {
         </div>
 
         <div className='promotional-image'>
-          <img className='promotion-image' src={`${getApiURL()}/uploads/small_visa_tap_online_d85c9fe28c.png`} alt='image_promo' />
+          <img className='promotion-image' src={`${getApiURL()}/uploads/visa_tap_online_6cc6209cc1.png`} alt='image_promo' />
         </div>
       </section>
       <section className='form-section-container unselectable'>
-        {promotion && promotion.expired === false ?
+        {promotion && promotion.expired === false && promotion.couponsAvailabes
+          ?
           <a.div {...bind()} style={{ y, touchAction: 'none' }}>
             <div className='form-swipeable-container'>
               <div className='form-div'>
@@ -132,7 +134,7 @@ function App() {
                 </div>
                 <div className='form-container'>
                   <div className='form-title-container'>
-                    <h2 className="form-title">¡Ingresá tus datos para participar!</h2>
+                    <h2 className="form-title">{texts.FORM_TITLE}</h2>
                   </div>
                   <div className='formulary'>
                     <Router>

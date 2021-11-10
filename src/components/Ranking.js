@@ -10,9 +10,8 @@ import { getAllParticipants } from '../strapi/data.js'
 import { Field, Form, Formik } from 'formik'
 import { TextField } from 'formik-material-ui'
 import * as Yup from 'yup';
-import axios from 'axios'
 import swal from 'sweetalert';
-import { getApiURL, getAuth, getPromotionId } from "../strapi/config.js";
+import { getPromotionId } from "../strapi/config.js";
 
 
 const Ranking = () => {
@@ -25,12 +24,12 @@ const Ranking = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => {
         setOpen(false)
-        setIsCompleted(false) //Para que cuando salga del modal no siga manteniendo la posición del email ingresado
+        setIsCompleted(false)
     };
 
 
     useEffect(async () => {
-        const data = await await getAllParticipants({ promotionId: getPromotionId() })
+        const { data } = await getAllParticipants({ promotionId: getPromotionId() })
         setParticipants(data)
     }, [registeredUser]);
 
@@ -112,9 +111,18 @@ const Ranking = () => {
                                     </Grid>
 
                                     <Grid item container direction="column" style={{ justifyContent: 'center', alignContent: 'center' }}>
-                                        {participants
-                                            ? renderPartipantDetail()
-                                            : null}
+                                        {participants != null && participants.length > 0
+                                            ?
+                                            renderPartipantDetail()
+                                            :
+                                            <Grid item style={{ textAlign: 'center', padding: '10px', marginTop: '30px' }}>
+                                                {promotion.expired === false && promotion.couponsAvailabes
+                                                    ?
+                                                    <Typography id='no-participants' style={{ ...styles.textDescription, fontSize: '1.5rem' }}>{`${texts.NO_PARTICIPANTS}`}</Typography>
+                                                    :
+                                                    <Typography id='no-participants' style={{ ...styles.textDescription, fontSize: '1.5rem' }}>{`${texts.NO_PARTICIPANTS_WITHOUT_COUPONS}`}</Typography>
+                                                }
+                                            </Grid>}
                                     </Grid>
 
                                 </Grid>
@@ -129,19 +137,15 @@ const Ranking = () => {
     const request = async (email) => {
 
         try {
-            const { data } = await getAllParticipants({ email, promotionId: getPromotionId() })
-
-            if (data.status !== 200) {
-                throw new Error(data.message)
-            }
+            const { data, positionUserEmail } = await getAllParticipants({ email, promotionId: getPromotionId() })
             setParticipants(data)
             setIsCompleted(true)
 
-            return data
+            return positionUserEmail
         } catch (error) {
             swal({
                 title: "¡Error!",
-                text: `${error.message}`,
+                text: 'No hay usuarios registrados',
                 icon: 'error',
                 button: {
                     text: "Aceptar",
@@ -196,7 +200,9 @@ const Ranking = () => {
                                                     initialValues={{ email: '' }}
                                                     onSubmit={async (values, helpers) => {
                                                         const userRanking = await request(values.email)
-                                                        setUserPositionRanking(userRanking.positionUserEmail)
+                                                        if (userRanking) {
+                                                            setUserPositionRanking(userRanking)
+                                                        }
                                                         // helpers.resetForm()
                                                     }}
                                                     validationSchema={Yup.object({
@@ -238,7 +244,11 @@ const Ranking = () => {
                                                 </Grid>
                                                 : <Grid item style={{ ...styles.gridContainer, marginTop: '30px', textAlign: 'center' }}>
                                                     <Typography id='email-not-found' style={{ ...styles.textSubTitle, marginBottom: '10px', fontSize: '18px' }}>{`${texts.EMAIL_NOT_FOUND}`}</Typography>
-                                                    <Typography id='desc-part-without-pos' style={styles.textSubTitle}>{`${texts.INVITATION_TO_PARTICIPATE}`}</Typography>
+                                                    {promotion.expired === false && promotion.couponsAvailabes
+                                                        ? <Typography id='desc-part-without-pos' style={styles.textSubTitle}>{`${texts.INVITATION_TO_PARTICIPATE}`}</Typography>
+
+                                                        : null
+                                                    }
                                                 </Grid>
                                             : null
                                         }

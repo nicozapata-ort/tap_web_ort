@@ -16,8 +16,6 @@ import IconButton from '@mui/material/IconButton';
 import { getApiURL, getAuth, getPromotionId } from "../strapi/config.js";
 
 
-
-
 export default function UserFormFormik() {
     const { promotion } = useContext(PromotionContext);
     const { dataForm, setRegisteredUser, setStep, setFormCompleted } = useContext(FormContext);
@@ -33,7 +31,7 @@ export default function UserFormFormik() {
             <Modal
                 open={openModal}
                 onClose={handleClose}
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex:200 }}
             >
                 <Card id='message-coupon-card'>
                     <Scrollbar>

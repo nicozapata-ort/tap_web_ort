@@ -17,7 +17,6 @@ function getAuth(params) {
             }
         }
     }
-
 }
 
 function getApiURL() {
