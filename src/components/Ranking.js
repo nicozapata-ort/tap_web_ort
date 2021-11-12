@@ -50,8 +50,12 @@ const Ranking = () => {
                                             </div>
                                         </Grid>
 
-                                        <Grid item xs={7} sm={8} md={8} style={{ textAlign: 'center' }}>
-                                            <Typography id='name-part-ranking' style={{ color: '#FFFFFF' }}>{`${participante.name} ${participante.lastname[0]}.`}</Typography>
+                                        <Grid item xs={7} sm={8} md={8} style={{ textAlign: 'center', flexDirection:'row' }}>
+                                            <Typography
+                                                noWrap
+                                                id='name-part-ranking' style={{ color: '#FFFFFF' }}>{`${participante.name}`}</Typography>
+                                            <Typography
+                                                id='name-part-ranking' style={{ display:'inline',color: '#FFFFFF' }}>{` ${participante.lastname[0]}.`}</Typography>
                                         </Grid>
 
                                         <Grid item xs={3} sm={2} md={2} style={{ textAlign: 'center' }}>
@@ -120,7 +124,7 @@ const Ranking = () => {
                                                     ?
                                                     <Typography id='no-participants' style={{ ...styles.textDescription, fontSize: '1.5rem' }}>{`${texts.NO_PARTICIPANTS}`}</Typography>
                                                     :
-                                                    <Typography id='no-participants' style={{ ...styles.textDescription, fontSize: '1.5rem' }}>{`${texts.NO_PARTICIPANTS_WITHOUT_COUPONS}`}</Typography>
+                                                    <Typography id='no-participants' style={{ ...styles.textDescription, fontSize: '1.5rem' }}>{`${texts.RANKING_WITHOUT_COUPONS}`}</Typography>
                                                 }
                                             </Grid>}
                                     </Grid>

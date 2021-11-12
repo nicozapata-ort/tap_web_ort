@@ -9,13 +9,15 @@ import { getPromotion } from './strapi/data.js'
 import logo from './assets/images/TAP_marca-02-color-RGB-gradiente-invertido.png'
 import Ranking from './components/Ranking.js'
 import { BrowserRouter as Router, Route } from "react-router-dom";
-// import imagePromotion from './assets/images/visa-tap-online.png'
 import PromotionState from './context/Promotion/PromotionState.js';
 import PromotionContext from './context/Promotion/PromotionContext';
+import FormContext from './context/Form/FormContext';
+import { MessageCoupon } from './components/MessageCoupon';
 import { getApiURL } from "./strapi/config.js";
 
 function App() {
   const { promotion, setPromotion } = useContext(PromotionContext);
+  const { openModal } = useContext(FormContext);
   const [isClosed, setIsClosed] = useState(true);
   const [{ y }, api] = useSpring(() => ({ y: 0 }))
   const maxHeight = -(window.innerHeight / 2 + 60);
@@ -147,6 +149,10 @@ function App() {
               </div>
             </div>
           </a.div>
+          : null
+        }
+        {openModal
+          ? <MessageCoupon />
           : null
         }
       </section>

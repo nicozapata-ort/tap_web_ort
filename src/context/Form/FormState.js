@@ -14,7 +14,10 @@ const FormState = (props) => {
         },
         step: 0,
         registeredUser: false, 
-        formCompleted: false
+        formCompleted: false,
+        openModal: false,
+        closeModal: false,
+        coupon: null
     }
     //registeredUser - Para cuando al momento de registrarse, sin tener que hacer F5 pueda verme en el ranking
 
@@ -48,12 +51,30 @@ const FormState = (props) => {
         })
     }
 
+    const setOpenModal = (data) => {
+        dispatch({
+            type: 'SET_OPEN_MODAL',
+            payload: data
+        })
+    }
+
+    const setCoupon = (data) => {
+        dispatch({
+            type: 'SET_COUPON',
+            payload: data
+        })
+    }
+
     return (
         <FormContext.Provider value={{
             dataForm: state.dataForm,
             step: state.step,
             registeredUser: state.registeredUser,
             formCompleted: state.formCompleted,
+            openModal: state.openModal,
+            coupon: state.coupon,
+            setCoupon,
+            setOpenModal,
             setForm,
             setStep,
             setRegisteredUser,
