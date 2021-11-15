@@ -116,6 +116,8 @@ export function FormikStepper({ children, ...props }) {
         return step === childrenArray.length - 1;
     }
 
+    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
     return (
         <Formik
             {...props}
@@ -131,10 +133,10 @@ export function FormikStepper({ children, ...props }) {
                 ? Yup.object({
                     nombre: Yup.string().max(20, `${texts.MAX_CHARACTER_TEXT_VAL}`).min(2, 'No se permiten menos de 2 caracteres.').matches(/^[aA-zZ\s]+$/, `${texts.ONLY_ALPHABET_TEXT_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`),
                     apellido: Yup.string().max(20, `${texts.MAX_CHARACTER_TEXT_VAL}`).min(2, 'No se permiten menos de 2 caracteres.').matches(/^[a-z][']?[a-z]+[a-z ]+$/gim, `${texts.ONLY_ALPHABET_TEXT_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`),
-                    dni: Yup.number().lessThan(100000000, `${texts.MIN_NUMBER_DNI_VAL}`).moreThan(10000000, `${texts.MAX_NUMBER_DNI_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`)
+                    dni: Yup.string().matches(/^[\d]{1,3}\.?[\d]{3,3}\.?[\d]{3,3}$/,`${texts.DNI_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`)
                 })
                 : Yup.object({
-                    email: Yup.string().email(`${texts.EMAIL_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`),
+                    email: Yup.string().matches(/^([a-z0-9.]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/, `${texts.EMAIL_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`),
                     telefono: Yup.number().lessThan(9999999999, `${texts.PHONE_VAL}`).moreThan(1100000000, `${texts.PHONE_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`)
                 })
             }

@@ -177,6 +177,9 @@ const Ranking = () => {
                 <Card id='ranking-card' className='unselectable'>
                     <Scrollbar>
                         <CardContent>
+                            {promotion != null 
+                            
+                            ? 
                             <div className='ranking-modal'>
                                 <Grid container spacing={4} direction='column' style={styles.gridContainer}>
 
@@ -262,6 +265,10 @@ const Ranking = () => {
                                 </Grid>
 
                             </div>
+                            
+                            : null
+
+                            }
                         </CardContent>
                     </Scrollbar>
                 </Card>

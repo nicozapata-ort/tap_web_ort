@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import './App.css';
 import { texts } from './assets/texts/strings.js'
 import FormState from './context/Form/FormState.js';
-import UserFormFormik from './components/UserFormFormik.js';
+import UserFormFormik from './components/Formulary.js';
 import { useSpring, a, config } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { getPromotion } from './strapi/data.js'
