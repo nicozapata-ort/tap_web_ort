@@ -19,4 +19,12 @@ async function getAllParticipants({ email, promotionId }) {
     return data
 }
 
-export { getPromotion, getAllParticipants }
+async function getCoupon({referr, req}){
+    const { data } = await axios.post(`${getApiURL()}/participants?referr=${referr}`, req, getAuth())
+    if (data.status !== 201) {
+        throw new Error(data.message)
+    }
+    return data
+}
+
+export { getPromotion, getAllParticipants, getCoupon }

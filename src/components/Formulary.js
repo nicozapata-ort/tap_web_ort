@@ -4,15 +4,15 @@ import { Card, CardContent, CircularProgress, Button, Box, Stepper, Step, StepLa
 import { Field, Form, Formik } from 'formik'
 import { TextField } from 'formik-material-ui'
 import FormContext from '../context/Form/FormContext.js'
-import axios from 'axios'
 import * as Yup from 'yup';
 import swal from 'sweetalert';
 import { useLocation } from "react-router-dom";
 import { Scrollbar } from 'react-scrollbars-custom'
-import { getApiURL, getAuth, getPromotionId } from "../strapi/config.js";
+import { getPromotionId } from "../strapi/config.js";
+import { getCoupon } from '../strapi/data.js'
 
 
-export default function UserFormFormik() {
+export default function Formulary() {
     const { dataForm, setRegisteredUser, setStep, setFormCompleted, setCoupon, setOpenModal } = useContext(FormContext);
     const handleOpen = () => setOpenModal(true)
 
@@ -36,12 +36,7 @@ export default function UserFormFormik() {
         const req = { user, promotionId }
 
         try {
-
-            const { data } = await axios.post(`${getApiURL()}/participants?referr=${query.get("referr")}`, req, getAuth())
-
-            if (data.status !== 201) {
-                throw new Error(data.message)
-            }
+            const data = await getCoupon({referr: query.get("referr"), req})
 
             if (data != null) {
                 setCoupon({ ...data })
@@ -133,11 +128,11 @@ export function FormikStepper({ children, ...props }) {
                 ? Yup.object({
                     nombre: Yup.string().max(20, `${texts.MAX_CHARACTER_TEXT_VAL}`).min(2, 'No se permiten menos de 2 caracteres.').matches(/^[aA-zZ\s]+$/, `${texts.ONLY_ALPHABET_TEXT_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`),
                     apellido: Yup.string().max(20, `${texts.MAX_CHARACTER_TEXT_VAL}`).min(2, 'No se permiten menos de 2 caracteres.').matches(/^[a-z][']?[a-z]+[a-z ]+$/gim, `${texts.ONLY_ALPHABET_TEXT_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`),
-                    dni: Yup.string().matches(/^[\d]{1,3}\.?[\d]{3,3}\.?[\d]{3,3}$/,`${texts.DNI_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`)
+                    dni: Yup.number().integer("No puede ingresar valores con puntos o comas.").positive("No puede ingresar valores negativos.").lessThan(100000000, `${texts.MIN_NUMBER_DNI_VAL}`).moreThan(10000000, `${texts.MAX_NUMBER_DNI_VAL}`).test('', 'dni es invalido', value => value > 0).required(`${texts.REQUIRED_TEXT_VAL}`)
                 })
                 : Yup.object({
                     email: Yup.string().matches(/^([a-z0-9.]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/, `${texts.EMAIL_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`),
-                    telefono: Yup.number().lessThan(9999999999, `${texts.PHONE_VAL}`).moreThan(1100000000, `${texts.PHONE_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`)
+                    telefono: Yup.number().integer("No puede ingresar valores con puntos o comas.").positive("No puede ingresar valores negativos.").lessThan(9999999999, `${texts.PHONE_VAL}`).moreThan(1100000000, `${texts.PHONE_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`)
                 })
             }
         >
