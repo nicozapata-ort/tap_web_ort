@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { texts } from '../assets/texts/strings.js'
-import { Card, CardContent, CircularProgress, Button, Box, Checkbox, Stepper, Step, StepLabel, Grid, Typography } from '@material-ui/core'
+import { Card, CardContent, CircularProgress, Button, Box, Stepper, Step, StepLabel, Grid, Typography } from '@material-ui/core'
 import { Field, Form, Formik, ErrorMessage } from 'formik'
 import { TextField } from 'formik-material-ui'
 import FormContext from '../context/Form/FormContext.js'
