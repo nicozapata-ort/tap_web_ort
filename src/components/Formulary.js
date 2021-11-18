@@ -8,7 +8,6 @@ import * as Yup from 'yup';
 import swal from 'sweetalert';
 import { useLocation } from "react-router-dom";
 import { Scrollbar } from 'react-scrollbars-custom'
-import { getPromotionId } from "../strapi/config.js";
 import { getCoupon } from '../strapi/data.js'
 
 
@@ -31,9 +30,7 @@ export default function Formulary() {
             phone: values.telefono,
         }
 
-        const promotionId = getPromotionId();
-
-        const req = { user, promotionId }
+        const req = { user }
 
         try {
             const data = await getCoupon({referr: query.get("referr"), req})
@@ -111,8 +108,6 @@ export function FormikStepper({ children, ...props }) {
         return step === childrenArray.length - 1;
     }
 
-    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-
     return (
         <Formik
             {...props}
@@ -128,7 +123,7 @@ export function FormikStepper({ children, ...props }) {
                 ? Yup.object({
                     nombre: Yup.string().max(20, `${texts.MAX_CHARACTER_TEXT_VAL}`).min(2, 'No se permiten menos de 2 caracteres.').matches(/^[aA-zZ\s]+$/, `${texts.ONLY_ALPHABET_TEXT_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`),
                     apellido: Yup.string().max(20, `${texts.MAX_CHARACTER_TEXT_VAL}`).min(2, 'No se permiten menos de 2 caracteres.').matches(/^[a-z][']?[a-z]+[a-z ]+$/gim, `${texts.ONLY_ALPHABET_TEXT_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`),
-                    dni: Yup.number().integer("No puede ingresar valores con puntos o comas.").positive("No puede ingresar valores negativos.").lessThan(100000000, `${texts.MIN_NUMBER_DNI_VAL}`).moreThan(10000000, `${texts.MAX_NUMBER_DNI_VAL}`).test('', 'dni es invalido', value => value > 0).required(`${texts.REQUIRED_TEXT_VAL}`)
+                    dni: Yup.number().integer("No puede ingresar valores con puntos o comas.").positive("No puede ingresar valores negativos.").lessThan(100000000, `${texts.MIN_NUMBER_DNI_VAL}`).moreThan(10000000, `${texts.MAX_NUMBER_DNI_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`)
                 })
                 : Yup.object({
                     email: Yup.string().matches(/^([a-z0-9.]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/, `${texts.EMAIL_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`),

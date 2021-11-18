@@ -26,6 +26,7 @@ export const texts = {
     SUBTITLE_OF_RANKING: '¡Ingresá tu correo electrónico para saber tu posición!',
     DESCRIPTION_OF_THE_RANKING_POSITION: 'Estás en la posición',
     DESCRIPTION_OF_THE_PRIZE_IN_RANKING: 'Tu premio es de',
+    NO_PARTICIPANTS: 'Aún no hay participantes.',
     RANKING_WITHOUT_COUPONS: 'Aún no hay participantes.',
     EMAIL_NOT_FOUND: 'Email no encontrado',
     DESCRIPTION_OF_THE_RANKING_POSITION: 'Estás en la posición',

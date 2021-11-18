@@ -122,7 +122,7 @@ function App() {
         </div>
 
         <div className='promotional-image'>
-          <img className='promotion-image' src={`${getApiURL()}/uploads/visa_tap_online_6cc6209cc1.png`} alt='image_promo' />
+          <img className='promotion-image' src={`${getApiURL()}/uploads/visa_tap_online_bd5f07243f.png`} alt='image_promo' />
         </div>
       </section>
       <section className='form-section-container unselectable'>

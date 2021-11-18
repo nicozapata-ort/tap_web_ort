@@ -4,7 +4,7 @@ import { getAuth, getApiURL, getPromotionId } from "./config.js";
 async function getPromotion() {
     try {
         const { data } = await axios.get(`${getApiURL()}/promotions/${getPromotionId()}`, getAuth());
-        console.log(data.Picture.url)
+        console.log(data)
         return data
     } catch (error) {
         console.log(error)
@@ -20,7 +20,7 @@ async function getAllParticipants({ email, promotionId }) {
 }
 
 async function getCoupon({referr, req}){
-    const { data } = await axios.post(`${getApiURL()}/participants?referr=${referr}`, req, getAuth())
+    const { data } = await axios.post(`${getApiURL()}/participants?referr=${referr}`, {...req, promotionId: getPromotionId()} , getAuth())
     if (data.status !== 201) {
         throw new Error(data.message)
     }
