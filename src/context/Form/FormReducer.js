@@ -1,4 +1,4 @@
-import { SET_FORM, SET_STEP, SET_REGISTERED_USER, SET_FORM_COMPLETED, SET_OPEN_MODAL, SET_COUPON } from "../types";
+import { SET_FORM, SET_STEP, SET_REGISTERED_USER, SET_FORM_COMPLETED, SET_OPEN_COUPON_MODAL, SET_OPEN_TERMS_MODAL, SET_COUPON } from "../types";
 
 export default (state, action) => {
     const { payload, type } = action
@@ -24,10 +24,15 @@ export default (state, action) => {
                 ...state,
                 formCompleted: payload
             }
-        case SET_OPEN_MODAL:
+        case SET_OPEN_COUPON_MODAL:
             return {
                 ...state,
-                openModal: payload
+                openCouponModal: payload
+            }
+        case SET_OPEN_TERMS_MODAL:
+            return {
+                ...state,
+                openTermsModal: payload
             }
         case SET_COUPON:
             return {

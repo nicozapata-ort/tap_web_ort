@@ -8,24 +8,24 @@ import IconButton from '@mui/material/IconButton';
 import FormContext from '../context/Form/FormContext.js'
 import PromotionContext from '../context/Promotion/PromotionContext.js'
 
-export const MessageCoupon = () => {
+export const CouponMessage = () => {
     const { promotion } = useContext(PromotionContext);
-    const { coupon, openModal, setOpenModal } = useContext(FormContext);
+    const { coupon, openCouponModal, setOpenCouponModal } = useContext(FormContext);
     const [copyTextLink, setCopyTextLink] = useState({ copied: false });
     const [copyTextCoupon, setCopyTextCoupon] = useState({ copied: false });
-    const handleClose = () => setOpenModal(false)
+    const handleClose = () => setOpenCouponModal(false)
 
 
     return (
         <Modal
-            open={openModal}
+            open={openCouponModal}
             onClose={handleClose}
             style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         >
             <Card id='message-coupon-card'>
                 <Scrollbar>
                     <CardContent>
-                        <Grid container spacing={0} direction="column" style={{ ...styles.gridContainer, minHeight: '55vh' }}>
+                        <Grid container spacing={3} direction="column" style={{ ...styles.gridContainer, minHeight: '55vh' }}>
 
                             <Grid item container direction='row' style={{ ...styles.gridContainer, marginTop: '30px' }}>
                                 <Grid item container style={{ justifyContent: 'space-between' }}>

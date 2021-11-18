@@ -6,17 +6,18 @@ const FormState = (props) => {
 
     const initialState = {
         dataForm: {
-            nombre:'',
-            apellido:'',
+            name:'',
+            lastName:'',
             email:'',
-            telefono: '',
-            dni: ''
+            phone: '',
+            dni: '',
+            acceptTerms: false,
         },
         step: 0,
         registeredUser: false, 
         formCompleted: false,
-        openModal: false,
-        closeModal: false,
+        openCouponModal: false,
+        openTermsModal: false,
         coupon: null
     }
     //registeredUser - Para cuando al momento de registrarse, sin tener que hacer F5 pueda verme en el ranking
@@ -51,9 +52,16 @@ const FormState = (props) => {
         })
     }
 
-    const setOpenModal = (data) => {
+    const setOpenCouponModal = (data) => {
         dispatch({
-            type: 'SET_OPEN_MODAL',
+            type: 'SET_OPEN_COUPON_MODAL',
+            payload: data
+        })
+    }
+    
+    const setOpenTermsModal = (data) => {
+        dispatch({
+            type: 'SET_OPEN_TERMS_MODAL',
             payload: data
         })
     }
@@ -71,10 +79,12 @@ const FormState = (props) => {
             step: state.step,
             registeredUser: state.registeredUser,
             formCompleted: state.formCompleted,
-            openModal: state.openModal,
+            openCouponModal: state.openCouponModal,
+            openTermsModal: state.openTermsModal,
             coupon: state.coupon,
             setCoupon,
-            setOpenModal,
+            setOpenCouponModal,
+            setOpenTermsModal,
             setForm,
             setStep,
             setRegisteredUser,

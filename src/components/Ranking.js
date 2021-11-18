@@ -50,12 +50,12 @@ const Ranking = () => {
                                             </div>
                                         </Grid>
 
-                                        <Grid item xs={7} sm={8} md={8} style={{ textAlign: 'center', flexDirection:'row' }}>
+                                        <Grid item xs={7} sm={8} md={8} style={{ textAlign: 'center', flexDirection: 'row' }}>
                                             <Typography
                                                 noWrap
                                                 id='name-part-ranking' style={{ color: '#FFFFFF' }}>{`${participante.name}`}</Typography>
                                             <Typography
-                                                id='name-part-ranking' style={{ display:'inline',color: '#FFFFFF' }}>{` ${participante.lastname[0]}.`}</Typography>
+                                                id='name-part-ranking' style={{ display: 'inline', color: '#FFFFFF' }}>{` ${participante.lastname[0]}.`}</Typography>
                                         </Grid>
 
                                         <Grid item xs={3} sm={2} md={2} style={{ textAlign: 'center' }}>
@@ -90,7 +90,7 @@ const Ranking = () => {
                             <CardContent>
                                 <Grid container spacing={3} style={styles.gridContainer}>
 
-                                    <Grid item container direction='row' style={{ ...styles.gridContainer, marginTop: '30px', justifyContent: 'center' }}>
+                                    <Grid item container direction='row' style={{ ...styles.gridContainer, marginTop: '30px', justifyContent: 'center', height:'5vh' }}>
                                         <Grid item container style={{ justifyContent: 'space-between' }}>
                                             <Grid item >
                                                 <IconButton aria-label="Volver" sx={{ color: '#FFFFFF' }} onClick={handleClose}>
@@ -98,9 +98,11 @@ const Ranking = () => {
                                                 </IconButton>
                                             </Grid>
                                         </Grid>
-                                        <div style={{ position: 'absolute', margin: '0 auto' }}>
-                                            <Typography id='prizes-title' style={styles.textTitle}>{`${texts.TITLE_OF_PRIZES}`}</Typography>
-                                        </div>
+                                    </Grid>
+
+
+                                    <Grid item style={{ ...styles.gridContainer, textAlign: 'center' }}>
+                                        <Typography id='prizes-title' style={styles.textTitle}>{`${texts.TITLE_OF_PRIZES}`}</Typography>
                                     </Grid>
 
                                     <Grid item container style={styles.gridContainer}>
@@ -177,96 +179,97 @@ const Ranking = () => {
                 <Card id='ranking-card' className='unselectable'>
                     <Scrollbar>
                         <CardContent>
-                            {promotion != null 
-                            
-                            ? 
-                            <div className='ranking-modal'>
-                                <Grid container spacing={4} direction='column' style={styles.gridContainer}>
+                            {promotion != null
 
-                                    <Grid item container direction='row' style={{ ...styles.gridContainer, marginTop: '30px' }}>
-                                        <Grid item container style={{ justifyContent: 'space-between' }}>
-                                            <Grid item >
-                                                <IconButton aria-label="Volver" sx={{ color: '#FFFFFF' }} onClick={handleClose}>
-                                                    <ArrowBackIcon />
-                                                </IconButton>
+                                ?
+                                <div className='ranking-modal'>
+                                    <Grid container spacing={4} direction='column' style={styles.gridContainer}>
+
+                                        <Grid item container direction='row' style={{ ...styles.gridContainer, marginTop: '30px', height:'5vh' }}>
+                                            <Grid item container style={{ justifyContent: 'space-between' }}>
+                                                <Grid item >
+                                                    <IconButton aria-label="Volver" sx={{ color: '#FFFFFF' }} onClick={handleClose}>
+                                                        <ArrowBackIcon />
+                                                    </IconButton>
+                                                </Grid>
                                             </Grid>
                                         </Grid>
-                                        <div style={{ position: 'absolute', margin: '0 auto' }}>
+
+                                        <Grid item style={{ ...styles.gridContainer, textAlign: 'center' }}>
                                             <Typography id='ranking-title' style={styles.textTitle}>{`${texts.TITLE_OF_RANKING}`}</Typography>
-                                        </div>
-                                    </Grid>
+                                        </Grid>
 
-                                    <Grid item style={{ ...styles.gridContainer, textAlign: 'center' }}>
-                                        <Typography id='ranking-subtitle' style={styles.textSubTitle}>{`${texts.SUBTITLE_OF_RANKING}`}</Typography>
-                                    </Grid>
+                                        <Grid item style={{ ...styles.gridContainer, textAlign: 'center' }}>
+                                            <Typography id='ranking-subtitle' style={styles.textSubTitle}>{`${texts.SUBTITLE_OF_RANKING}`}</Typography>
+                                        </Grid>
 
-                                    <Grid item container style={{ ...styles.gridContainer }}>
-                                        <Card id='ranking-form-card'>
-                                            <CardContent>
-                                                <Formik
-                                                    initialValues={{ email: '' }}
-                                                    onSubmit={async (values, helpers) => {
-                                                        const userRanking = await request(values.email)
-                                                        if (userRanking) {
-                                                            setUserPositionRanking(userRanking)
+                                        <Grid item container style={{ ...styles.gridContainer }}>
+                                            <Card id='ranking-form-card'>
+                                                <CardContent>
+                                                    <Formik
+                                                        initialValues={{ email: '' }}
+                                                        onSubmit={async (values, helpers) => {
+                                                            const userRanking = await request(values.email)
+                                                            if (userRanking) {
+                                                                setUserPositionRanking(userRanking)
+                                                            }
+                                                            // helpers.resetForm()
+                                                        }}
+                                                        validationSchema={Yup.object({
+                                                            email: Yup.string().email(`${texts.EMAIL_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`)
+                                                        })
                                                         }
-                                                        // helpers.resetForm()
-                                                    }}
-                                                    validationSchema={Yup.object({
-                                                        email: Yup.string().email(`${texts.EMAIL_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`)
-                                                    })
-                                                    }
-                                                >
-                                                    {({ isSubmitting }) => (
-                                                        <Form autoComplete="off">
-                                                            <Box paddingBottom={2}>
-                                                                <Field type='email' fullWidth name="email" component={TextField} label={texts.FORM_LABEL_EMAIL} variant="outlined" InputLabelProps={{ id: 'form-label-email', style: styles.textField }} />
-                                                            </Box>
-                                                            <Grid container spacing={2} style={styles.gridContainer}>
-                                                                <Grid item>
-                                                                    <Button
-                                                                        disabled={isSubmitting} variant='contained'
-                                                                        id='ranking-button-form'
-                                                                        startIcon={isSubmitting ? <CircularProgress size='1rem' /> : null}
-                                                                        style={{ backgroundColor: isSubmitting ? '#CDCDCD' : '#14D2B9', color: isSubmitting ? '#757575' : '#FFFFFF' }} type='submit'>
-                                                                        {`${texts.SEE_POSITION_BUTTON}`}
-                                                                    </Button>
+                                                    >
+                                                        {({ isSubmitting }) => (
+                                                            <Form autoComplete="off">
+                                                                <Box paddingBottom={2}>
+                                                                    <Field type='email' fullWidth name="email" component={TextField} label={texts.FORM_LABEL_EMAIL} variant="outlined" InputLabelProps={{ id: 'form-label-email', style: styles.textField }} />
+                                                                </Box>
+                                                                <Grid container spacing={2} style={styles.gridContainer}>
+                                                                    <Grid item>
+                                                                        <Button
+                                                                            disabled={isSubmitting} variant='contained'
+                                                                            id='ranking-button-form'
+                                                                            startIcon={isSubmitting ? <CircularProgress size='1rem' /> : null}
+                                                                            style={{ backgroundColor: isSubmitting ? '#CDCDCD' : '#14D2B9', color: isSubmitting ? '#757575' : '#FFFFFF' }} type='submit'>
+                                                                            {`${texts.SEE_POSITION_BUTTON}`}
+                                                                        </Button>
+                                                                    </Grid>
                                                                 </Grid>
-                                                            </Grid>
-                                                        </Form>
-                                                    )}
-                                                </Formik>
-                                            </CardContent>
-                                        </Card>
+                                                            </Form>
+                                                        )}
+                                                    </Formik>
+                                                </CardContent>
+                                            </Card>
 
-                                        {isCompleted
+                                            {isCompleted
 
-                                            ? userPositionRanking > 0
+                                                ? userPositionRanking > 0
 
-                                                ? <Grid item style={{ ...styles.gridContainer, marginTop: '50px', textAlign: 'center' }}>
-                                                    <Typography id='desc-part-pos' style={{ ...styles.textSubTitle }}>{`${texts.DESCRIPTION_OF_THE_RANKING_POSITION}`}</Typography>
-                                                    <Typography id='pos-part' style={{ ...styles.textSubTitle, ...styles.textBorder }}>{userPositionRanking}</Typography>
-                                                    <Typography id='desc-part-prize' style={styles.textSubTitle}>{`${texts.DESCRIPTION_OF_THE_PRIZE_IN_RANKING}`}</Typography>
-                                                    <Typography id='part-prize-price-3' style={{ ...styles.textSubTitle, ...styles.textBorder }}>${userPositionRanking <= promotion.firstPlaces ? promotion.prizeMaxPrice : promotion.prizeMinPrice} </Typography>
-                                                </Grid>
-                                                : <Grid item style={{ ...styles.gridContainer, marginTop: '30px', textAlign: 'center' }}>
-                                                    <Typography id='email-not-found' style={{ ...styles.textSubTitle, marginBottom: '10px', fontSize: '18px' }}>{`${texts.EMAIL_NOT_FOUND}`}</Typography>
-                                                    {promotion.expired === false && promotion.couponsAvailabes
-                                                        ? <Typography id='desc-part-without-pos' style={styles.textSubTitle}>{`${texts.INVITATION_TO_PARTICIPATE}`}</Typography>
+                                                    ? <Grid item style={{ ...styles.gridContainer, marginTop: '50px', textAlign: 'center' }}>
+                                                        <Typography id='desc-part-pos' style={{ ...styles.textSubTitle }}>{`${texts.DESCRIPTION_OF_THE_RANKING_POSITION}`}</Typography>
+                                                        <Typography id='pos-part' style={{ ...styles.textSubTitle, ...styles.textBorder }}>{userPositionRanking}</Typography>
+                                                        <Typography id='desc-part-prize' style={styles.textSubTitle}>{`${texts.DESCRIPTION_OF_THE_PRIZE_IN_RANKING}`}</Typography>
+                                                        <Typography id='part-prize-price-3' style={{ ...styles.textSubTitle, ...styles.textBorder }}>${userPositionRanking <= promotion.firstPlaces ? promotion.prizeMaxPrice : promotion.prizeMinPrice} </Typography>
+                                                    </Grid>
+                                                    : <Grid item style={{ ...styles.gridContainer, marginTop: '30px', textAlign: 'center' }}>
+                                                        <Typography id='email-not-found' style={{ ...styles.textSubTitle, marginBottom: '10px', fontSize: '18px' }}>{`${texts.EMAIL_NOT_FOUND}`}</Typography>
+                                                        {promotion.expired === false && promotion.couponsAvailabes
+                                                            ? <Typography id='desc-part-without-pos' style={styles.textSubTitle}>{`${texts.INVITATION_TO_PARTICIPATE}`}</Typography>
 
-                                                        : null
-                                                    }
-                                                </Grid>
-                                            : null
-                                        }
+                                                            : null
+                                                        }
+                                                    </Grid>
+                                                : null
+                                            }
+                                        </Grid>
+
+                                        <ChildModal />
                                     </Grid>
 
-                                    <ChildModal />
-                                </Grid>
+                                </div>
 
-                            </div>
-                            
-                            : null
+                                : null
 
                             }
                         </CardContent>

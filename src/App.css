@@ -44,12 +44,12 @@ html {
   text-align: start;
 }
 
-#participantRankingPrize, #prizes-title, #ranking-title, #coupon-desc, #desc-referr-link{
+#participantRankingPrize, #prizes-title, #ranking-title, #terms-title, #coupon-desc, #desc-referr-link{
   font-weight: 600;
   font-family: 'Comfortaa', cursive;
 }
 
-#pos-part-ranking, #name-part-ranking, #points-part-ranking, #part-prize-price-1, #part-prize-price-2, #ranking-subtitle, #coupon-desc-2, #desc-part-pos, #pos-part, #desc-part-prize, #part-prize-price-3, #email-not-found, #desc-part-without-pos, #no-participants, #form-label-name, #form-label-last-name, #form-label-dni, #form-label-email, #form-label-phone, #label-step, #coupon, #referr-link, #copy-coupon, #copy-link{
+#pos-part-ranking, #name-part-ranking, #points-part-ranking, #part-prize-price-1, #part-prize-price-2, #ranking-subtitle, #coupon-desc-2, #desc-part-pos, #pos-part, #desc-part-prize, #part-prize-price-3, #email-not-found, #desc-part-without-pos, #no-participants, #form-label-name, #form-label-last-name, #form-label-dni, #form-label-email, #form-label-phone, #form-label-terms, #label-step, #terms-desc, #coupon, #referr-link, #copy-coupon, #copy-link{
   font-weight: 400;
   font-family: 'Comfortaa', cursive;
 }
@@ -268,7 +268,7 @@ html {
   margin: 20px auto;
 }
 
-#ranking-button-form, #form-button-1, #form-button-2, #coupon-button-1, #coupon-button-2{
+#ranking-button-form, #form-button-1, #form-button-2, #form-button-3, #coupon-button-1, #coupon-button-2{
   border-radius: 25px; 
   text-transform: none; 
   font-family: 'Comfortaa', cursive;
@@ -296,7 +296,7 @@ html {
 }
 
 
-#ranking-card, #message-coupon-card, #ranking-card-2{
+#ranking-card, #message-coupon-card, #message-terms-card, #ranking-card-2{
   width: 95vw; 
   height: 65vh; 
   background-color: #002350; 
@@ -367,7 +367,7 @@ html {
 }
 
 /******************************** RANKING *******************************/
-#ranking-card, #message-coupon-card, #ranking-card-2{
+#ranking-card, #message-coupon-card, #message-terms-card, #ranking-card-2{
   width: 60vw; 
   height: 60vh; 
   border-radius: 50px;

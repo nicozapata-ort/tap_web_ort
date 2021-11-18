@@ -12,12 +12,13 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import PromotionState from './context/Promotion/PromotionState.js';
 import PromotionContext from './context/Promotion/PromotionContext';
 import FormContext from './context/Form/FormContext';
-import { MessageCoupon } from './components/MessageCoupon';
+import { CouponMessage } from './components/CouponMessage.js';
+import { TermsMessage } from './components/TermsMessage.js';
 import { getApiURL } from "./strapi/config.js";
 
 function App() {
   const { promotion, setPromotion } = useContext(PromotionContext);
-  const { openModal } = useContext(FormContext);
+  const { openCouponModal, openTermsModal } = useContext(FormContext);
   const [isClosed, setIsClosed] = useState(true);
   const [{ y }, api] = useSpring(() => ({ y: 0 }))
   const maxHeight = -(window.innerHeight / 2 + 60);
@@ -121,9 +122,13 @@ function App() {
           </div>
         </div>
 
-        <div className='promotional-image'>
-          <img className='promotion-image' src={`${getApiURL()}/uploads/visa_tap_online_bd5f07243f.png`} alt='image_promo' />
-        </div>
+        {promotion !== null
+          ?
+          <div className='promotional-image'>
+            <img className='promotion-image' src={`${getApiURL() + promotion.Picture.formats.small.url}`} alt='image_promo' />
+          </div>
+          : null
+        }
       </section>
       <section className='form-section-container unselectable'>
         {promotion && promotion.expired === false && promotion.couponsAvailabes
@@ -151,8 +156,12 @@ function App() {
           </a.div>
           : null
         }
-        {openModal
-          ? <MessageCoupon />
+        {openCouponModal
+          ? <CouponMessage />
+          : null
+        }
+        {openTermsModal
+          ? <TermsMessage />
           : null
         }
       </section>

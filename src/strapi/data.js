@@ -4,7 +4,6 @@ import { getAuth, getApiURL, getPromotionId } from "./config.js";
 async function getPromotion() {
     try {
         const { data } = await axios.get(`${getApiURL()}/promotions/${getPromotionId()}`, getAuth());
-        console.log(data)
         return data
     } catch (error) {
         console.log(error)
