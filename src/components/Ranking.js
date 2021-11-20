@@ -143,8 +143,7 @@ const Ranking = () => {
     const request = async (email) => {
 
         try {
-            const { data, positionUserEmail } = await getAllParticipants({ email, promotionId: getPromotionId() })
-            setParticipants(data)
+            const { positionUserEmail } = await getAllParticipants({ email, promotionId: getPromotionId() })
             setIsCompleted(true)
             return positionUserEmail
         } catch (error) {
@@ -211,8 +210,10 @@ const Ranking = () => {
                                                             const userRanking = await request(values.email)
                                                             if (userRanking) {
                                                                 setUserPositionRanking(userRanking)
+                                                            }else{
+                                                                setUserPositionRanking(0)
                                                             }
-                                                            // helpers.resetForm()
+                                                            helpers.resetForm()
                                                         }}
                                                         validationSchema={Yup.object({
                                                             email: Yup.string().email(`${texts.EMAIL_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`)
