@@ -146,12 +146,11 @@ const Ranking = () => {
             const { data, positionUserEmail } = await getAllParticipants({ email, promotionId: getPromotionId() })
             setParticipants(data)
             setIsCompleted(true)
-
             return positionUserEmail
         } catch (error) {
             swal({
                 title: "¡Error!",
-                text: 'No hay usuarios registrados',
+                text: `${texts.ERROR_NO_REGISTERED_USERS}`,
                 icon: 'error',
                 button: {
                     text: "Aceptar",

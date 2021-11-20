@@ -95,7 +95,7 @@ export default function Formulary() {
                                             type="checkbox"
                                             name="acceptTerms"
                                         />
-                                        <> {texts.FORM_LABEL_TERMS} <Button id='form-button-3' variant="text" onClick={handleOpenTerms} style={{ color: '#002350', backgroundColor:'#F3F3F3' }}>términos y condiciones.</Button> </>
+                                        <> {texts.FORM_LABEL_TERMS} <Button id='form-button-3' variant="contained" onClick={handleOpenTerms} style={{ color: '#002350', backgroundColor:'#F3F3F3' }}>términos y condiciones.</Button> </>
                                     </label>
                                     <ErrorMessage name="acceptTerms" component="div" style={{ color: 'red', fontSize: '13px', paddingLeft: '15px' }} />
                                 </Box>
@@ -132,7 +132,7 @@ export function FormikStepper({ children, ...props }) {
             validationSchema={!isLastStep()
                 ? Yup.object({
                     name: Yup.string().max(20, `${texts.MAX_CHARACTER_TEXT_VAL}`).min(2, 'No se permiten menos de 2 caracteres.').matches(/^[aA-zZ\s]+$/, `${texts.ONLY_ALPHABET_TEXT_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`),
-                    lastName: Yup.string().max(20, `${texts.MAX_CHARACTER_TEXT_VAL}`).min(2, 'No se permiten menos de 2 caracteres.').matches(/^[a-z][']?[a-z]+[a-z ]+$/gim, `${texts.ONLY_ALPHABET_TEXT_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`),
+                    lastName: Yup.string().max(20, `${texts.ONLY_ALPHABET_TEXT_VAL}`).min(2, `${texts.ONLY_ALPHABET_TEXT_VAL}`).matches(/^([a-z][']|[a-z_])+( [a-z_]+)*[a-z']{1,}$/gim, `${texts.ONLY_ALPHABET_TEXT_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`),
                     dni: Yup.number().integer("No puede ingresar valores con puntos o comas.").positive("No puede ingresar valores negativos.").lessThan(100000000, `${texts.MIN_NUMBER_DNI_VAL}`).moreThan(10000000, `${texts.MAX_NUMBER_DNI_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`)
                 })
                 : Yup.object({
