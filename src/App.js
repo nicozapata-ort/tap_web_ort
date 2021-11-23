@@ -1,21 +1,21 @@
 import React, { useEffect, useState, useContext } from 'react'
 import './App.css';
 import { texts } from './assets/texts/strings.js'
-import FormState from './context/Form/FormState.js';
-import Formulary from './components/Formulary.js';
-import { useSpring, a, config } from '@react-spring/web'
-import { useDrag } from '@use-gesture/react'
-import { getPromotion } from './strapi/data.js'
 import logo from './assets/images/TAP_marca-02-color-RGB-gradiente-invertido.png'
-import Ranking from './components/Ranking.js'
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import FormState from './context/Form/FormState.js';
 import PromotionState from './context/Promotion/PromotionState.js';
 import PromotionContext from './context/Promotion/PromotionContext';
 import FormContext from './context/Form/FormContext';
 import { CouponMessage } from './components/CouponMessage.js';
+import Formulary from './components/Formulary.js';
+import Ranking from './components/Ranking.js'
 import { TermsMessage } from './components/TermsMessage.js';
+import { getPromotion } from './strapi/data.js'
 import { getApiURL } from "./strapi/config.js";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import swal from 'sweetalert';
+import { useSpring, a, config } from '@react-spring/web'
+import { useDrag } from '@use-gesture/react'
 
 
 function App() {
