@@ -20,7 +20,6 @@ const FormState = (props) => {
         openTermsModal: false,
         coupon: null
     }
-    //registeredUser - Para cuando al momento de registrarse, sin tener que hacer F5 pueda verme en el ranking
 
     const [state, dispatch] = useReducer(FormReducer, initialState);
 
