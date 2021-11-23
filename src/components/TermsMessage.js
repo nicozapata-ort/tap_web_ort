@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react"
+import React, { useContext } from "react"
 import { texts } from '../assets/texts/strings.js'
-import { Card, CardContent, Button, Grid, Modal, Typography } from '@material-ui/core'
+import { Card, CardContent, Grid, Modal, Typography } from '@material-ui/core'
 import { Scrollbar } from 'react-scrollbars-custom'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from '@mui/material/IconButton';

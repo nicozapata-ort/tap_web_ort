@@ -28,10 +28,10 @@ export const texts = {
     SUBTITLE_OF_RANKING: '¡Ingresá tu correo electrónico para saber tu posición!',
     DESCRIPTION_OF_THE_RANKING_POSITION: 'Estás en la posición',
     DESCRIPTION_OF_THE_PRIZE_IN_RANKING: 'Tu premio es de',
+    ERROR_NO_CURRENT_PROMOTION: 'No hay promoción vigente',
     ERROR_NO_REGISTERED_USERS: 'No hay usuarios registrados',
     NO_PARTICIPANTS: 'Aún no hay participantes ¡Sé el primero en sumarte!',
     RANKING_WITHOUT_COUPONS: 'Aún no hay participantes.',
     EMAIL_NOT_FOUND: 'Email no encontrado',
-    DESCRIPTION_OF_THE_RANKING_POSITION: 'Estás en la posición',
     INVITATION_TO_PARTICIPATE: '¡Te invitamos a completar el formulario para participar!'
 }

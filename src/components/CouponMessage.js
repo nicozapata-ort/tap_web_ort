@@ -49,7 +49,7 @@ export const CouponMessage = () => {
 
                                 <Grid item style={styles.borderCoupon}>
                                     <Typography id='referr-link' style={{ color: '#FFFFFF', fontSize: '18px' }}>
-                                        <a href={coupon.url_referrals} target='_blank' style={{ color: '#FFFFFF' }}>{`${coupon.url_referrals}`}</a>
+                                        <a href={coupon.url_referrals} target='_blank' rel="noreferrer" style={{ color: '#FFFFFF' }}>{`${coupon.url_referrals}`}</a>
                                     </Typography>
                                 </Grid>
                             </Grid>

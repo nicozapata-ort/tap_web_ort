@@ -1,6 +1,6 @@
 import { SET_FORM, SET_STEP, SET_REGISTERED_USER, SET_FORM_COMPLETED, SET_OPEN_COUPON_MODAL, SET_OPEN_TERMS_MODAL, SET_COUPON } from "../types";
 
-export default (state, action) => {
+export default function FormReducer(state, action) {
     const { payload, type } = action
 
     switch (type) {

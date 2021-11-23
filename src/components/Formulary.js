@@ -145,7 +145,6 @@ export function FormikStepper({ children, ...props }) {
             {({ isSubmitting }) => (
                 <Form autoComplete="off">
                     <Grid container direction='column' justifyContent='center' alignContent='center'>
-
                         <Grid item container alignContent="center" justifyContent="center" >
                             <Grid item style={{ width: '100vw' }}>
                                 <Stepper activeStep={step} alternativeLabel>
@@ -159,11 +158,9 @@ export function FormikStepper({ children, ...props }) {
                                 </Stepper>
                             </Grid>
                         </Grid>
-
                         <Grid item>
                             {currentChild}
                         </Grid>
-
                         <Grid item container spacing={2} alignContent="center" justifyContent="center" >
                             <Grid item>
                                 {step > 0
@@ -188,7 +185,6 @@ export function FormikStepper({ children, ...props }) {
                                 </Button>
                             </Grid>
                         </Grid>
-
                     </Grid>
                 </Form>
             )}

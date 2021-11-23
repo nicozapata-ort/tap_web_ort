@@ -15,6 +15,8 @@ import FormContext from './context/Form/FormContext';
 import { CouponMessage } from './components/CouponMessage.js';
 import { TermsMessage } from './components/TermsMessage.js';
 import { getApiURL } from "./strapi/config.js";
+import swal from 'sweetalert';
+
 
 function App() {
   const { promotion, setPromotion } = useContext(PromotionContext);
@@ -29,7 +31,7 @@ function App() {
   }
 
   const close = (velocity = 0) => {
-    api.start({ y: 0, immediate: false, config: { ...config.stiff, velocity } })
+    api.start({ y: 0, immediate: true, config: { ...config.stiff, velocity } })
     setIsClosed(true)
   }
 
@@ -57,13 +59,24 @@ function App() {
   useEffect(() => {
 
     async function fetchMyAPI() {
-      const data = await getPromotion()
-      setPromotion(data)
+      await getPromotion()
+        .then(data => setPromotion(data)) 
+        .catch(() => {
+          swal({
+            title: "¡Error!",
+            text: `${texts.ERROR_NO_CURRENT_PROMOTION}`,
+            icon: 'error',
+            button: {
+              text: "Aceptar",
+            },
+            timer: 10000
+          });
+        })
     }
-
+    
     fetchMyAPI()
 
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="body">
@@ -74,7 +87,6 @@ function App() {
       </header>
 
       <section className='desc-section-container'>
-
         {promotion != null
           ?
           promotion.expired === false

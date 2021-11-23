@@ -1,6 +1,6 @@
 import { SET_PROMOTION } from "../types";
 
-export default (state, action) => {
+export default function PromotionReducer(state, action) {
     const { payload, type } = action
 
     switch (type) {
@@ -8,5 +8,7 @@ export default (state, action) => {
             return {
                 promotion: payload
             }
+        default:
+            return state;
     }
 }

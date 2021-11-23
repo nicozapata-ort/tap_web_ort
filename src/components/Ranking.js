@@ -28,9 +28,26 @@ const Ranking = () => {
     };
 
 
-    useEffect(async () => {
-        const { data } = await getAllParticipants({ promotionId: getPromotionId() })
-        setParticipants(data)
+    useEffect(() => {
+
+        async function fetchMyAPI() {
+            await getAllParticipants({ promotionId: getPromotionId() })
+                .then(({ data }) => setParticipants(data))
+                .catch((e) => {
+                    swal({
+                        title: "¡Error!",
+                        text: `${texts.ERROR_NO_REGISTERED_USERS}`,
+                        icon: 'error',
+                        button: {
+                            text: "Aceptar",
+                        },
+                        timer: 10000
+                    });
+                })
+        }
+
+        fetchMyAPI()
+
     }, [registeredUser]);
 
     function renderPartipantDetail() {
@@ -90,7 +107,7 @@ const Ranking = () => {
                             <CardContent>
                                 <Grid container spacing={3} style={styles.gridContainer}>
 
-                                    <Grid item container direction='row' style={{ ...styles.gridContainer, marginTop: '30px', justifyContent: 'center', height:'5vh' }}>
+                                    <Grid item container direction='row' style={{ ...styles.gridContainer, marginTop: '30px', justifyContent: 'center', height: '5vh' }}>
                                         <Grid item container style={{ justifyContent: 'space-between' }}>
                                             <Grid item >
                                                 <IconButton aria-label="Volver" sx={{ color: '#FFFFFF' }} onClick={handleClose}>
@@ -143,7 +160,7 @@ const Ranking = () => {
     const request = async (email) => {
 
         try {
-            const { positionUserEmail } = await getAllParticipants({ email, promotionId: getPromotionId() })
+            const { positionUserEmail } = await getAllParticipants({ promotionId: getPromotionId(), email })
             setIsCompleted(true)
             return positionUserEmail
         } catch (error) {
@@ -183,7 +200,7 @@ const Ranking = () => {
                                 <div className='ranking-modal'>
                                     <Grid container spacing={4} direction='column' style={styles.gridContainer}>
 
-                                        <Grid item container direction='row' style={{ ...styles.gridContainer, marginTop: '30px', height:'5vh' }}>
+                                        <Grid item container direction='row' style={{ ...styles.gridContainer, marginTop: '30px', height: '5vh' }}>
                                             <Grid item container style={{ justifyContent: 'space-between' }}>
                                                 <Grid item >
                                                     <IconButton aria-label="Volver" sx={{ color: '#FFFFFF' }} onClick={handleClose}>
@@ -210,7 +227,7 @@ const Ranking = () => {
                                                             const userRanking = await request(values.email)
                                                             if (userRanking) {
                                                                 setUserPositionRanking(userRanking)
-                                                            }else{
+                                                            } else {
                                                                 setUserPositionRanking(0)
                                                             }
                                                             helpers.resetForm()
