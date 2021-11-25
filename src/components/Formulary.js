@@ -136,7 +136,7 @@ export function FormikStepper({ children, ...props }) {
                     dni: Yup.number().integer("No puede ingresar valores con puntos o comas.").positive("No puede ingresar valores negativos.").lessThan(100000000, `${texts.MIN_NUMBER_DNI_VAL}`).moreThan(10000000, `${texts.MAX_NUMBER_DNI_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`)
                 })
                 : Yup.object({
-                    email: Yup.string().matches(/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/, `${texts.EMAIL_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`),
+                    email: Yup.string().email(`${texts.EMAIL_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`),
                     phone: Yup.number().integer("No puede ingresar valores con puntos o comas.").positive("No puede ingresar valores negativos.").lessThan(9999999999, `${texts.PHONE_VAL}`).moreThan(1100000000, `${texts.PHONE_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`),
                     acceptTerms: Yup.boolean().oneOf([true], "No es posible dejar el campo sin completar.").required(`${texts.REQUIRED_TEXT_VAL}`)
                 })
