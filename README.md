@@ -15,3 +15,7 @@ Haber configurado las variables de entorno para que cumplan los siguientes requi
 REACT_APP_AUTHORIZATION_STRAPI: JWT de un usuario registrado en el backend mencionado anteriormente, debe cumplir este formato, en este ejemplo se usa 123 como JWT: Bearer 123
 REACT_APP_URL_STRAPI: IP con puerto, o URL de donde este ejecutado el servidor mencionado anteriormente.
 REACT_APP_PROMOTION_ID: ID de la promoción a la cual va a estar asociada la LANDING, el ID debe ser el que este en el backend mencionado anteriormente.
+
+#Manuales:
+
+En la carpeta principal se encuentran tanto el Manual de Usuario como el Manual del Programador con todas las especificaciones del sistema.
