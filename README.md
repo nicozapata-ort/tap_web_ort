@@ -1,70 +1,17 @@
-# Getting Started with Create React App
+#Landing web para TAP
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Antes de ejecutar este proyecto es necesario:
 
-## Available Scripts
+Tener el proyecto https://github.com/nicozapata-ort/tap_web_ort_strapi.git ejecutando en algún servidor, con los siguiente requisitos minimos:
 
-In the project directory, you can run:
+1) Un usuario registrado en la colección Users(O Usuarios según el idioma del navegador) y que dicho usuario este autorizado para hacer todas las funciones en las colecciones Participants, Coupons y Promotions.
 
-### `npm start`
+2) Tener al menos un registro en la colección Promotions con todos sus campos.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+3) Tener cupones asociados a la promoción anterior que tenga el atributo "used" como "false"
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Haber configurado las variables de entorno para que cumplan los siguientes requisitos, bien sea en el .env o por otro metodo:
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+REACT_APP_AUTHORIZATION_STRAPI: JWT de un usuario registrado en el backend mencionado anteriormente, debe cumplir este formato, en este ejemplo se usa 123 como JWT: Bearer 123
+REACT_APP_URL_STRAPI: IP con puerto, o URL de donde este ejecutado el servidor mencionado anteriormente.
+REACT_APP_PROMOTION_ID: ID de la promoción a la cual va a estar asociada la LANDING, el ID debe ser el que este en el backend mencionado anteriormente.
