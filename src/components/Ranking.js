@@ -233,7 +233,7 @@ const Ranking = () => {
                                                             helpers.resetForm()
                                                         }}
                                                         validationSchema={Yup.object({
-                                                            email: Yup.string().email(`${texts.EMAIL_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`)
+                                                            email: Yup.string().matches(/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/, `${texts.EMAIL_VAL}`).required(`${texts.REQUIRED_TEXT_VAL}`)
                                                         })
                                                         }
                                                     >
